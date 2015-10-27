@@ -5,8 +5,18 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{44EA99DB-87C0-462F-962C-0937465058A8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assemblies", "Assemblies", "{8669A814-7747-4C24-92EE-2D27CA78C2B0}"
+	ProjectSection(SolutionItems) = preProject
+		Library\Assemblies\CsvParser.dll = Library\Assemblies\CsvParser.dll
+		Library\Assemblies\microsoft.crm.sdk.proxy.dll = Library\Assemblies\microsoft.crm.sdk.proxy.dll
+		Library\Assemblies\microsoft.xrm.sdk.dll = Library\Assemblies\microsoft.xrm.sdk.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8669A814-7747-4C24-92EE-2D27CA78C2B0} = {44EA99DB-87C0-462F-962C-0937465058A8}
 	EndGlobalSection
 EndGlobal
