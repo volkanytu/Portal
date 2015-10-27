@@ -19,8 +19,38 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WindowsApp", "WindowsApp", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WindowsServices", "WindowsServices", "{6A5F8259-0BF3-4214-B1E2-89F4A4AE55C7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assemblies", "Assemblies", "{8EFAB37A-1E11-4233-BC58-CB6D3C218693}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\..\..\BACKUP DRIVE\TFS\VOLKAN\DO_NEWDESIGN\Library\Assemblies\CsvParser.dll = ..\..\..\..\..\..\BACKUP DRIVE\TFS\VOLKAN\DO_NEWDESIGN\Library\Assemblies\CsvParser.dll
+		..\..\..\..\..\..\BACKUP DRIVE\TFS\VOLKAN\DO_NEWDESIGN\Library\Assemblies\microsoft.crm.sdk.proxy.dll = ..\..\..\..\..\..\BACKUP DRIVE\TFS\VOLKAN\DO_NEWDESIGN\Library\Assemblies\microsoft.crm.sdk.proxy.dll
+		..\..\..\..\..\..\BACKUP DRIVE\TFS\VOLKAN\DO_NEWDESIGN\Library\Assemblies\microsoft.xrm.sdk.dll = ..\..\..\..\..\..\BACKUP DRIVE\TFS\VOLKAN\DO_NEWDESIGN\Library\Assemblies\microsoft.xrm.sdk.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GK.Library.Business", "..\..\..\..\..\..\BACKUP DRIVE\TFS\VOLKAN\DO_NEWDESIGN\Library\GK.Library.Business\GK.Library.Business.csproj", "{091E15B6-8B10-4814-9EB3-D987BB27CAED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GK.Library.Utility", "..\..\..\..\..\..\BACKUP DRIVE\TFS\VOLKAN\DO_NEWDESIGN\Library\GK.Library.Utility\GK.Library.Utility.csproj", "{FEDCB7F2-0AFD-476F-8823-F78061D7E553}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{091E15B6-8B10-4814-9EB3-D987BB27CAED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{091E15B6-8B10-4814-9EB3-D987BB27CAED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{091E15B6-8B10-4814-9EB3-D987BB27CAED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{091E15B6-8B10-4814-9EB3-D987BB27CAED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEDCB7F2-0AFD-476F-8823-F78061D7E553}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEDCB7F2-0AFD-476F-8823-F78061D7E553}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEDCB7F2-0AFD-476F-8823-F78061D7E553}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEDCB7F2-0AFD-476F-8823-F78061D7E553}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8EFAB37A-1E11-4233-BC58-CB6D3C218693} = {0E7CCA5E-3FC4-47B2-BDBE-3A27C22B7000}
+		{091E15B6-8B10-4814-9EB3-D987BB27CAED} = {0E7CCA5E-3FC4-47B2-BDBE-3A27C22B7000}
+		{FEDCB7F2-0AFD-476F-8823-F78061D7E553} = {0E7CCA5E-3FC4-47B2-BDBE-3A27C22B7000}
 	EndGlobalSection
 EndGlobal
