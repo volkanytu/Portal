@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{091E15B6-8B10-4814-9EB3-D987BB27CAED}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GK.Library.Business</RootNamespace>
+    <AssemblyName>GK.Library.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="microsoft.crm.sdk.proxy">
+      <HintPath>..\Assemblies\microsoft.crm.sdk.proxy.dll</HintPath>
+    </Reference>
+    <Reference Include="microsoft.xrm.sdk">
+      <HintPath>..\Assemblies\microsoft.xrm.sdk.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AnnotationHelper.cs" />
+    <Compile Include="AnnouncementHelper.cs" />
+    <Compile Include="AnswerHelper.cs" />
+    <Compile Include="ArticleHelper.cs" />
+    <Compile Include="AttachmentFileHelper.cs" />
+    <Compile Include="CommentHelper.cs" />
+    <Compile Include="ContactHelper.cs" />
+    <Compile Include="AssemblyRequestHelper.cs" />
+    <Compile Include="LocationHelper.cs" />
+    <Compile Include="EducationHelper.cs" />
+    <Compile Include="ForumHelper.cs" />
+    <Compile Include="FriendshipHelper.cs" />
+    <Compile Include="GeneralHelper.cs" />
+    <Compile Include="GraffitiHelper.cs" />
+    <Compile Include="LikeHelper.cs" />
+    <Compile Include="LoginHelper.cs" />
+    <Compile Include="MessageHelper.cs" />
+    <Compile Include="PageContentHelper.cs" />
+    <Compile Include="GiftHelper.cs" />
+    <Compile Include="DiscoveryFormHelper.cs" />
+    <Compile Include="PointCodeHelper.cs" />
+    <Compile Include="PortalHelper.cs" />
+    <Compile Include="PortalUserHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuestionHelper.cs" />
+    <Compile Include="ScoreHelper.cs" />
+    <Compile Include="SMSHelper.cs" />
+    <Compile Include="SurveyHelper.cs" />
+    <Compile Include="ValidationHelper.cs" />
+    <Compile Include="VideoHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GK.Library.Utility\GK.Library.Utility.csproj">
+      <Project>{fedcb7f2-0afd-476f-8823-f78061d7e553}</Project>
+      <Name>GK.Library.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

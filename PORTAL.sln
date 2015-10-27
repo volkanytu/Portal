@@ -12,11 +12,31 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assemblies", "Assemblies", 
 		Library\Assemblies\microsoft.xrm.sdk.dll = Library\Assemblies\microsoft.xrm.sdk.dll
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GK.Library.Business", "Library\GK.Library.Business\GK.Library.Business.csproj", "{091E15B6-8B10-4814-9EB3-D987BB27CAED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GK.Library.Utility", "Library\GK.Library.Utility\GK.Library.Utility.csproj", "{FEDCB7F2-0AFD-476F-8823-F78061D7E553}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{091E15B6-8B10-4814-9EB3-D987BB27CAED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{091E15B6-8B10-4814-9EB3-D987BB27CAED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{091E15B6-8B10-4814-9EB3-D987BB27CAED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{091E15B6-8B10-4814-9EB3-D987BB27CAED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEDCB7F2-0AFD-476F-8823-F78061D7E553}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEDCB7F2-0AFD-476F-8823-F78061D7E553}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEDCB7F2-0AFD-476F-8823-F78061D7E553}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEDCB7F2-0AFD-476F-8823-F78061D7E553}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8669A814-7747-4C24-92EE-2D27CA78C2B0} = {44EA99DB-87C0-462F-962C-0937465058A8}
+		{091E15B6-8B10-4814-9EB3-D987BB27CAED} = {44EA99DB-87C0-462F-962C-0937465058A8}
+		{FEDCB7F2-0AFD-476F-8823-F78061D7E553} = {44EA99DB-87C0-462F-962C-0937465058A8}
 	EndGlobalSection
 EndGlobal
