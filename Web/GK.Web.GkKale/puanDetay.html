@@ -1,0 +1,88 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="pointDetailController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="js/jquery/jquery.widget.min.js"></script>
+    <script src="js/jquery/jquery.session.js"></script>
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js"></script>
+    <script src="js/pagescripts/languageMessagesJS.js"></script>
+    <script src="js/pagescripts/pointdetailJS.js"></script>
+    <script src="js/customPlugin.js"></script>
+</head>
+<body style="background:#fff;">
+    <!--Loading-->
+    <div class="popupContainer" style="background-color:transparent;">
+        <div class="popup popupMsgSend">
+            <div class="error" ng-show="showErrorHeader"><span class="errorText">{{errorText}}</span></div>
+            <!--Popup Body-->
+            <div class="popupBody" ng-show="showLoading">
+                <!--Data-->
+                <div class="data cnt">
+                    <div id="divLoadingMain" ng-show="showLoading" style="text-align:center;">
+                        <img src="images/loading.gif" width="48" />
+                        <br />
+                        <br />
+                        <h4 style="text-align:center;">{{ ContentMessages["CM128"] }}</h4>
+                    </div>
+                </div>
+                <!--Data-->
+            </div>
+            <!--Popup Body-->
+        </div>
+    </div>
+    <!--Loading-->
+
+    <!--Main Content-->
+    <div class="mainContent scorePage scoreDetail clearfix" id="divMain" ng-show="showMain">
+        <div class="title-content title-score">
+            <h1><i class="icon3 iconScore"></i><span>Puanlarım<i></i></span></h1>
+        </div>
+        <!--Desc-->
+        <div class="content-desc">
+            <p>Puan detaylarınızı bu sayfadan takip edebilirsiniz.</p>
+        </div>
+        <!--Desc-->
+        <!--Sort List-->
+        <!--table-->
+        <div class="detail-title"><span>Puan Detayı</span></div>
+        <!--Title-->
+        <div class="row row-sort-list">
+            <!--Table-->
+            <div class="table" id="divResult">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="text-left">Puan Türü</th>
+                            <th class="text-left">Puan</th>
+                            <th class="text-left">Tarih</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblList">
+                        <tr class="warning" ng-repeat="x in pointDetail">
+                            <td>{{x.ScoreTypeString}}</td>
+                            <td class="right">{{x.Point}}</td>
+                            <td class="right">{{x.CreatedOnString}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="score-total"><span id="lblTotal">Toplam Puan:{{totalPoint}}</span></div>
+            </div>
+            <!--Table-->
+        </div>
+        <!--Sort List-->
+
+    </div>
+    <!--Main Content-->
+</body>
+</html>

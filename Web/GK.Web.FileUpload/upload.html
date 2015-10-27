@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="css/metro-bootstrap.css" rel="stylesheet" />
+    <link href="css/iconFont.css" rel="stylesheet" />
+
+    <script src="scripts/jquery/jquery.min.js"></script>
+    <script src="scripts/jquery/jquery.widget.min.js"></script>
+    <script src="scripts/jquery/jquery.fileupload.js"></script>
+    <script src="scripts/metro.min.js"></script>
+    <script src="scripts/jquery/purl.js"></script>
+    <script src="scripts/metro/metro-progressbar.js"></script>
+    <script src="scripts/pagescripts/GlobalVariables.js"></script>
+    <script src="scripts/pagescripts/fileuploadJS.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            FileUploadHelper.OnLoad();
+        });
+    </script>
+
+</head>
+<body class="metro" style="background-color:white !important;">
+    <div class="container span6">
+        <!--<h1>Dosya Yükleme</h1>-->
+
+        <h3 id="lbl_message" class="fg-red"></h3>
+
+        <div class="grid">
+            <div class="row" style="margin-bottom:25px;margin-top:-10px;height:30px;">
+            </div>
+
+            <div class="row" style="margin-bottom:25px;margin-top:-10px;">
+                <div class="span6">
+                    <button class="default place-left large" id="btn_file"><i class="icon-search"></i>&nbsp;Select File</button>
+                    <!--<button class="success place-right large" id="btn_import"><i class="icon-upload"></i>&nbsp;Upload</button>-->
+                </div>
+            </div>
+
+            <legend></legend>
+
+            <div id='divLoading' style="display:none;">Please wait &nbsp;&nbsp;<img src='images/dots32.gif' /></div>
+
+            <div class="row">
+                <div class="span6">
+                    <div class="span6 listview" id="lstView">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="display:none;">
+            <div class="input-control text disabled" style="width: 300px;">
+                <input type="text" disabled="disabled" placeholder="Dosya yolu" id="txt_file" />
+                <span class="helper"></span>
+            </div>
+        </div>
+    </div>
+    <div>
+        <input type="file" id="file" multiple="true" />
+    </div>
+</body>
+</html>

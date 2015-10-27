@@ -1,0 +1,276 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="editProfileController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="js/jquery/jquery.widget.min.js"></script>
+    <script src="js/jquery/jquery.session.js"></script>
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/jquery/jquery.maskedinput.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js"></script>
+    <script src="js/pagescripts/languageMessagesJS.js"></script>
+    <script src="js/pagescripts/editprofileJS.js"></script>
+    <script src="js/customPlugin.js"></script>
+</head>
+<body style="background:#fff;">
+
+    <!--Loading-->
+    <div class="popupContainer" style="background-color:transparent;">
+        <div class="popup popupMsgSend">
+            <div class="error" ng-show="showErrorHeader"><span class="errorText">{{errorText}}</span></div>
+            <!--Popup Body-->
+            <div class="popupBody" ng-show="showLoading">
+                <!--Data-->
+                <div class="data cnt">
+                    <div id="divLoadingMain" ng-show="showLoading" style="text-align:center;">
+                        <img src="images/loading.gif" width="48" />
+                        <br />
+                        <br />
+                        <h4 style="text-align:center;">{{ ContentMessages["CM060"] }}</h4>
+                    </div>
+                </div>
+                <!--Data-->
+            </div>
+            <!--Popup Body-->
+        </div>
+    </div>
+    <!--Loading-->
+    <!--Main Content-->
+    <div class="mainContent profileDetailPage clearfix" id="divMain" ng-show="showMain">
+
+        <!--Title-->
+        <div class="title-content title-prf">
+            <h1><i class="icon3 iconPrf"></i><span>Profilim<i></i></span></h1>
+        </div>
+        <!--Title-->
+
+        <div id="divMain">
+            <!--Profile İmg-->
+            <div class="grid-row grid-prf-img">
+                <div class="row row-prf-img">
+                    <div class="prf-holder">
+                        <div class="prf-img"><img src="{{userInfo.ImageUrl}}" /></div>
+                        <div class="prf-info">
+                            <h1>{{userInfo.ContactInfo.FirstName + ' ' + userInfo.ContactInfo.LastName }}</h1>
+                            <span>{{userInfo.ContactInfo.Title}}</span>
+                            <div class="update-btn">
+                                <a href="javascript:void(0);" ng-click="OpenFileDialog();"><i class="fotoUpdate"></i></a>
+                                <input type="file" id="fileUpload" ng-show="false" />
+                            </div>
+                        </div>
+                        <div class="fixer"></div>
+                    </div>
+                </div>
+            </div>
+            <!--Profile İmg-->
+            <!--Grid-->
+            <div class="grid-row grid-data">
+
+                <!--Title-->
+                <div class="title-bottom title-profile">
+                    <h1>Profil Bilgilerim</h1>
+                </div>
+                <!--Title-->
+                <!--Data Enter-->
+                <div class="row row-data-enter">
+
+                    <div class="data-holder left">
+                        <div class="ng-control"><label class="ng-binding">Ad</label></div>
+                        <div class="input-control"><input name="txtName" type="text" id="txtName" placeholder="" ng-model="userInfo.ContactInfo.FirstName" /></div>
+                    </div>
+
+                    <div class="data-holder right">
+                        <div class="ng-control"><label class="ng-binding">Soyad</label></div>
+                        <div class="input-control"><input name="txtSurName" type="text" id="txtSurName" placeholder="" ng-model="userInfo.ContactInfo.LastName" /></div>
+                    </div>
+                    <div class="fixer"></div>
+                </div>
+
+                <div class="row row-data-enter">
+
+                    <div class="data-holder left">
+                        <div class="ng-control"><label class="ng-binding">Firma Adı</label></div>
+                        <div class="input-control"><input name="txtTitle" type="text" id="txtTitle" placeholder="" ng-model="userInfo.ContactInfo.Title" /></div>
+                    </div>
+
+                    <div class="data-holder right">
+                        <div class="ng-control"><label class="ng-binding">Cinsiyet</label></div>
+                        <div class="input-control select">
+                            <select name="txtSurName" type="text" id="slctGender" placeholder="" ng-model="userInfo.ContactInfo.Gender">
+                                <option value="0">Seçiniz</option>
+                                <option value="1">Bay</option>
+                                <option value="2">Bayan</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="fixer"></div>
+                </div>
+
+                <div class="row row-data-enter">
+
+                    <div class="data-holder left">
+                        <div class="ng-control"><label class="ng-binding">Cep Telefonu</label></div>
+                        <div class="input-control">
+                            <input name="txtMobilePhone" type="text" id="txtMobilePhone" placeholder="" ng-model="userInfo.ContactInfo.MobilePhone" />
+                        </div>
+                    </div>
+
+                    <div class="data-holder right">
+                        <div class="ng-control"><label class="ng-binding">İş Telefonu</label></div>
+                        <div class="input-control">
+                            <input name="txtWorkPhone" type="text" id="txtWorkPhone" placeholder="" ng-model="userInfo.ContactInfo.WorkPhone" />
+                        </div>
+                    </div>
+                    <div class="fixer"></div>
+                </div>
+
+                <div class="row row-data-enter">
+
+                    <div class="data-holder left">
+                        <div class="ng-control"><label class="ng-binding">E-Mail Adresi</label></div>
+                        <div class="input-control">
+                            <input name="txtEmail" type="text" id="txtEmail" placeholder="" ng-model="userInfo.ContactInfo.EmailAddress" />
+                        </div>
+                    </div>
+
+                    <div class="data-holder right">
+                        <div class="ng-control"><label class="ng-binding">T.C. No</label></div>
+                        <div class="input-control">
+                            <input name="txtIdentity" type="text" id="txtIdentity" placeholder="" ng-model="userInfo.ContactInfo.IdentityNumber" />
+                        </div>
+                    </div>
+                    <div class="fixer"></div>
+                </div>
+
+                <div class="row row-data-enter">
+
+                    <div class="data-holder left">
+                        <div class="ng-control"><label class="ng-binding">Doğum Tarihi</label></div>
+                        <div class="input-control datepicker" id="txtBirthDate" data-role="datepicker">
+                            <input readonly="readonly" placeholder="" ng-model="userInfo.ContactInfo.BirthDate" />
+                        </div>
+                    </div>
+
+                    <div class="data-holder right">
+                        <div class="ng-control"><label class="ng-binding">Montaj Yapıyor Mu?</label></div>
+                        <div class="input-control select">
+                            <select type="text" placeholder="" ng-model="userInfo.ContactInfo.MarkContact">
+                                <option value="-1">Seçiniz</option>
+                                <option value="1">Evet</option>
+                                <option value="0">Hayır</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Data Enter-->
+            </div>
+            <!--Grid-->
+            <!--Grid-->
+            <div class="grid-row grid-data">
+                <!--Title-->
+                <div class="title-bottom title-password">
+                    <h1>Adres Bilgileri</h1>
+                </div>
+
+                <div class="row row-data-enter">
+
+                    <div class="data-holder left">
+                        <div class="input-control select">
+                            <select ng-model="userInfo.ContactInfo.CityId" id="cityId"
+                                    ng-options="city as city.Name for city in cities"
+                                    ng-change="CityChange();"></select>
+                        </div>
+                    </div>
+
+                    <div class="data-holder right">
+                        <div class="ng-control"><label class="ng-binding">İlçe</label></div>
+                        <div class="input-control select">
+                            <select ng-model="userInfo.ContactInfo.TownId"
+                                    ng-options="town as town.Name for town in towns"></select>
+                        </div>
+                    </div>
+                    <div class="fixer"></div>
+
+                </div>
+
+                <div class="row row-data-enter">
+                    <div class="data-holder right" style="width:100%;">
+                        <div class="ng-control"><label class="ng-binding">Adres Detayı</label></div>
+                        <div class="input-control">
+                            <input name="txtEmail" placeholder="" style="width:100%;" ng-model="userInfo.ContactInfo.AddressDetail" />
+                        </div>
+                    </div>
+                    <div class="fixer"></div>
+                </div>
+
+            </div>
+            <!--Grid-->
+            <!--Grid-->
+            <div class="grid-row grid-data">
+                <!--Title-->
+                <div class="title-bottom title-password">
+                    <h1>Şifre Değiştirme</h1>
+                </div>
+                <!--Title-->
+
+                <div class="row row-data-enter">
+
+                    <div class="data-holder left">
+                        <div class="ng-control"><label class="ng-binding">Eski Şifre</label></div>
+                        <div class="input-control">
+                            <input name="txtOldPassword" type="password" id="txtOldPassword" placeholder="" ng-model="userInfo.ContactInfo.OldPassword" />
+                        </div>
+                    </div>
+
+                    <div class="data-holder right">
+                        <div class="ng-control"><label class="ng-binding">Yeni Şifre</label></div>
+                        <div class="input-control">
+                            <input name="txtNewPassword" type="password" id="txtNewPassword" placeholder="" ng-model="userInfo.ContactInfo.NewPassword" />
+                        </div>
+                    </div>
+                    <div class="fixer"></div>
+                </div>
+
+                <div class="row row-data-enter">
+
+                    <div class="data-holder left">
+                        <div class="ng-control"><label class="ng-binding">Yeni Şifre Tekrar</label></div>
+                        <div class="input-control">
+                            <input name="txtReType" type="password" id="txtReType" placeholder="" ng-model="userInfo.ContactInfo.PasswordReType" />
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!--Grid-->
+            <!--Grid-->
+            <div class="grid-row grid-data-btn">
+                <div class="row row-data-btn">
+                    <button id="btnUpdate" class="btnPrfUpdate" ng-click="UpdateProfile();"><span>PROFİLİMİ GÜNCELLE</span></button>
+                </div>
+            </div>
+            <!--Grid-->
+            <!--Grid-->
+            <div class="grid-row grid-data-wrng">
+                <div class="row row-data-wrng">
+                    <p>! Profilini ilk güncellediğinde bütün boş alanları doldurman gerekiyor.Kazandığın ödülü sana ulaştırabilmemiz için telefon numaranı ve e-posta adresini güncel tutman gerektiğini unutma. Ayrıca sürprizlerden haberdar olabilmen ve şifre işlemlerini gerçekleştirebilmen için de iletişim bilgilerinin doğru olması gerekli.</p>
+                </div>
+            </div>
+            <!--Grid-->
+
+        </div>
+    </div>
+    <!--Main Content-->
+</body>
+</html>

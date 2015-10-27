@@ -1,0 +1,258 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="mainController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+    <meta id="myViewport" name="viewport" content="width=device-width, initial-scale=0.7, maximum-scale=0.7, minimum-scale=0.7, user-scalable=no" />
+
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="styles/toastr.css" rel="stylesheet" />
+
+    <style>
+        .modal20 > .modal-dialog {
+            width: 20% !important;
+        }
+
+        .modal50 > .modal-dialog {
+            width: 50% !important;
+        }
+
+        .modal100 > .modal-dialog {
+            width: 100% !important;
+        }
+
+        .modal90 > .modal-dialog {
+            width: 90% !important;
+        }
+
+        .modal80 > .modal-dialog {
+            width: 80% !important;
+        }
+    </style>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="js/jquery/jquery.widget.min.js"></script>
+    <script src="js/jquery/jquery.session.js"></script>
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js?ver=300820152239"></script>
+    <script src="js/pagescripts/languageMessagesJS.js?ver=300820152239"></script>
+    <script src="js/pagescripts/mainJS.js?ver=300820152239"></script>
+    <script src="js/customPlugin.js"></script>
+    <script src="js/jquery/notify.js"></script>
+    <script src="js/jquery/toastr.js"></script>
+    <script src="js/jquery/jquery.simplemodal.js"></script>
+    <script src="js/jquery/osx.js"></script>
+    <script src="js/socket.io.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            IndexHelper.OnLoad();
+        });
+        $(function () {
+
+
+        });
+
+    </script>
+
+</head>
+
+<body class="content">
+
+    <div class="popupContainer" style="background-color:transparent;">
+        <div class="popup popupMsgSend">
+            <div class="error" ng-show="showErrorHeader"><span class="errorText">{{errorText}}</span></div>
+            <!--Popup Body-->
+            <div class="popupBody" ng-show="showLoading">
+                <!--Data-->
+                <div class="data cnt">
+                    <div id="divLoadingMain" class="text-center" ng-show="showLoading" style="text-align:center;">
+                        <img src="images/loading.gif" width="48" />
+                        <br />
+                        <br />
+                        <h4 class="text-center" style="color:white;text-align:center;">{{ ContentMessages["CM007"] }}</h4>
+                    </div>
+                </div>
+                <!--Data-->
+            </div>
+            <!--Popup Body-->
+        </div>
+    </div>
+
+    <div class="container" ng-show="showMain">
+        <!--Header-->
+        <div class="header clearfix">
+            <div class="headerHolder">
+                <div class="col col1">
+                    <div class="mbMenu hidden"><a href="javascript:void(0);" class="mbMbtn"></a></div>
+                    <div class="grid grid1"><a href="#" ng-click="openPage($event,'duvarYazisi.html')" class="logo"><img src="./images/logo.png" border="0" title="Kale Kilit" /></a></div>
+                    <div class="grid grid2">
+                        <div class="headerMenu">
+                            <ul>
+                                <li><a href="javascript:void(0);" ng-click="openPage($event,'hediyeler.html')">Hediyeler</a></li>
+                                <li><a href="javascript:void(0);" ng-click="OpenDynamicPage(100000002)">Kale Anahtarcılar Kulübü Nedir?</a></li>
+                            </ul>
+                            <div class="fixer"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fixer"></div>
+            </div>
+        </div>
+        <!--Header-->
+        <!--Body-->
+        <div class="body clearfix">
+            <div class="bodyHolder clearfix" id="bodyHolder">
+
+                <!--Mobile Logout-->
+                <div class="mLogout">
+                    <div class="mLogoutHldr">
+                        <div class="prf"><a href="javascript:void(0);" class="prfbtn"><span>{{contact.FirstName+" "+contact.LastName}}</span><i class="icon1 iconMember"></i></a></div>
+                        <div class="mLogoutSub">
+                            <a href="javascript:void(0);" id="btnMyProfile" ng-click="openPage($event,'profilDetay.html')"><i class="icon4 iconPrf"></i>Profilim</a>
+                            <a href="javascript:void(0);" id="btnLogOut" ng-click="CloseSession()"><i class="icon4 iconLogout"></i>Çıkış</a>
+                        </div>
+                    </div>
+                </div>
+                <!--Mobile Logout-->
+                <!--Left Content-->
+                <div class="left">
+                    <div class="leftContent">
+                        <!--Profile Img-->
+                        <div class="prf-img-hldr">
+                            <div class="prfImg">
+                                <div class="img"><img src="{{profileImagePath}}" /><a href="javascript:void(0);" id="btnUpdateProfile" ng-click="openPage($event,'profilDetay.html')"><i class="fotoUpdate"></i></a></div>
+                            </div>
+                            <!--Profile Img-->
+                            <!--Profile Info-->
+                            <div class="prfInf">
+                                <h1>{{contact.FirstName+" "+contact.LastName}}</h1>
+                                <span>{{contact.Title}}</span>
+                            </div>
+                            <!--Profile Info-->
+                        </div>
+                        <div class="leftMenu">
+                            <ul>
+                                <li>
+                                    <a href="javascript:void(0);" type="menu" id="btnGraffiti" ng-click="openPage($event,'duvarYazisi.html')">
+                                        <i class="icon2 iconT"></i>
+                                        Duvar Yazısı
+                                        <div class="iconRight">
+                                            <!--<i class="icon2 iconScr"></i>-->
+                                            <!--<span class="count">12</span>-->
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" type="menu" id="btnWhois" ng-click="openPage($event,'kimKimdir.html')">
+                                        <i class="icon2 iconH"></i>Kim Kimdir?
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" type="menu" id="btnFriendship" ng-click="openPage($event,'arkadaslarim.html')">
+                                        <i class="icon2 iconF"></i>
+                                        Arkadaşlarım
+                                        <div class="iconRight">
+                                            <!--<i class="icon2 iconScr"></i>-->
+                                            <!--<span class="count">3</span>-->
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" type="menu" id="btnChat" ng-click="openPage($event,'mesajlar.html')">
+                                        <i class="icon2 iconM"></i>Mesajlar
+                                        <div class="iconRight" ng-show="showMessageNotification">
+                                            <span class="count">!</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li><a href="javascript:void(0);" type="menu" id="btnEducation" ng-click="openPage($event,'egitimler.html')"><i class="icon2 iconE"></i>Eğitimler</a></li>
+                                <!--<li><a href="javascript:void(0);" type="menu" id="btnArticle" ng-click="openPage($event,'makaleler.html')"><i class="icon2 iconA"></i>Makaleler</a></li>-->
+                                <li><a href="javascript:void(0);" type="menu" id="btnAnnounce" ng-click="openPage($event,'duyurular.html')"><i class="icon2 iconAn"></i>Duyurular</a></li>
+                                <li><a href="javascript:void(0);" type="menu" id="btnVideo" ng-click="openPage($event,'videolar.html')"><i class="icon2 iconV"></i>Videolar</a></li>
+                                <li><a href="javascript:void(0);" type="menu" id="btnForum" ng-click="openPage($event,'forum.html')"><i class="icon2 iconFr"></i>Forum</a></li>
+                                <!--<li><a href="javascript:void(0);" type="menu" id="btnSurvey" ng-click="openPage($event,'yapimAsamasinda.html')"><i class="icon2 iconAnk"></i>Anket</a></li>-->
+                                <li><a href="javascript:void(0);" type="menu" id="btnSurvey" ng-click="openPage($event,'ucretsizKesifFormu.html')"><i class="icon2 iconAnk"></i>Ücretsiz Keşif Formu</a></li>
+                                <li><a href="javascript:void(0);" type="menu" id="btnRequests" ng-click="openPage($event,'isEmirleri.html')"><i class="icon2 iconAnk"></i>İş Emirleri</a></li>
+                                <li><a href="javascript:void(0);" type="menu" id="btnPoints" ng-click="openPage($event,'puanlarim.html')"><i class="icon2 iconP"></i>Puanlarım</a></li>
+                            </ul>
+                        </div>
+                        <!--Survey-->
+                        <div class="survey">
+                            <h4>Ürün Etiket Kodu Girişi</h4>
+                            <div>
+                                <input type="text" placeholder="Kodu giriniz" ng-model="pointCode" id="txtCode" />
+                                <a href="javascript:void(0);" class="btnCodeSend" ng-click="UseCode();"></a>
+                            </div>
+                            <br />
+                            <p style="color:white;" ng-show="showCodeMessage">{{codeMessage}}</p>
+
+                        </div>
+                        <!--Survey-->
+                        <!--Information Cup-->
+                        <div class="cup">
+                            <h1><i></i>Bilgi Küpü</h1>
+                            <div class="btnQ">
+                                <a href="#" ng-click="openPage($event,'bilgiKupu.html')">SORU AL</a>
+                            </div>
+                            <div class="cupholder">
+                                <div class="wrp"><a href="#" ng-click="openPage($event,'bilgiKupu.html')" class="m m1"></a></div>
+                                <div class="wrp"><a href="#" ng-click="openPage($event,'bilgiKupu.html')" class="m m2"></a></div>
+                                <div class="wrp"><a href="#" ng-click="openPage($event,'bilgiKupu.html')" class="m m3"></a></div>
+                                <div class="wrp"><a href="#" ng-click="openPage($event,'bilgiKupu.html')" class="m m4"></a></div>
+                                <div class="wrp"><a href="#" ng-click="openPage($event,'bilgiKupu.html')" class="m m5"></a></div>
+                                <div class="wrp"><a href="#" ng-click="openPage($event,'bilgiKupu.html')" class="m m6"></a></div>
+                                <div class="wrp"><a href="#" ng-click="openPage($event,'bilgiKupu.html')" class="m m7"></a></div>
+                                <div class="wrp"><a href="#" ng-click="openPage($event,'bilgiKupu.html')" class="m m8"></a></div>
+                                <div class="wrp"><a href="#" ng-click="openPage($event,'bilgiKupu.html')" class="m m9"></a></div>
+                                <div class="wrp"><a href="#" ng-click="openPage($event,'bilgiKupu.html')" class="m m10"></a></div>
+                                <div class="wrp"><a href="#" ng-click="openPage($event,'bilgiKupu.html')" class="m m11"></a></div>
+                                <div class="wrp"><a href="#" ng-click="openPage($event,'bilgiKupu.html')" class="m m12"></a></div>
+                                <div class="wrp"><a href="#" ng-click="openPage($event,'bilgiKupu.html')" class="m m13"></a></div>
+                                <div class="wrp"><a href="#" ng-click="openPage($event,'bilgiKupu.html')" class="m m14"></a></div>
+                                <div class="wrp"><a href="#" ng-click="openPage($event,'bilgiKupu.html')" class="m m15"></a></div>
+                                <div class="fixer"></div>
+                            </div>
+                        </div>
+                        <!--Information Cup-->
+                    </div>
+                </div>
+                <!--Left Content-->
+                <!--Right Content-->
+                <div class="right">
+                    <div class="bnrContent">
+                        <div class="minusMiniSliderHolder">
+                            <ul class="slider">
+                                <li><img src="./images/164_ASM_220x304.png" border="0" /></li>
+                                <li><img src="./images/164_CEC_220x304.png" border="0" /></li>
+                                <li><img src="./images/164_KIS_220x304.png" border="0" /></li>
+                            </ul>
+                            <div class="fixer"></div>
+                        </div>
+                        <div class="bnrBox">
+                            <img src="./images/Anahtarcilar_Logo_220x304.png" border="0" />
+                        </div>
+                    </div>
+                    <div class="iframeContent">
+                        <iframe id="ifrmContent" frameborder='0' height='100%' width='100%' scrolling='no' src='{{iframeSrc}}'></iframe>
+                    </div>
+                </div>
+                <!--Right Content-->
+                <div class="fixer"></div>
+                <div class="mbFooter">
+                    <div class="mbFooterholder"><a href="#" class="wallText" ng-click="openPage($event,'duvarYazisi.html')"><i></i><span>Duvar Yazısı</span></a><a href="#" class="friends" ng-click="openPage($event,'arkadaslarim.html')"><i></i><span>Arkadaşlarım</span></a><a href="#" class="education" ng-click="openPage($event,'egitimler.html')"><i></i><span>Eğitimler</span></a><a href="#" class="comments" ng-click="openPage($event,'duyurular.html')"><i></i><span>Duyurular</span></a></div>
+                </div>
+            </div>
+        </div>
+        <!--Body-->
+    </div>
+    <div class="vail vMbMenu vLgMenu"></div>
+    <script type="text/javascript" language="javascript" src="./js/allScripts.js"></script>
+</body>
+</html>

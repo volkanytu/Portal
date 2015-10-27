@@ -1,0 +1,76 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="cubeQuestionController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="js/jquery/jquery.widget.min.js"></script>
+    <script src="js/jquery/jquery.session.js"></script>
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js"></script>
+    <script src="js/pagescripts/languageMessagesJS.js"></script>
+    <script src="js/pagescripts/cubequestionJS.js"></script>
+    <script src="js/customPlugin.js"></script>
+</head>
+<body style="background:#fff;">
+    <!--Main Content-->
+    <div class="mainContent videoPage clearfix" id="divMain">
+        <div class="title-content title-cup">
+            <h1><i class="icon3 iconCup"></i><span>Bilgi Küpü<i></i></span></h1>
+        </div>
+
+        <div class="content-desc count">
+            <div class="counter">
+                <div class="awards">
+                    <i></i>
+                    <span>5</span>
+                </div>
+                <div class="counter-hldr">
+                    <span class="timer"></span>
+                </div>
+            </div>
+            <h4>Soru</h4>
+            <p>{{questionInfo.Name}}</p>
+        </div>
+
+        <!--Loading-->
+        <div class="popupContainer" style="background-color:transparent;margin-top:20px;">
+            <div class="popup popupMsgSend">
+                <div class="error" ng-show="showErrorHeader"><span id="lblErrorMain">{{errorText}}</span></div>
+                <!--Popup Body-->
+                <div class="popupBody" ng-show="showLoading">
+                    <!--Data-->
+                    <div class="data cnt">
+                        <div id="divLoadingMain" ng-show="showLoading" style="text-align:center;">
+                            <img src="images/loading.gif" width="48" />
+                            <br />
+                            <br />
+                            <h4 style="text-align:center;">{{ ContentMessages["M064"] }}</h4>
+                        </div>
+                    </div>
+                    <!--Data-->
+                </div>
+                <!--Popup Body-->
+            </div>
+        </div>
+        <!--Loading-->
+
+        <div class="grid-row content" ng-show="showMain">
+            <div class="inline-check" ng-repeat="choice in questionInfo.QuestionChoices">
+                <input type="radio" name="choice" ng-model="$parent.choiceId" value="{{choice.Id}}" />
+                <span>{{choice.Name}}</span>
+            </div>
+            <div class="btnAns"><a href="#" ng-click="SaveAnswer();">CEVAPLA</a></div>
+        </div>
+    </div>
+    <!--Main Content-->
+</body>
+</html>

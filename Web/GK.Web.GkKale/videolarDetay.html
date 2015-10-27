@@ -1,0 +1,96 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="videoListController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="js/jquery/jquery.widget.min.js"></script>
+    <script src="js/jquery/jquery.session.js"></script>
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js"></script>
+    <script src="js/pagescripts/languageMessagesJS.js"></script>
+    <script src="js/pagescripts/videolistJS.js"></script>
+    <script src="js/customPlugin.js"></script>
+</head>
+<body style="background:#fff;">
+    <!--Main Content-->
+    <div class="mainContent videoPage videoDetailPage clearfix" id="divMain">
+        <div class="title-content title-video">
+            <h1><i class="icon3 iconVideo"></i><span>Videolar</span></h1>
+        </div>
+        <div class="nav">
+            <a href="videolar.html" id="btnMain">Kategori</a><i></i>
+            <a href="#" id="btnCategory">{{categoryName}}</a>
+        </div>
+        <div class="detail-title"><span>{{categoryName}}</span></div>
+        <!--Video Top Banner-->
+        <div class="content-bnr">
+            <img src="{{categoryImageUrl}}" />
+        </div>
+        <!--Video Top Banner-->
+        <!--Video List-->
+        <div class="video-list clearfix">
+            <!--Loading-->
+            <div class="popupContainer" style="background-color:transparent;">
+                <div class="popup popupMsgSend">
+                    <div class="error no-save" ng-show="showErrorHeader" style="margin-top:20px;"><span id="lblOtherNotFound">! Kayıt bulunamadı</span></div>
+                    <!--Popup Body-->
+                    <div class="popupBody" ng-show="showLoading">
+                        <!--Data-->
+                        <div class="data cnt">
+                            <div id="divLoadingMain" ng-show="showLoading" style="text-align:center;">
+                                <img src="images/loading.gif" width="48" />
+                                <br />
+                                <br />
+                                <h4 style="text-align:center;">{{ ContentMessages["CM103"] }}</h4>
+                            </div>
+                        </div>
+                        <!--Data-->
+                    </div>
+                    <!--Popup Body-->
+                </div>
+            </div>
+            <!--Loading-->
+
+            <ul ng-show="showMain">
+                <li ng-repeat="x in videos">
+                    <a href="#" ng-click="EditVideo(x.Id,x.Name);">
+                        <div class="inline">
+                            <div class="img">
+                                <img src="{{attachmentUrl+x.ImagePath}}" />
+                            </div>
+                            <div class="desc">
+                                <span class="title">{{x.Name}}</span>
+                            </div><i class="vPlayer"></i>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--Video List-->
+        <!--Pagging-->
+        <div class="pagination">
+            <div class="holder" id="divPaging">
+                <ul>
+                    <li><span class="current prev"><i class="icon-previous"></i></span></li>
+                    <li class="active"><span class="current">1</span></li>
+                    <li><a href="#" class="page-link">2</a></li>
+                    <li><a href="#" class="page-link next"><i class="icon-next"></i></a></li>
+                </ul>
+                <div class="fixer"></div>
+            </div>
+        </div>
+        <!--Pagging-->
+
+    </div>
+    <!--Main Content-->
+</body>
+</html>

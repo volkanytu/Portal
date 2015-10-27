@@ -1,0 +1,69 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="assemblyRequestController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="js/jquery/jquery.widget.min.js"></script>
+    <script src="js/jquery/jquery.session.js"></script>
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js"></script>
+    <script src="js/pagescripts/languageMessagesJS.js"></script>
+    <script src="js/pagescripts/assemblyrequestJS.js"></script>
+    <script src="js/customPlugin.js"></script>
+</head>
+<body style="background:#fff;">
+    <!--Main Content-->
+    <div class="mainContent annPage clearfix" id="divMain">
+        <div class="title-content title-ann">
+            <h1><i class="icon3 iconAnn"></i><span>İş Emirleri</span></h1>
+        </div>
+        <div class="content-desc">
+            <p>E-Ticaret tarafından size yönlendirilen iş emirleri listesi.</p>
+        </div>
+
+        <!--Loading-->
+        <div class="popupContainer" style="background-color:transparent;margin-top:20px;">
+            <div class="popup popupMsgSend">
+                <div class="error" ng-show="showErrorHeader"><span id="lblErrorMain">{{errorText}}</span></div>
+                <!--Popup Body-->
+                <div class="popupBody" ng-show="showLoading">
+                    <!--Data-->
+                    <div class="data cnt">
+                        <div id="divLoadingMain" ng-show="showLoading" style="text-align:center;">
+                            <img src="images/loading.gif" width="48" />
+                            <br />
+                            <br />
+                            <h4 style="text-align:center;">İş emirleri kontrol ediliyor...</h4>
+                        </div>
+                    </div>
+                    <!--Data-->
+                </div>
+                <!--Popup Body-->
+            </div>
+        </div>
+        <!--Loading-->
+
+        <div class="grid-row content" ng-show="showMain">
+            <div class="bulletin-list">
+                <div class="bulletin-row" ng-repeat="x in requests">
+                    <a href="#" ng-click="EditRequest(x.Id)">
+                        <p>{{x.FirstName +' ' + x.LastName}}</p>
+                        <span class="date">{{x.CreatedOnString}}</span>
+                    </a>
+                </div>
+            </div>
+            <div class="error" ng-show="noRecord"><span id="lblErrorMain">! İş emri kaydı bulunamadı.</span></div>
+        </div>
+    </div>
+    <!--Main Content-->
+</body>
+</html>

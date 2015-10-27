@@ -1,0 +1,166 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="graffitiController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="js/jquery/jquery.widget.min.js"></script>
+    <script src="js/jquery/jquery.session.js"></script>
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js?ver=300820152239"></script>
+    <script src="js/pagescripts/languageMessagesJS.js?ver=300820152239"></script>
+    <script src="js/pagescripts/graffitiJS.js?ver=300820152239"></script>
+    <script src="js/customPlugin.js"></script>
+
+</head>
+<body style="background:#fff;">
+    <button id="loadGraffiti" ng-click="GetGraffities()" ng-show="false">LoadGraffiti</button>
+    <div class="popupContainer" style="background-color:transparent;">
+        <div class="popup popupMsgSend">
+            <div class="error" ng-show="showErrorHeader"><span class="errorText">{{errorText}}</span></div>
+            <!--Popup Body-->
+            <div class="popupBody" ng-show="showLoading">
+                <!--Data-->
+                <div class="data cnt">
+                    <div id="divLoadingMain" ng-show="showLoading" style="text-align:center;">
+                        <img src="images/loading.gif" width="48" />
+                        <br />
+                        <br />
+                        <h4 style="text-align:center;">{{ ContentMessages["CM100"] }}</h4>
+                    </div>
+                </div>
+                <!--Data-->
+            </div>
+            <!--Popup Body-->
+        </div>
+    </div>
+
+    <div class="mainContent clearfix" id="divMain" ng-show="showMain">
+        <div id="graffitiList">
+            <!--Content Share-->
+            <div class="grid-row share">
+                <div class="shareHolder">
+                    <div class="shareBtns">
+                        <div class="btn btn1" ng-class="sendCommentAreaClass" ng-click="showCommentArea($event)">
+                            <button id="" class="iconCmmnt" ng-click="showCommentArea($event)"></button>
+                        </div>
+                        <div class="btn btn2" ng-class="sendImgAreaClass" ng-click="showImgArea($event)">
+                            <button class="iconFoto" id="btnSelectPhoto" ng-click="showImgArea($event)"></button>
+                        </div>
+                        <!--<div class="btn btn3">
+                            <button id="" class="iconCamera"></button>
+                        </div>-->
+                    </div>
+                </div>
+                <div class="writeComnt" data-role="input-control" ng-show="showCommentSend">
+                    <textarea placeholder="Ne düşünüyorsun?" id="txtGraffiti" ng-model="txtGraffiti"></textarea>
+                </div>
+
+                <div class="writeComnt" data-role="content" ng-show="showImgSend">
+                    <!--Profile İmg-->
+                    <div class="grid-row grid-prf-img">
+                        <div class="row row-prf-img">
+                            <div class="prf-holder">
+                                <div class="prf-img">
+                                    <img src="{{GraffitiImageUrl}}" />
+                                    <div class="update-btn">
+                                        <a href="javascript:void(0);" ng-click="OpenFileDialog();"><i class="fotoUpdate"></i></a>
+                                        <input type="file" id="fileUpload" ng-show="false" />
+                                    </div>
+
+                                    <div class="update-btn">
+                                        <a href="javascript:void(0);" ng-click="RemoveImage();"><i class="fotoRemove"></i></a>
+                                    </div>
+                                </div>
+                                <div class="prf-info">
+
+                                </div>
+                                <div class="fixer"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Profile İmg-->
+                </div>
+
+                <div class="contentBtns">
+                    <a href="javascript:void(0);" class="btnDefault btnShare" id="btnShare" ng-click="CreateGraffiti()"><span>PAYLAŞ</span></a>
+                </div>
+            </div>
+            <!--Content Share-->
+
+            <div class="grid-row content" ng-repeat="graffiti in graffities">
+                <!--Get user Comments-->
+                <div class="get-comment">
+                    <div class="row row-user">
+                        <div class="row-inline">
+                            <div class="avtr"><span class="avatar-bg" style="background-image:url({{attachmentUrl+graffiti.PortalUserImage}});"></span></div>
+                            <div class="info"><div class="colmn"><a href="#" ng-click="EditUser(graffiti.PortalUser.Id);"><span class="name">{{graffiti.PortalUser.Name}}</span></a></div><div class="colmn"><span class="date">{{graffiti.CreatedOnString}}</span></div></div>
+                            <div class="row row-comment">
+                                <div class="user-comment"><p>{{graffiti.Description}}</p></div>
+                            </div>
+                            <div class="fixer"></div>
+                        </div>
+                    </div>
+                    <div class="row row-img" ng-show="graffiti.HasMedia">
+                        <img src="{{attachmentUrl+graffiti.ImagePath}}" />
+                    </div>
+                    <div class="row row-social">
+                        <div class="case">
+                            <a href="javascript:void(0);" class="like" title="Beğen" ng-click="Like(graffiti.GraffitiId)"><i></i><span>{{graffiti.LikeCount}}</span></a>
+                            <a href="javascript:void(0);" class="cmnt" title="Yorum"><i></i><span>{{graffiti.CommentCount}}</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Get user Comments-->
+                <div class="get-comment">
+                    <div class="commentView" ng-show="graffiti.CommentCount>CommentIncreaseCount">
+                        <a href="javascript:void(0);" class="view" ng-click="GetGraffitiComments(graffiti.GraffitiId,graffiti.CommentList)"><i></i>Önceki yorumları gör</a>
+                    </div>
+                    <!--Comments-->
+                    <div class="comments" ng-repeat="comment in graffiti.CommentList">
+                        <div class="row row-user">
+                            <div class="row-inline">
+                                <div class="avtr"><span class="avatar-bg" style="background-image:url({{attachmentUrl+comment.PortalUserImage}});"></span></div>
+                                <div class="info"><div class="colmn"><a href="#" ng-click="EditUser(comment.PortalUser.Id);"><span class="name">{{comment.PortalUser.Name}}</span></a></div><div class="colmn"><span class="date">{{comment.CreatedOnString}}</span></div></div>
+                                <div class="user-comnt"><p>{{comment.Description}}</p></div>
+                                <div class="fixer"></div>
+                            </div>
+                        </div>
+                        <!--<div class="row row-user">
+                            <div class="row-inline">
+                                <div class="avtr"><span class="avatar-bg"></span></div>
+                                <div class="info"><div class="colmn"><a href="#"><span class="name">Erdem.özşen</span></a></div><div class="colmn"><span class="date">3 Gün önce</span></div></div>
+                                <div class="user-comnt"><p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from</p></div>
+                                <div class="fixer"></div>
+                            </div>
+                        </div>-->
+                    </div>
+                    <!--Comments-->
+                    <div class="row row-social" ng-show="false">
+                        <div class="case">
+                            <a href="javascript:void(0);" class="like" title="Beğen" type="likeGraffiti"><i></i><span>2</span></a>
+                            <a href="javascript:void(0);" class="cmnt" title="Yorum"><i></i><span>5</span></a>
+                        </div>
+                    </div>
+                    <div class="row row-comnt-make">
+                        <div class="cmnt" data-role="input-control">
+                            <input type="text" placeholder="Yorum Yap" class="cmntInput" texttype="comment" ng-model="graffiti.commentText" />
+                            <a href="javascript:void(0);" class="btnCmnt" ng-click="sendComment(graffiti.GraffitiId,graffiti.commentText,graffiti.CommentList)"></a>
+                        </div>
+                    </div>
+                </div>
+                <!--Get user Comments-->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="giftDetailController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <script src="js/jquery-base.min.js"></script>
+    <script src="js/customPlugin.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js"></script>
+    <script src="js/pagescripts/languageMessagesJS.js"></script>
+    <script src="js/pagescripts/giftDetailJS.js"></script>
+</head>
+<body style="background:#fff;">
+    <!--Main Content-->
+    <div class="mainContent giftPage clearfix" id="divMain">
+        <div class="title-content title-gift">
+            <h1><i class="icon3 iconGift"></i><span>Hediyeler<i></i></span></h1>
+        </div>
+        <div class="nav">
+            <a href="hediyeler.html">Hediyeler</a><i></i>
+            <a href="hediyeler.html">{{categoryName}}</a><i></i>
+            <a href="#">{{gift.Name}}</a>
+        </div>
+        <div class="detail-title"><span>{{gift.Name}}</span><small class="prdCode">Kod:{{gift.GiftCode}}</small></div>
+        <!--Content List-->
+        <div class="grid-row grid-row-text">
+            <div id="rowMainInfo">
+                <div class="bnr">
+                    <img src="{{attachmentUrl+gift.ImageUrl}}" /><div class="cPopup"><div><span class="scr">{{gift.Point}}</span><span class="txt">Puan</span></div></div>
+                    <div class="content-share">
+                        <a href="#" class="like" id="btnUp"><i></i><span>0</span></a>
+                        <a href="#" class="comment"><i></i><span id="lblCommentCount">0</span></a>
+                        <a href="javascript:void(0);" class="btnDefault btnScore" ng-click="CreateGiftRequest();"><span>PUAN KULLAN</span></a><div class="fixer"></div>
+                    </div>
+                </div>
+                <p class="item-title">Detaylı Bilgi</p>
+                <div ng-bind-html="giftDesc">
+
+                </div>
+            </div>
+            <div id="rowComments" class="row-cmnts" ng-show="false">
+                <p class="item-title"><i class="icon1 iconCmt"></i>Yorumlar</p>
+                <div class="error"><span id="lblErrorComments"></span></div>
+            </div>
+
+            <div id="lstComments" class="row-lst-cmnts" ng-show="false">
+                <!--Get user Comments-->
+                <div class="get-comment">
+                    <!--Comments-->
+                    <div class="comments">
+                        <div class="row row-user">
+                            <div class="row-inline">
+                                <div class="avtr"><span class="avatar-bg"></span></div>
+                                <div class="info"><div class="colmn"><a href="#"><span class="name">Erdem.özşen</span></a></div><div class="colmn"><span class="date">11 Kasım 2014 Salı 01:37</span></div></div>
+                                <div class="user-comnt"><p>The point of using Lorem Ipsum is that it has a more-or-less.</p></div>
+                                <div class="fixer"></div>
+                            </div>
+                        </div>
+                        <div class="row row-user">
+                            <div class="row-inline">
+                                <div class="avtr"><span class="avatar-bg"></span></div>
+                                <div class="info"><div class="colmn"><a href="#"><span class="name">Erdem.özşen</span></a></div><div class="colmn"><span class="date">3 Gün önce</span></div></div>
+                                <div class="user-comnt"><p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from</p></div>
+                                <div class="fixer"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Comments-->
+                    <div class="row row-comnt-make">
+                        <div class="cmnt"><input type="text" placeholder="Yorum Yap" class="cmntInput" texttype="comment" /><a href="javascript:void(0);" class="btnCmnt"></a></div>
+                    </div>
+                </div>
+                <!--Get user Comments-->
+            </div>
+
+        </div>
+        <!--Content List-->
+    </div>
+    <!--Main Content-->
+    <script type="text/javascript" language="javascript" src="./js/allScripts.js"></script>
+</body>
+</html>

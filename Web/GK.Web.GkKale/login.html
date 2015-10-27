@@ -1,0 +1,132 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="loginController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+    <meta id="myViewport" name="viewport" content="width=device-width, initial-scale=0.7, maximum-scale=0.7, minimum-scale=0.7, target-densitydpi=device-dpi, user-scalable=no" />
+
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+    <!--<link href="styles/bootstrap.min.css" rel="stylesheet" />-->
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="js/jquery/jquery.widget.min.js"></script>
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/pagescripts/loginJS.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js"></script>
+    <script src="js/jquery/jquery.session.js"></script>
+    <script src="js/pagescripts/languageMessagesJS.js"></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+            //debugger;
+            LoginHelper.OnLoad();
+        });
+
+    </script>
+
+</head>
+
+<body class="pageLogin">
+
+    <div class="popupContainer" style="background-color:transparent;">
+        <div class="popup popupMsgSend">
+            <div class="error" ng-show="showErrorHeader"><span class="errorText">{{errorText}}</span></div>
+            <!--Popup Body-->
+            <div class="popupBody" ng-show="showLoading">
+                <!--Data-->
+                <div class="data cnt">
+                    <div id="divLoadingMain" ng-show="showLoading" style="text-align:center;">
+                        <img src="images/loading.gif" width="48" />
+                        <br />
+                        <br />
+                        <h4 style="text-align:center;">{{ ContentMessages["CM001"] }}</h4>
+                    </div>
+                </div>
+                <!--Data-->
+            </div>
+            <!--Popup Body-->
+        </div>
+    </div>
+
+    <div class="container" ng-show="showMain">
+        <!--Header-->
+        <div class="header clearfix">
+            <div class="headerHolder">
+                <div class="col col1">
+                    <div class="grid grid1"><a href="javascript:void(0);" class="logo"><img src="./images/logo.png" border="0" title="Kale Kilit" /></a></div>
+                </div>
+                <div class="fixer"></div>
+            </div>
+        </div>
+        <!--Header-->
+        <!--Body-->
+        <div class="body clearfix">
+            <div class="bodyHolder loginPage clearfix">
+
+                <!--Member Login-->
+                <div class="left">
+                    <div class="boxDefault boxMemberLogin">
+                        <div class="boxHolder">
+                            <div class="boxHeader boxHeaderMember">
+                                <h2 class="boxTitle">Kale Kilit Platformu</h2>
+                                <span class="boxBttmTitle">Kale Kilit Platformu Hesabı</span>
+                            </div>
+                            <div class="boxBody boxBodyMember">
+                                <div id="divLoadingMain" style="text-align:center;" ng-show="showCheckLoading">
+                                    <img src="images/loading.gif" width="48" />
+                                    <br />
+                                    <br />
+                                    <h4 style="text-align:center;">Kontrol ediliyor...</h4>
+                                </div>
+                                <div class="boxFields boxMemberFields" ng-hide="showCheckLoading">
+                                    <span class="name">Kullanıcı Adı</span> <span class="control">
+                                        <input type="text" ng-model="loginObject.userName" ng-keypress="CheckLogin($event)" />
+                                    </span>
+                                </div>
+                                <div class="boxFields boxMemberFields" ng-hide="showCheckLoading">
+                                    <span class="name">Şifre</span> <span class="control">
+                                        <input type="password" ng-model="loginObject.password" ng-keypress="CheckLogin($event)" />
+                                    </span>
+                                </div>
+                                <div class="boxFooter boxMemberFooter" ng-hide="showCheckLoading">
+                                    <div class="boxBtnsCntrl boxMembrBtnsCntrl"><a href="javascript:void(0);" class="btnDefault btnLogin" ng-click="CheckLogin();"><span>GİRİŞ</span></a></div>
+                                    <div class="boxAccountCntrl boxMembrAccountCntrl">
+                                        <a href="#" class="btnDefault btnAccunt" ng-click="ForgotPassword();"><span>HESABIMA ERİŞEMİYORUM</span></a>
+                                    </div>
+                                    <div class="fixer"></div>
+                                </div>
+                            </div>
+                            <div class="error" ng-show="showError"><span class="errorText">{{errorText}}</span></div>
+                            <div class="loginInfo">
+                                <span class="infoText">Üyelik için <a href="mailto:uye@kaleanahtarcilarkulubu.com.tr" style="font-weight:bold;">uye@kaleanahtarcilarkulubu.com.tr</a> ile iletişime geçebilirsiniz.</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!--Member Login-->
+                <!--Member Login Banner-->
+                <div class="right">
+                    <div class="loginBnr">
+                        <span class="bnr"><img src="data:{{portal.PortalLoginImage.MimeType}};base64,{{portal.PortalLoginImage.File}}" border="0" /></span>
+                        <div class="bnrText">
+                            <span class="smallText">1 SİLİNDİR 4 BÜYÜK SALDIRILARA KARŞI!</span>
+                            <span class="largeText">DÜNYADA İLK 80 dB ALARMLI SİLİNDİRLER</span>
+                        </div>
+                    </div>
+                </div>
+                <!--Member Login Banner-->
+                <div class="fixer">
+                </div>
+            </div>
+        </div>
+        <!--Body-->
+    </div>
+</body>
+</html>

@@ -1,0 +1,118 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="giftListController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <script src="js/jquery-base.min.js"></script>
+    <script src="js/customPlugin.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js"></script>
+    <script src="js/pagescripts/languageMessagesJS.js"></script>
+    <script src="js/pagescripts/giftListJS.js"></script>
+</head>
+<body style="background:#fff;">
+    <!--Main Content-->
+    <div class="mainContent giftPage clearfix" id="divMain">
+        <div class="title-content title-gift">
+            <h1><i class="icon3 iconGift"></i><span>Hediyeler<i></i></span></h1>
+        </div>
+
+
+        <div class="content-desc">
+            <p>Bu sayfada yer alan hediyeleri ve kategorileri filtrelemek için aşağıdaki alanları seçiniz.</p>
+        </div>
+
+        <!--Banner-->
+        <div class="gift-banner">
+            <img src="./images/hediyele_banner.jpg" border="0" />
+        </div>
+        <!--Banner-->
+        <!--Filtre-->
+        <div class="gift-filter">
+            <div class="gift-select">
+                <label>Kategori</label>
+                <select class="gift"
+                        ng-init="selectedCategory = categories[0]"
+                        ng-model="selectedCategory"
+                        ng-options="category as category.Name for category in categories"
+                        ng-change="CategoryChange();"></select>
+            </div>
+            <div class="gift-select">
+                <label>Sıralama</label>
+                <select class="gift"
+                        ng-model="selectedSortType"
+                        ng-options="sortType.Value as sortType.Label for sortType in sortTypes"
+                        ng-change="CategoryChange();"></select>
+            </div>
+            <div class="fixer"></div>
+        </div>
+        <!--Filtre-->
+        <!--Loading-->
+        <div class="popupContainer" style="background-color:transparent;margin-top:20px;">
+            <div class="popup popupMsgSend">
+                <div class="error" ng-show="showErrorHeader"><span id="lblErrorMain">{{errorText}}</span></div>
+                <!--Popup Body-->
+                <div class="popupBody" ng-show="showLoading">
+                    <!--Data-->
+                    <div class="data cnt">
+                        <div id="divLoadingMain" ng-show="showLoading" style="text-align:center;">
+                            <img src="images/loading.gif" width="48" />
+                            <br />
+                            <br />
+                            <h4 style="text-align:center;">{{ ContentMessages["CM129"] }}</h4>
+                        </div>
+                    </div>
+                    <!--Data-->
+                </div>
+                <!--Popup Body-->
+            </div>
+        </div>
+        <!--Loading-->
+        <div ng-show="showMain">
+            <!--Title-->
+            <div class="title-bottom">
+                <h1>{{selectedCategory!=null ? selectedCategory.Name+' Listesi' : 'Kategori seçiniz'}}</h1>
+            </div>
+
+            <!--Title-->
+            <!--Video List-->
+            <div class="gift-list clearfix">
+                <ul>
+                    <li ng-repeat="gift in gifts">
+                        <a href="#" ng-click="EditGift(gift.Id);">
+                            <div class="inline">
+                                <div class="img">
+                                    <img src="{{attachmentUrl+gift.ImageUrl}}" style="height:210px;width:250px;" />
+                                    <div class="cPopup">
+                                        <div>
+                                            <span class="scr">{{gift.Point}}</span>
+                                            <span class="txt">Puan</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="desc"><span class="title">{{gift.Name}}</span></div>
+                            </div>
+                        </a>
+                    </li>
+                    <!--<li><a href="#"><div class="inline"><div class="img"><img src="./images/mondial_cooter.jpg" /><div class="cPopup"><div><span class="scr">450.000</span><span class="txt">Puan</span></div></div></div><div class="desc"><span class="title">Mondial Scooter</span></div></div></a></li>
+                    <li><a href="#"><div class="inline"><div class="img"><img src="./images/kanuni_motorsiklet.jpg" /><div class="cPopup"><div><span class="scr">450.000</span><span class="txt">Puan</span></div></div></div><div class="desc"><span class="title">Kanuni Motorsiklet</span></div></div></a></li>
+                    <li><a href="#"><div class="inline"><div class="img"><img src="./images/mondial_cooter.jpg" /><div class="cPopup"><div><span class="scr">450.000</span><span class="txt">Puan</span></div></div></div><div class="desc"><span class="title">Mondial E-Mon</span></div></div></a></li>-->
+                </ul>
+            </div>
+            <!--Video List-->
+
+        </div>
+        <!--Main Content-->
+    </div>
+
+    <script type="text/javascript" language="javascript" src="./js/allScripts.js"></script>
+
+</body>
+</html>

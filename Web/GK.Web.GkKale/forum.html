@@ -1,0 +1,73 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="forumController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="js/jquery/jquery.widget.min.js"></script>
+    <script src="js/jquery/jquery.session.js"></script>
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js"></script>
+    <script src="js/pagescripts/languageMessagesJS.js"></script>
+    <script src="js/pagescripts/forumJS.js"></script>
+    <script src="js/customPlugin.js"></script>
+</head>
+<body style="background:#fff;">
+    <!--Main Content-->
+    <div class="mainContent forumPage clearfix" id="divMain">
+        <!--Content Header-->
+        <div class="title-content title-forum">
+            <h1><i class="icon3 iconForum"></i><span>Forum</span></h1>
+        </div>
+        <!--Content Header-->
+        <!--Content Desc-->
+        <div class="content-desc">
+            <p>Forum alanındaki konu başlıklarını inceleyip yorum bırakabilir, kendi konu başlığınızı açarak fikir ve deneyimlerinizi paylaşabilirsiniz. Yeni konu başlığı açmak ve forumlara yorum yazmak için önce aşağıdaki kategorilerden ilgili olanı seçin.</p>
+        </div>
+
+        <!--Loading-->
+        <div class="popupContainer" style="background-color:transparent;margin-top:20px;">
+            <div class="popup popupMsgSend">
+                <div class="error" ng-show="showErrorHeader"><span id="lblErrorMain">{{errorText}}</span></div>
+                <!--Popup Body-->
+                <div class="popupBody" ng-show="showLoading">
+                    <!--Data-->
+                    <div class="data cnt">
+                        <div id="divLoadingMain" ng-show="showLoading" style="text-align:center;">
+                            <img src="images/loading.gif" width="48" />
+                            <br />
+                            <br />
+                            <h4 style="text-align:center;">{{ ContentMessages["CM090"] }}</h4>
+                        </div>
+                    </div>
+                    <!--Data-->
+                </div>
+                <!--Popup Body-->
+            </div>
+        </div>
+        <!--Loading-->
+
+        <!--Content Desc-->
+
+        <div class="grid-row grid-row-text" ng-show="showMain">
+            <div id="lstForums">
+                <div class="list-row" ng-repeat="forum in forumList">
+                    <h3>{{forum.Name}}</h3>
+                    <div class="row" ng-repeat="subForum in forum.SubForums">
+                        <a href="#" ng-click="OpenSubForum(forum.Id,forum.Name,subForum.Id,subForum.Name);"><p>{{subForum.Name}}</p></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Main Content-->
+</body>
+</html>

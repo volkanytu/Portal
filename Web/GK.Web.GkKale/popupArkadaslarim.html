@@ -1,0 +1,90 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="friendDetailController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <script src="js/jquery-base.min.js"></script>
+    <script src="js/customPlugin.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js"></script>
+    <script src="js/pagescripts/languageMessagesJS.js"></script>
+    <script src="js/pagescripts/edituserJS.js"></script>
+</head>
+<body style="background-color:transparent;">
+    <div class="popupContainer" id="divMain" ng-show="showMain">
+
+
+        <div class="popup popupFriend">
+            <div class="closePopup"><a href="#" class="pPclose"></a></div>
+            <div class="popupHeader clearfix">
+                <h1><i></i>{{userInfo.ContactInfo.FirstName + ' ' + userInfo.ContactInfo.LastName}}</h1>
+            </div>
+            <!--Popup Body-->
+            <div class="popupBody">
+                <div class="popupUsr clearfix">
+                    <div class="prfImg">
+                        <span class="avatar-bg" style="background-image:url({{userInfo.ImageUrl}});"></span>
+                        <!--<img src="{{userInfo.ImageUrl}}" style="background-image:url({{attachmentUrl+x.ImageUrl}});" />-->
+                    </div>
+                    <div class="prfDetail">
+                        <div class="usrName">
+                            <span>{{userInfo.ContactInfo.FirstName + ' ' + userInfo.ContactInfo.LastName}}</span>
+                        </div>
+                        <div class="usrBtn">
+                            <div ng-show="isFriend">
+                                <a href="#" class="btnOther btnFriendExt" ng-click="CloseFriendship();">
+                                    <span>ARKADAŞ LİSTEMDEN ÇIKAR</span>
+                                </a>
+                            </div>
+
+                            <div ng-show="haveYouRequest">
+                                <a href="#" class="btnOther btnFriendExt" ng-click="CloseFriendshipRequest(100000001);">
+                                    <span>İSTEİĞİMİ İPTAL ET</span>
+                                </a>
+                            </div>
+
+                            <div ng-show="hasNoRequest">
+                                <a href="#" class="btnOther btnFriendExt" ng-click="CreateFriendshipRequest();">
+                                    <span>ARKADAŞLIK İSTEĞİ GÖNDER</span>
+                                </a>
+                            </div>
+
+                            <div ng-show="hasUserRequest">
+                                <p style="margin-top:20px;">Arkadaşlık İsteği ?</p>
+
+                                <a href="#" class="btnOther btnFriendExt" style="float:left;" ng-click="CloseFriendshipRequest(2);">
+                                    <span>KABUL ET</span>
+                                </a>
+
+                                <a href="#" class="btnOther btnFriendExt" style="float:left; margin-left:10px;" ng-click="CloseFriendshipRequest(100000000);">
+                                    <span>RED ET</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Popup Info-->
+                <div class="popupInfo clearfix">
+                    <div class="popupTitle"><h2>Profil Bilgisi</h2></div>
+                    <ul>
+                        <li><div class="clmn txt"><span>Ünvan</span></div><div class="clmn dtl"><span>{{userInfo.ContactInfo.Title}}</span></div></li>
+                        <li><div class="clmn txt"><span>Cep Telefonu</span></div><div class="clmn dtl"><span>{{userInfo.ContactInfo.MobilePhone}}</span></div></li>
+                        <li><div class="clmn txt"><span>iş Telefonu</span></div><div class="clmn dtl"><span>{{userInfo.ContactInfo.WorkPhone}}</span></div></li>
+                        <li><div class="clmn txt"><span>Email Adresi</span></div><div class="clmn dtl"><span>{{userInfo.ContactInfo.EmailAddress}}</span></div></li>
+                        <li><div class="clmn txt"><span>Doğum Tarihi</span></div><div class="clmn dtl"><span>...</span></div></li>
+                    </ul>
+                </div>
+                <!--Popup Info-->
+            </div>
+            <!--Popup Body-->
+        </div>
+    </div>
+</body>
+</html>
