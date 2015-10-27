@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="GK.WebServices.SOAP.EmosService.EmosService" CodeBehind="EmosService.svc.cs" %>

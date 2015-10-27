@@ -1,0 +1,867 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://sms.dataport.com.tr/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://sms.dataport.com.tr/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://sms.dataport.com.tr/">
+      <s:element name="Register">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Session" type="tns:Session" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Session">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AccountNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="RegisterResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RegisterResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendSMS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendSMSRequest" type="tns:SendSMSRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SendSMSRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SessionID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Operator" type="tns:Operators" />
+          <s:element minOccurs="0" maxOccurs="1" name="GroupID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Orginator" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShortNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Isunicode" type="tns:Unicode" />
+          <s:element minOccurs="0" maxOccurs="1" name="SendDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeleteDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MessageList" type="tns:MessageList" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="Operators">
+        <s:restriction base="s:string">
+          <s:enumeration value="Turkcell" />
+          <s:enumeration value="Avea" />
+          <s:enumeration value="Vodafone" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="Unicode">
+        <s:restriction base="s:string">
+          <s:enumeration value="Yes" />
+          <s:enumeration value="No" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="MessageList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GSMList" type="tns:ArrayOfGSM" />
+          <s:element minOccurs="0" maxOccurs="1" name="ContentList" type="tns:ArrayOfContent" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfGSM">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="GSM" nillable="true" type="tns:GSM" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="GSM">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfContent">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Content" nillable="true" type="tns:Content" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Content">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendSMSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendSMSResult" type="tns:SendMessageResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SendMessageResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Results" type="tns:ArrayOfResult" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Result" nillable="true" type="tns:Result" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Result">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MessageID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendTCNOSMS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendTCNoSMSRequest" type="tns:SendTCNoSMSRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SendTCNoSMSRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SessionID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Operator" type="tns:Operators" />
+          <s:element minOccurs="0" maxOccurs="1" name="GroupID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Orginator" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShortNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Isunicode" type="tns:Unicode" />
+          <s:element minOccurs="0" maxOccurs="1" name="SendDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeleteDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TCMessageList" type="tns:TCMessageList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TCMessageList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TCNOList" type="tns:ArrayOfTCNO" />
+          <s:element minOccurs="0" maxOccurs="1" name="ContentList" type="tns:ArrayOfContent" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTCNO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TCNO" nillable="true" type="tns:TCNO" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TCNO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendTCNOSMSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendTCNOSMSResult" type="tns:SendMessageResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendWapPush">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendWappushRequest" type="tns:SendWappushRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SendWappushRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SessionID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Operator" type="tns:Operators" />
+          <s:element minOccurs="0" maxOccurs="1" name="GroupID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Orginator" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShortNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SendDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeleteDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WPList" type="tns:WPList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="WPList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GSMList" type="tns:ArrayOfGSM" />
+          <s:element minOccurs="0" maxOccurs="1" name="WPContentList" type="tns:ArrayOfWPContent" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfWPContent">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="WPContent" nillable="true" type="tns:WPContent" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="WPContent">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="URL" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Indicator" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendWapPushResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendWapPushResult" type="tns:SendMessageResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendMMS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendMMSRequest" type="tns:SendMMSRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SendMMSRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SessionID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Operator" type="tns:Operators" />
+          <s:element minOccurs="0" maxOccurs="1" name="GroupID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Orginator" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShortNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SendDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeleteDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSMList" type="tns:ArrayOfGSM" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MMSContent" type="tns:MMSContent" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MMSContent">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MMSFile" type="s:base64Binary" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Subject" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Smil" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendMMSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendMMSResult" type="tns:SendMMSResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SendMMSResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MMSFileID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Results" type="tns:ArrayOfResult" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendTAXNOSMS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendTaxNoSMSRequest" type="tns:SendTaxNoSMSRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SendTaxNoSMSRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SessionID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Operator" type="tns:Operators" />
+          <s:element minOccurs="0" maxOccurs="1" name="GroupID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Orginator" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShortNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Isunicode" type="tns:Unicode" />
+          <s:element minOccurs="0" maxOccurs="1" name="SendDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeleteDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TaxMessageList" type="tns:TAXMessageList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TAXMessageList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TAXNOList" type="tns:ArrayOfTAXNO" />
+          <s:element minOccurs="0" maxOccurs="1" name="ContentList" type="tns:ArrayOfContent" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTAXNO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TAXNO" nillable="true" type="tns:TAXNO" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TAXNO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendTAXNOSMSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendTAXNOSMSResult" type="tns:SendMessageResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInboxMessages">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InboxRequest" type="tns:InboxRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="InboxRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="LastDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FirstDate" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="State" type="tns:MessageState" />
+          <s:element minOccurs="1" maxOccurs="1" name="Operator" type="tns:Operators" />
+          <s:element minOccurs="0" maxOccurs="1" name="Prefix" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShortNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SessionID" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="MessageState">
+        <s:restriction base="s:string">
+          <s:enumeration value="Read" />
+          <s:enumeration value="Unread" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetInboxMessagesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInboxMessagesResult" type="tns:InboxResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="InboxResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="Error" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InboxMessageList" type="tns:ArrayOfInboxMessage" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfInboxMessage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="InboxMessage" nillable="true" type="tns:InboxMessage" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="InboxMessage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MessageID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sender" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SourceNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SendDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Operator" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateSendGroup">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateGroupRequest" type="tns:CreateGroupRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CreateGroupRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SessionID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GroupName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateSendGroupResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateSendGroupResult" type="tns:CreateGroupResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CreateGroupResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GroupID" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendFileSMS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="FileSMSRequest" type="tns:FileSMSRequest" />
+            <s:element minOccurs="0" maxOccurs="1" name="File" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FileSMSRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SessionID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Operator" type="tns:Operators" />
+          <s:element minOccurs="0" maxOccurs="1" name="Orginator" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShortNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Isunicode" type="tns:Unicode" />
+          <s:element minOccurs="0" maxOccurs="1" name="SendDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeleteDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ControlType" type="tns:FileControl" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="FileControl">
+        <s:restriction base="s:string">
+          <s:enumeration value="UnControl" />
+          <s:enumeration value="Size" />
+          <s:enumeration value="Name" />
+          <s:enumeration value="Size_Name" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SendFileSMSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendFileSMSResult" type="tns:FileSMSResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FileSMSResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="GroupID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileID" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendTCNOSearchGSM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TckGsmSearchRequest" type="tns:TckGsmSearchRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="TckGsmSearchRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SessionID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Operator" type="tns:Operators" />
+          <s:element minOccurs="0" maxOccurs="1" name="Orginator" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShortNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TCNoList" type="tns:ArrayOfTCNO" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendTCNOSearchGSMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendTCNOSearchGSMResult" type="tns:SendMessageResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendTCNOConfirmGSM">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TckGsmConfirmRequest" type="tns:TckGsmConfirmRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="TckGsmConfirmRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SessionID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Operator" type="tns:Operators" />
+          <s:element minOccurs="0" maxOccurs="1" name="Orginator" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ShortNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TCNoList" type="tns:ArrayOfTCNO" />
+          <s:element minOccurs="0" maxOccurs="1" name="GSMList" type="tns:ArrayOfGSM" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendTCNOConfirmGSMResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendTCNOConfirmGSMResult" type="tns:SendMessageResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CancelMessages">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CancelMessagesRequest" type="tns:CancelMessagesRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CancelMessagesRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CancelIDs" type="tns:ArrayOfCancelID" />
+          <s:element minOccurs="0" maxOccurs="1" name="SessionID" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCancelID">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CancelID" nillable="true" type="tns:CancelID" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CancelID">
+        <s:simpleContent>
+          <s:extension base="s:string" />
+        </s:simpleContent>
+      </s:complexType>
+      <s:element name="CancelMessagesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CancelMessagesResult" type="tns:CancelMessagesResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CancelMessagesResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CanceledMessage" type="tns:ArrayOfCanceledMessage" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCanceledMessage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CanceledMessage" nillable="true" type="tns:CanceledMessage" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CanceledMessage">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MessageID" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="RegisterSoapIn">
+    <wsdl:part name="parameters" element="tns:Register" />
+  </wsdl:message>
+  <wsdl:message name="RegisterSoapOut">
+    <wsdl:part name="parameters" element="tns:RegisterResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendSMSSoapIn">
+    <wsdl:part name="parameters" element="tns:SendSMS" />
+  </wsdl:message>
+  <wsdl:message name="SendSMSSoapOut">
+    <wsdl:part name="parameters" element="tns:SendSMSResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendTCNOSMSSoapIn">
+    <wsdl:part name="parameters" element="tns:SendTCNOSMS" />
+  </wsdl:message>
+  <wsdl:message name="SendTCNOSMSSoapOut">
+    <wsdl:part name="parameters" element="tns:SendTCNOSMSResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendWapPushSoapIn">
+    <wsdl:part name="parameters" element="tns:SendWapPush" />
+  </wsdl:message>
+  <wsdl:message name="SendWapPushSoapOut">
+    <wsdl:part name="parameters" element="tns:SendWapPushResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendMMSSoapIn">
+    <wsdl:part name="parameters" element="tns:SendMMS" />
+  </wsdl:message>
+  <wsdl:message name="SendMMSSoapOut">
+    <wsdl:part name="parameters" element="tns:SendMMSResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendTAXNOSMSSoapIn">
+    <wsdl:part name="parameters" element="tns:SendTAXNOSMS" />
+  </wsdl:message>
+  <wsdl:message name="SendTAXNOSMSSoapOut">
+    <wsdl:part name="parameters" element="tns:SendTAXNOSMSResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInboxMessagesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInboxMessages" />
+  </wsdl:message>
+  <wsdl:message name="GetInboxMessagesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInboxMessagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateSendGroupSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateSendGroup" />
+  </wsdl:message>
+  <wsdl:message name="CreateSendGroupSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateSendGroupResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendFileSMSSoapIn">
+    <wsdl:part name="parameters" element="tns:SendFileSMS" />
+  </wsdl:message>
+  <wsdl:message name="SendFileSMSSoapOut">
+    <wsdl:part name="parameters" element="tns:SendFileSMSResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendTCNOSearchGSMSoapIn">
+    <wsdl:part name="parameters" element="tns:SendTCNOSearchGSM" />
+  </wsdl:message>
+  <wsdl:message name="SendTCNOSearchGSMSoapOut">
+    <wsdl:part name="parameters" element="tns:SendTCNOSearchGSMResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendTCNOConfirmGSMSoapIn">
+    <wsdl:part name="parameters" element="tns:SendTCNOConfirmGSM" />
+  </wsdl:message>
+  <wsdl:message name="SendTCNOConfirmGSMSoapOut">
+    <wsdl:part name="parameters" element="tns:SendTCNOConfirmGSMResponse" />
+  </wsdl:message>
+  <wsdl:message name="CancelMessagesSoapIn">
+    <wsdl:part name="parameters" element="tns:CancelMessages" />
+  </wsdl:message>
+  <wsdl:message name="CancelMessagesSoapOut">
+    <wsdl:part name="parameters" element="tns:CancelMessagesResponse" />
+  </wsdl:message>
+  <wsdl:portType name="MessageServicesSoap">
+    <wsdl:operation name="Register">
+      <wsdl:input message="tns:RegisterSoapIn" />
+      <wsdl:output message="tns:RegisterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendSMS">
+      <wsdl:input message="tns:SendSMSSoapIn" />
+      <wsdl:output message="tns:SendSMSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendTCNOSMS">
+      <wsdl:input message="tns:SendTCNOSMSSoapIn" />
+      <wsdl:output message="tns:SendTCNOSMSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendWapPush">
+      <wsdl:input message="tns:SendWapPushSoapIn" />
+      <wsdl:output message="tns:SendWapPushSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMMS">
+      <wsdl:input message="tns:SendMMSSoapIn" />
+      <wsdl:output message="tns:SendMMSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendTAXNOSMS">
+      <wsdl:input message="tns:SendTAXNOSMSSoapIn" />
+      <wsdl:output message="tns:SendTAXNOSMSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInboxMessages">
+      <wsdl:input message="tns:GetInboxMessagesSoapIn" />
+      <wsdl:output message="tns:GetInboxMessagesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateSendGroup">
+      <wsdl:input message="tns:CreateSendGroupSoapIn" />
+      <wsdl:output message="tns:CreateSendGroupSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendFileSMS">
+      <wsdl:input message="tns:SendFileSMSSoapIn" />
+      <wsdl:output message="tns:SendFileSMSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendTCNOSearchGSM">
+      <wsdl:input message="tns:SendTCNOSearchGSMSoapIn" />
+      <wsdl:output message="tns:SendTCNOSearchGSMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendTCNOConfirmGSM">
+      <wsdl:input message="tns:SendTCNOConfirmGSMSoapIn" />
+      <wsdl:output message="tns:SendTCNOConfirmGSMSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CancelMessages">
+      <wsdl:input message="tns:CancelMessagesSoapIn" />
+      <wsdl:output message="tns:CancelMessagesSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="MessageServicesHttpGet" />
+  <wsdl:portType name="MessageServicesHttpPost" />
+  <wsdl:binding name="MessageServicesSoap" type="tns:MessageServicesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Register">
+      <soap:operation soapAction="http://sms.dataport.com.tr/Register" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSMS">
+      <soap:operation soapAction="http://sms.dataport.com.tr/SendSMS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendTCNOSMS">
+      <soap:operation soapAction="http://sms.dataport.com.tr/SendTCNOSMS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendWapPush">
+      <soap:operation soapAction="http://sms.dataport.com.tr/SendWapPush" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMMS">
+      <soap:operation soapAction="http://sms.dataport.com.tr/SendMMS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendTAXNOSMS">
+      <soap:operation soapAction="http://sms.dataport.com.tr/SendTAXNOSMS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInboxMessages">
+      <soap:operation soapAction="http://sms.dataport.com.tr/GetInboxMessages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateSendGroup">
+      <soap:operation soapAction="http://sms.dataport.com.tr/CreateSendGroup" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendFileSMS">
+      <soap:operation soapAction="http://sms.dataport.com.tr/SendFileSMS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendTCNOSearchGSM">
+      <soap:operation soapAction="http://sms.dataport.com.tr/SendTCNOSearchGSM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendTCNOConfirmGSM">
+      <soap:operation soapAction="http://sms.dataport.com.tr/SendTCNOConfirmGSM" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelMessages">
+      <soap:operation soapAction="http://sms.dataport.com.tr/CancelMessages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MessageServicesSoap12" type="tns:MessageServicesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Register">
+      <soap12:operation soapAction="http://sms.dataport.com.tr/Register" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendSMS">
+      <soap12:operation soapAction="http://sms.dataport.com.tr/SendSMS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendTCNOSMS">
+      <soap12:operation soapAction="http://sms.dataport.com.tr/SendTCNOSMS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendWapPush">
+      <soap12:operation soapAction="http://sms.dataport.com.tr/SendWapPush" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMMS">
+      <soap12:operation soapAction="http://sms.dataport.com.tr/SendMMS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendTAXNOSMS">
+      <soap12:operation soapAction="http://sms.dataport.com.tr/SendTAXNOSMS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInboxMessages">
+      <soap12:operation soapAction="http://sms.dataport.com.tr/GetInboxMessages" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateSendGroup">
+      <soap12:operation soapAction="http://sms.dataport.com.tr/CreateSendGroup" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendFileSMS">
+      <soap12:operation soapAction="http://sms.dataport.com.tr/SendFileSMS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendTCNOSearchGSM">
+      <soap12:operation soapAction="http://sms.dataport.com.tr/SendTCNOSearchGSM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendTCNOConfirmGSM">
+      <soap12:operation soapAction="http://sms.dataport.com.tr/SendTCNOConfirmGSM" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelMessages">
+      <soap12:operation soapAction="http://sms.dataport.com.tr/CancelMessages" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MessageServicesHttpGet" type="tns:MessageServicesHttpGet">
+    <http:binding verb="GET" />
+  </wsdl:binding>
+  <wsdl:binding name="MessageServicesHttpPost" type="tns:MessageServicesHttpPost">
+    <http:binding verb="POST" />
+  </wsdl:binding>
+  <wsdl:service name="MessageServices">
+    <wsdl:port name="MessageServicesSoap" binding="tns:MessageServicesSoap">
+      <soap:address location="http://api.dataport.com.tr/MessageServices.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MessageServicesSoap12" binding="tns:MessageServicesSoap12">
+      <soap12:address location="http://api.dataport.com.tr/MessageServices.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MessageServicesHttpGet" binding="tns:MessageServicesHttpGet">
+      <http:address location="http://api.dataport.com.tr/MessageServices.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MessageServicesHttpPost" binding="tns:MessageServicesHttpPost">
+      <http:address location="http://api.dataport.com.tr/MessageServices.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

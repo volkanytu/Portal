@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="GK.WebServices.REST.CrmService.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="GK_WebServices_REST_CrmService_DataPortApi_MessageServices" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://api.dataport.com.tr/MessageServices.asmx</Value>
+    </Setting>
+    <Setting Name="GK_WebServices_REST_CrmService_smsService_smsservice" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://www.postaguvercini.com/api_ws/smsservice.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
