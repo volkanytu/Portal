@@ -40,6 +40,25 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GK.Plugins.SurveyAnswer", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GK.Plugins.VideoLog", "Plugins\GK.Plugins.VideoLog\GK.Plugins.VideoLog.csproj", "{AB3E136C-C5C6-42F8-A9D9-1A2B65F398C9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScriptsAndQueries", "ScriptsAndQueries", "{FAB833C8-4BFB-4312-8E45-ADCC40098314}"
+	ProjectSection(SolutionItems) = preProject
+		ScriptsAndQueries\fn_FindUserGuid.sql = ScriptsAndQueries\fn_FindUserGuid.sql
+		ScriptsAndQueries\new_announcement.js = ScriptsAndQueries\new_announcement.js
+		ScriptsAndQueries\new_article.js = ScriptsAndQueries\new_article.js
+		ScriptsAndQueries\new_articlecategory.js = ScriptsAndQueries\new_articlecategory.js
+		ScriptsAndQueries\new_cubelevel.js = ScriptsAndQueries\new_cubelevel.js
+		ScriptsAndQueries\new_education.js = ScriptsAndQueries\new_education.js
+		ScriptsAndQueries\new_educationcategory.js = ScriptsAndQueries\new_educationcategory.js
+		ScriptsAndQueries\new_gift.js = ScriptsAndQueries\new_gift.js
+		ScriptsAndQueries\new_global.js = ScriptsAndQueries\new_global.js
+		ScriptsAndQueries\new_graffiti.js = ScriptsAndQueries\new_graffiti.js
+		ScriptsAndQueries\new_pagecontent.js = ScriptsAndQueries\new_pagecontent.js
+		ScriptsAndQueries\new_user.js = ScriptsAndQueries\new_user.js
+		ScriptsAndQueries\new_video.js = ScriptsAndQueries\new_video.js
+		ScriptsAndQueries\new_videocategory.js = ScriptsAndQueries\new_videocategory.js
+		ScriptsAndQueries\WebSSL.config = ScriptsAndQueries\WebSSL.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
