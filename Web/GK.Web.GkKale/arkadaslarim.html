@@ -1,0 +1,126 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="friendshipController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="js/jquery/jquery.widget.min.js"></script>
+    <script src="js/jquery/jquery.session.js"></script>
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js"></script>
+    <script src="js/pagescripts/languageMessagesJS.js"></script>
+    <script src="js/pagescripts/friendshipJS.js"></script>
+    <script src="js/customPlugin.js"></script>
+
+</head>
+<body style="background:#fff;">
+    <!--Main Content-->
+    <div class="mainContent friendsPage clearfix" id="divMain">
+        <div class="title-content title-who">
+            <h1><i class="icon3 iconWho"></i><span>Arkadaşlarım</span></h1>
+        </div>
+        <div class="content-desc">
+            <p>Arkadaş listenizi takip edip onay bekleyen arkadaşlarınızı görebilirsiniz.</p>
+        </div>
+
+        <!--Loading-->
+        <div class="popupContainer" style="background-color:transparent;margin-top:20px;">
+            <div class="popup popupMsgSend">
+                <div class="error" ng-show="showErrorHeader"><span id="lblErrorMain">{{errorText}}</span></div>
+                <!--Popup Body-->
+                <div class="popupBody" ng-show="showLoading">
+                    <!--Data-->
+                    <div class="data cnt">
+                        <div id="divLoadingMain" ng-show="showLoading" style="text-align:center;">
+                            <img src="images/loading.gif" width="48" />
+                            <br />
+                            <br />
+                            <h4 style="text-align:center;">{{ ContentMessages["CM094"] }}</h4>
+                        </div>
+                    </div>
+                    <!--Data-->
+                </div>
+                <!--Popup Body-->
+            </div>
+        </div>
+        <!--Loading-->
+
+        <!--User Info-->
+        <div class="grid-row content" ng-show="showMain">
+            <!--Butons-->
+            <div class="btns-control friends clearfix">
+                <div class="btn"><a href="javascript:void(0);" class="btnDefault btnAllFriend" ng-click="AllFriends();"><span>TÜM ARKADAŞLARIM ({{allFriends.length}})</span></a></div>
+                <div class="btn"><a href="javascript:void(0);" class="btnDefault btnReq" ng-click="MyRequests();"><span>ARKADAŞ İSTEKLERİM ({{myRequests.length}})</span></a></div>
+                <div class="btn"><a href="javascript:void(0);" class="btnDefault btnFriendReq" ng-click="UserRequests();"><span>ARKADAŞ İSTEKLERİ ({{userRequests.length}})</span></a></div>
+            </div>
+            <!--Butons-->
+        </div>
+        <!--User Info-->
+        <!--User Info-->
+        <div class="title-bottom" ng-show="showAllFriends">
+            <h1 idid="lblTitle">Tüm Akadaşlarım</h1>
+        </div>
+
+        <div class="title-bottom" ng-show="showMyRequests">
+            <h1 idid="lblTitle">Arkadaş İsteklerim</h1>
+        </div>
+
+        <div class="title-bottom" ng-show="showuserRequests">
+            <h1 idid="lblTitle">Arkadaş İstekleri</h1>
+        </div>
+
+        <!--User Info-->
+        <!--Friends List-->
+        <div class="box-list clearfix">
+            <div class="error no-save" ng-show="noRecordAllFriends"><span id="lblOtherNotFound">! Kayıt bulunamadı</span></div>
+            <div class="box center" ng-repeat="af in allFriends" ng-show="showAllFriends">
+                <div class="inline">
+                    <a href="#" ng-click="EditUser(af.UserId);">
+                        <div class="img" style='width: 165px !important; height: 145px; float: left;background-size: 100%; background-position: center center;  background-repeat: no-repeat; background-image: url({{attachmentUrl+af.ImageUrl}});'></div>
+                        <div class="desc" type="edituser">
+                            <span class="name">{{af.FullName}}</span><span class="case">{{af.JobTitle}}</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--Friends List-->
+        <!--Friends List-->
+        <div class="box-list clearfix">
+            <div class="error no-save" ng-show="noRecordMyRequests"><span id="lblOtherNotFound">! Kayıt bulunamadı</span></div>
+            <div class="box center" ng-repeat="mr in myRequests" ng-show="showMyRequests">
+                <div class="inline">
+                    <a href="#" ng-click="EditUser(mr.UserId);">
+                        <div class="img" style='width: 165; height: 145px; float: left;background-size: 100%; background-position: center center;  background-repeat: no-repeat; background-image: url({{attachmentUrl+mr.ImageUrl}});'></div>
+                        <div class="desc" type="edituser"><span class="name">{{mr.FullName}}</span><span class="case">{{mr.JobTitle}}</span></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--Friends List-->
+        <!--Friends List-->
+        <div class="box-list clearfix">
+            <div class="error no-save" ng-show="noRecordUserRequests"><span id="lblOtherNotFound">! Kayıt bulunamadı</span></div>
+            <div class="box center" ng-repeat="ur in userRequests" ng-show="showuserRequests">
+                <div class="inline">
+                    <a href="#" ng-click="EditUser(ur.UserId);">
+                        <div class="img" style='width: 165; height: 145px; float: left;background-size: 100%; background-position: center center;  background-repeat: no-repeat; background-image: url({{attachmentUrl+ur.ImageUrl}});'></div>
+                        <div class="desc" type="edituser"><span class="name">{{ur.FullName}}</span><span class="case">{{ur.JobTitle}}</span></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--Friends List-->
+
+    </div>
+    <!--Main Content-->
+</body>
+</html>

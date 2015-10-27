@@ -1,0 +1,79 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="cubeLevelController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="js/jquery/jquery.widget.min.js"></script>
+    <script src="js/jquery/jquery.session.js"></script>
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js?ver=300820152239"></script>
+    <script src="js/pagescripts/languageMessagesJS.js?ver=300820152239"></script>
+    <script src="js/pagescripts/cubelevelJS.js?ver=300820152239"></script>
+    <script src="js/customPlugin.js"></script>
+</head>
+<body style="background:#fff;">
+    <!--Main Content-->
+    <div class="mainContent videoPage clearfix" id="divMain">
+        <div class="title-content title-cup">
+            <h1><i class="icon3 iconCup"></i><span>Bilgi Küpü<i></i></span></h1>
+        </div>
+        <div class="content-desc">
+            <p>Kolay, orta ve zor seviyedeki genel kültür sorularını doğru cevapladığınız taktirde puan kazanacaksınız.  Her doğru yanıt verdiğiniz kolay için 5, orta için 10, zor için 15 puan kazanırsınız. Her soru için süre 15 saniyedir. Bol şanslar!</p>
+        </div>
+
+        <!--Loading-->
+        <div class="popupContainer" style="background-color:transparent;margin-top:20px;">
+            <div class="popup popupMsgSend">
+                <div class="error" ng-show="showErrorHeader"><span id="lblErrorMain">{{errorText}}</span></div>
+                <!--Popup Body-->
+                <div class="popupBody" ng-show="showLoading">
+                    <!--Data-->
+                    <div class="data cnt">
+                        <div id="divLoadingMain" ng-show="showLoading" style="text-align:center;">
+                            <img src="images/loading.gif" width="48" />
+                            <br />
+                            <br />
+                            <h4 style="text-align:center;">{{ ContentMessages["M064"] }}</h4>
+                        </div>
+                    </div>
+                    <!--Data-->
+                </div>
+                <!--Popup Body-->
+            </div>
+        </div>
+        <!--Loading-->
+        <!--List-->
+        <div class="video-list clearfix" ng-show="showMain">
+            <ul>
+                <li ng-repeat="level in cubeLevels">
+                    <a href="#" ng-click="SelectLevel(level.Id,level.Name);">
+                        <div class="inline">
+                            <div class="img">
+                                <img src="{{attachmentUrl+level.ImagePath}}" border="0" />
+                            </div>
+                            <div class="desc">
+                                <span class="title">{{level.Name}}</span>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <div class="fixer"></div>
+            <!--<div class="trust_check">
+                <input type="checkbox" ng-model="trustMyself" /><span>Bilgine Güveniyorum</span><div class="tooltip"><h2>Risk almak ister misin?</h2><p>Doğru cevabında x2 puan alacaksın. Yanlış cevabında puan kaybedeceksin.</p></div>
+            </div>-->
+        </div>
+        <!--List-->
+    </div>
+    <!--Main Content-->
+</body>
+</html>

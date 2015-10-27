@@ -1,0 +1,39 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="newForumSubjectController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <script src="js/jquery-base.min.js"></script>
+    <script src="js/customPlugin.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js"></script>
+    <script src="js/pagescripts/languageMessagesJS.js"></script>
+    <script src="js/pagescripts/addforumsubjectJS.js"></script>
+</head>
+<body style="background-color:transparent;">
+    <div class="popupContainer">
+        <div class="popup popupMsgSend">
+            <div class="closePopup"><a href="#" class="pPclose"></a></div>
+            <div class="popupHeader clearfix">
+                <h1><i></i>Yeni Konu Başlığı</h1>
+            </div>
+            <!--Popup Body-->
+            <div class="popupBody">
+                <!--Data-->
+                <div class="data tlt"><input type="text" placeholder="Konu başlığı" ng-model="title" /></div>
+                <div class="data cnt"><textarea placeholder="Konu başlığı içeriği" ng-model="content"></textarea></div>
+                <div class="data btnSnd"><button class="save" ng-click="CreateForumSubject();">KAYDET</button></div>
+                <!--Data-->
+            </div>
+            <!--Popup Body-->
+        </div>
+    </div>
+</body>
+</html>

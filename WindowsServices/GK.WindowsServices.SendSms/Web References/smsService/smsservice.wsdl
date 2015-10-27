@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://83.66.137.24/PgApiWs" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s1="http://83.66.137.24/PgApiWs/AbstractTypes" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://83.66.137.24/PgApiWs" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Figensoft PostaGuvercini Api Web Service</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://83.66.137.24/PgApiWs">
+      <s:element name="SmsInsert_1_N">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="SendDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="ExpireDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="Recepients" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SmsInsert_1_NResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SmsInsert_1_NResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SmsInsert_N_N">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="SendDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="ExpireDate" nillable="true" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="Recepients" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="Messages" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SmsInsert_N_NResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SmsInsert_N_NResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SmsStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MessageIDs" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SmsStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SmsStatusResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreditBalance">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreditBalanceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CreditBalanceResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IdCheck">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IdCheckResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IdCheckResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IdCheck2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="IdCheck2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="IdCheck2Result" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SmsStatus2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MessageIDs" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SmsStatus2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SmsStatus2Result" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArrayOfString" nillable="true" type="tns:ArrayOfString" />
+      <s:element name="int" type="s:int" />
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+    <s:schema targetNamespace="http://83.66.137.24/PgApiWs/AbstractTypes">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <s:complexType name="StringArray">
+        <s:complexContent mixed="false">
+          <s:restriction base="soapenc:Array">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="String" type="s:string" />
+            </s:sequence>
+          </s:restriction>
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SmsInsert_1_NSoapIn">
+    <wsdl:part name="parameters" element="tns:SmsInsert_1_N" />
+  </wsdl:message>
+  <wsdl:message name="SmsInsert_1_NSoapOut">
+    <wsdl:part name="parameters" element="tns:SmsInsert_1_NResponse" />
+  </wsdl:message>
+  <wsdl:message name="SmsInsert_N_NSoapIn">
+    <wsdl:part name="parameters" element="tns:SmsInsert_N_N" />
+  </wsdl:message>
+  <wsdl:message name="SmsInsert_N_NSoapOut">
+    <wsdl:part name="parameters" element="tns:SmsInsert_N_NResponse" />
+  </wsdl:message>
+  <wsdl:message name="SmsStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:SmsStatus" />
+  </wsdl:message>
+  <wsdl:message name="SmsStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:SmsStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreditBalanceSoapIn">
+    <wsdl:part name="parameters" element="tns:CreditBalance" />
+  </wsdl:message>
+  <wsdl:message name="CreditBalanceSoapOut">
+    <wsdl:part name="parameters" element="tns:CreditBalanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IdCheckSoapIn">
+    <wsdl:part name="parameters" element="tns:IdCheck" />
+  </wsdl:message>
+  <wsdl:message name="IdCheckSoapOut">
+    <wsdl:part name="parameters" element="tns:IdCheckResponse" />
+  </wsdl:message>
+  <wsdl:message name="IdCheck2SoapIn">
+    <wsdl:part name="parameters" element="tns:IdCheck2" />
+  </wsdl:message>
+  <wsdl:message name="IdCheck2SoapOut">
+    <wsdl:part name="parameters" element="tns:IdCheck2Response" />
+  </wsdl:message>
+  <wsdl:message name="SmsStatus2SoapIn">
+    <wsdl:part name="parameters" element="tns:SmsStatus2" />
+  </wsdl:message>
+  <wsdl:message name="SmsStatus2SoapOut">
+    <wsdl:part name="parameters" element="tns:SmsStatus2Response" />
+  </wsdl:message>
+  <wsdl:message name="SmsStatusHttpGetIn">
+    <wsdl:part name="Username" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="MessageIDs" type="s1:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="SmsStatusHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="CreditBalanceHttpGetIn">
+    <wsdl:part name="Username" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreditBalanceHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="IdCheckHttpGetIn">
+    <wsdl:part name="Username" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IdCheckHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="IdCheck2HttpGetIn">
+    <wsdl:part name="Username" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IdCheck2HttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SmsStatus2HttpGetIn">
+    <wsdl:part name="Username" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="MessageIDs" type="s1:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="SmsStatus2HttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="SmsStatusHttpPostIn">
+    <wsdl:part name="Username" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="MessageIDs" type="s1:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="SmsStatusHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="CreditBalanceHttpPostIn">
+    <wsdl:part name="Username" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreditBalanceHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="IdCheckHttpPostIn">
+    <wsdl:part name="Username" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IdCheckHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="IdCheck2HttpPostIn">
+    <wsdl:part name="Username" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="IdCheck2HttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SmsStatus2HttpPostIn">
+    <wsdl:part name="Username" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="MessageIDs" type="s1:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="SmsStatus2HttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:portType name="smsserviceSoap">
+    <wsdl:operation name="SmsInsert_1_N">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">SMS gönderme... (Tek mesaj cok alici)</wsdl:documentation>
+      <wsdl:input message="tns:SmsInsert_1_NSoapIn" />
+      <wsdl:output message="tns:SmsInsert_1_NSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SmsInsert_N_N">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">SMS gönderme... (Cok mesaj cok alici)</wsdl:documentation>
+      <wsdl:input message="tns:SmsInsert_N_NSoapIn" />
+      <wsdl:output message="tns:SmsInsert_N_NSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SmsStatus">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">SMS durum sorgulama...</wsdl:documentation>
+      <wsdl:input message="tns:SmsStatusSoapIn" />
+      <wsdl:output message="tns:SmsStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreditBalance">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Kredi sorgulama...</wsdl:documentation>
+      <wsdl:input message="tns:CreditBalanceSoapIn" />
+      <wsdl:output message="tns:CreditBalanceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IdCheck">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Alfanumerik sorgulama...</wsdl:documentation>
+      <wsdl:input message="tns:IdCheckSoapIn" />
+      <wsdl:output message="tns:IdCheckSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IdCheck2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Abone tipi sorgulama...</wsdl:documentation>
+      <wsdl:input message="tns:IdCheck2SoapIn" />
+      <wsdl:output message="tns:IdCheck2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SmsStatus2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">SMS durum sorgulama (zamanli)...</wsdl:documentation>
+      <wsdl:input message="tns:SmsStatus2SoapIn" />
+      <wsdl:output message="tns:SmsStatus2SoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="smsserviceHttpGet">
+    <wsdl:operation name="SmsStatus">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">SMS durum sorgulama...</wsdl:documentation>
+      <wsdl:input message="tns:SmsStatusHttpGetIn" />
+      <wsdl:output message="tns:SmsStatusHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreditBalance">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Kredi sorgulama...</wsdl:documentation>
+      <wsdl:input message="tns:CreditBalanceHttpGetIn" />
+      <wsdl:output message="tns:CreditBalanceHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IdCheck">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Alfanumerik sorgulama...</wsdl:documentation>
+      <wsdl:input message="tns:IdCheckHttpGetIn" />
+      <wsdl:output message="tns:IdCheckHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IdCheck2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Abone tipi sorgulama...</wsdl:documentation>
+      <wsdl:input message="tns:IdCheck2HttpGetIn" />
+      <wsdl:output message="tns:IdCheck2HttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SmsStatus2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">SMS durum sorgulama (zamanli)...</wsdl:documentation>
+      <wsdl:input message="tns:SmsStatus2HttpGetIn" />
+      <wsdl:output message="tns:SmsStatus2HttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="smsserviceHttpPost">
+    <wsdl:operation name="SmsStatus">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">SMS durum sorgulama...</wsdl:documentation>
+      <wsdl:input message="tns:SmsStatusHttpPostIn" />
+      <wsdl:output message="tns:SmsStatusHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreditBalance">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Kredi sorgulama...</wsdl:documentation>
+      <wsdl:input message="tns:CreditBalanceHttpPostIn" />
+      <wsdl:output message="tns:CreditBalanceHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IdCheck">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Alfanumerik sorgulama...</wsdl:documentation>
+      <wsdl:input message="tns:IdCheckHttpPostIn" />
+      <wsdl:output message="tns:IdCheckHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="IdCheck2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Abone tipi sorgulama...</wsdl:documentation>
+      <wsdl:input message="tns:IdCheck2HttpPostIn" />
+      <wsdl:output message="tns:IdCheck2HttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SmsStatus2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">SMS durum sorgulama (zamanli)...</wsdl:documentation>
+      <wsdl:input message="tns:SmsStatus2HttpPostIn" />
+      <wsdl:output message="tns:SmsStatus2HttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="smsserviceSoap" type="tns:smsserviceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SmsInsert_1_N">
+      <soap:operation soapAction="http://83.66.137.24/PgApiWs/SmsInsert_1_N" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SmsInsert_N_N">
+      <soap:operation soapAction="http://83.66.137.24/PgApiWs/SmsInsert_N_N" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SmsStatus">
+      <soap:operation soapAction="http://83.66.137.24/PgApiWs/SmsStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreditBalance">
+      <soap:operation soapAction="http://83.66.137.24/PgApiWs/CreditBalance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IdCheck">
+      <soap:operation soapAction="http://83.66.137.24/PgApiWs/IdCheck" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IdCheck2">
+      <soap:operation soapAction="http://83.66.137.24/PgApiWs/IdCheck2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SmsStatus2">
+      <soap:operation soapAction="http://83.66.137.24/PgApiWs/SmsStatus2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="smsserviceSoap12" type="tns:smsserviceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SmsInsert_1_N">
+      <soap12:operation soapAction="http://83.66.137.24/PgApiWs/SmsInsert_1_N" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SmsInsert_N_N">
+      <soap12:operation soapAction="http://83.66.137.24/PgApiWs/SmsInsert_N_N" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SmsStatus">
+      <soap12:operation soapAction="http://83.66.137.24/PgApiWs/SmsStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreditBalance">
+      <soap12:operation soapAction="http://83.66.137.24/PgApiWs/CreditBalance" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IdCheck">
+      <soap12:operation soapAction="http://83.66.137.24/PgApiWs/IdCheck" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IdCheck2">
+      <soap12:operation soapAction="http://83.66.137.24/PgApiWs/IdCheck2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SmsStatus2">
+      <soap12:operation soapAction="http://83.66.137.24/PgApiWs/SmsStatus2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="smsserviceHttpGet" type="tns:smsserviceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="SmsStatus">
+      <http:operation location="/SmsStatus" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreditBalance">
+      <http:operation location="/CreditBalance" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IdCheck">
+      <http:operation location="/IdCheck" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IdCheck2">
+      <http:operation location="/IdCheck2" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SmsStatus2">
+      <http:operation location="/SmsStatus2" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="smsserviceHttpPost" type="tns:smsserviceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="SmsStatus">
+      <http:operation location="/SmsStatus" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreditBalance">
+      <http:operation location="/CreditBalance" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IdCheck">
+      <http:operation location="/IdCheck" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="IdCheck2">
+      <http:operation location="/IdCheck2" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SmsStatus2">
+      <http:operation location="/SmsStatus2" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="smsservice">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Figensoft PostaGuvercini Api Web Service</wsdl:documentation>
+    <wsdl:port name="smsserviceSoap" binding="tns:smsserviceSoap">
+      <soap:address location="http://www.postaguvercini.com/api_ws/smsservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="smsserviceSoap12" binding="tns:smsserviceSoap12">
+      <soap12:address location="http://www.postaguvercini.com/api_ws/smsservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="smsserviceHttpGet" binding="tns:smsserviceHttpGet">
+      <http:address location="http://www.postaguvercini.com/api_ws/smsservice.asmx" />
+    </wsdl:port>
+    <wsdl:port name="smsserviceHttpPost" binding="tns:smsserviceHttpPost">
+      <http:address location="http://www.postaguvercini.com/api_ws/smsservice.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

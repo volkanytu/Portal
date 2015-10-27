@@ -1,0 +1,169 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="loginController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+    <meta id="myViewport" name="viewport" content="width=device-width, initial-scale=0.7, maximum-scale=0.7, minimum-scale=0.7, target-densitydpi=device-dpi, user-scalable=no" />
+
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+    <!--<link href="styles/bootstrap.min.css" rel="stylesheet" />-->
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="js/jquery/jquery.widget.min.js"></script>
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/pagescripts/loginJS.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js"></script>
+    <script src="js/jquery/jquery.session.js"></script>
+    <script src="js/pagescripts/languageMessagesJS.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+            //debugger;
+            LoginHelper.OnLoad();
+
+
+
+        });
+
+        function test() {
+
+            var asd = grecaptcha.getResponse();
+
+            var jData = {};
+            jData.secret = "6Le-IA4TAAAAAElIB77hMVvtZhBV1x80uYGQGct6";
+            jData.response = asd;
+
+            var jSonData = JSON.stringify(jData);
+
+            //debugger;
+            $.ajax({
+                url: "https://www.google.com/recaptcha/api/siteverify",
+                async: false,
+                dataType: "json",
+                contentType: "application/json;",
+                type: "POST",
+
+                success: function (data) {
+                    //debugger;
+                    if (data != null) {
+
+                        return;
+                    }
+                    else {
+                        return false;
+                    }
+                },
+                error: function (a, b, c) {
+                    debugger;
+                }
+            });
+        }
+
+    </script>
+
+</head>
+
+<body class="pageLogin">
+
+    <div class="container" ng-show="showMain">
+        <!--Header-->
+        <div class="header clearfix">
+            <div class="headerHolder">
+                <div class="col col1">
+                    <div class="grid grid1"><a href="javascript:void(0);" class="logo"><img src="./images/logo.png" border="0" title="Kale Kilit" /></a></div>
+                </div>
+                <div class="fixer"></div>
+            </div>
+        </div>
+        <!--Header-->
+        <!--Body-->
+        <div class="body clearfix">
+            <div class="bodyHolder loginPage clearfix">
+
+                <!--Member Login-->
+                <div class="left">
+                    <div class="boxDefault boxMemberLogin">
+                        <div class="boxHolder">
+                            <div class="boxHeader boxHeaderMember">
+                                <h2 class="boxTitle">Değerlendirme Anketi</h2>
+                                <span class="boxBttmTitle">Hizmetimizi değerlendirin</span>
+                            </div>
+                            <div class="boxBody boxBodyMember">
+                                <!--<div id="divLoadingMain" style="text-align:center;" ng-show="showCheckLoading">
+                                    <img src="images/loading.gif" width="48" />
+                                    <br />
+                                    <br />
+                                    <h4 style="text-align:center;">Kontrol ediliyor...</h4>
+                                </div>-->
+                                <div class="boxFields boxMemberFields" ng-hide="showCheckLoading">
+                                    <span class="name">Aldığınız hizmeti bir yakınınıza tavsiye eder misiniz?</span> <span class="control">
+                                        <select style="width:100%;">
+                                            <option value="-1"></option>
+                                            <option value="100000000">Evet</option>
+                                            <option value="100000001">Hayır</option>
+                                        </select>
+                                    </span>
+                                </div>
+                                <div class="boxFields boxMemberFields" ng-hide="showCheckLoading">
+                                    <span class="name">Cevabınız evet ise 1 -10 arasında  not verir misiniz?</span> <span class="control">
+                                        <select style="width:100%;">
+                                            <option value="-1"></option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+
+                                        </select>
+                                    </span>
+                                </div>
+                                <div class="boxFooter boxMemberFooter" ng-hide="showCheckLoading">
+                                    <div class="boxBtnsCntrl boxMembrBtnsCntrl">
+                                        <a href="javascript:void(0);" class="btnDefault btnLogin" onclick="test();">
+                                            <span>GÖNDER</span>
+                                        </a>
+                                    </div>
+                                    <div class="fixer"></div>
+                                </div>
+                            </div>
+                            <div style="width:100%;" class="g-recaptcha" data-sitekey="6Le-IA4TAAAAAC8K28baHPhw_rgV2fxW2BST1viQ" data-size="compact"></div>
+                            <!--<div class="error" ng-show="showError"><span class="errorText">{{errorText}}</span></div>
+                            <div class="loginInfo">
+                                <span class="infoText">Üyelik için <a href="mailto:uye@kaleanahtarcilarkulubu.com.tr" style="font-weight:bold;">uye@kaleanahtarcilarkulubu.com.tr</a> ile iletişime geçebilirsiniz.</span>
+                            </div>-->
+
+                        </div>
+                    </div>
+                </div>
+                <!--Member Login-->
+                <!--Member Login Banner-->
+                <div class="right">
+                    <div class="loginBnr">
+                        <span class="bnr"><img src="data:{{portal.PortalLoginImage.MimeType}};base64,{{portal.PortalLoginImage.File}}" border="0" /></span>
+                        <div class="bnrText">
+                            <span class="smallText">1 SİLİNDİR 4 BÜYÜK SALDIRILARA KARŞI!</span>
+                            <span class="largeText">DÜNYADA İLK 80 dB ALARMLI SİLİNDİRLER</span>
+                        </div>
+                    </div>
+                </div>
+                <!--Member Login Banner-->
+                <div class="fixer">
+                </div>
+            </div>
+        </div>
+        <!--Body-->
+    </div>
+</body>
+</html>

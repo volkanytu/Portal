@@ -1,0 +1,195 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="chatController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+    <link href="styles/jquery.tokenize.css" rel="stylesheet" />
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <script src="js/jquery-base.min.js"></script>
+    <script src="js/customPlugin.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/jquery/jquery.tokenize.js"></script>
+    <script src="js/jquery/jquery.nicescroll.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js"></script>
+    <script src="js/pagescripts/languageMessagesJS.js"></script>
+    <script src="js/pagescripts/chatJS.js"></script>
+    <script src="js/socket.io.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $(".writeComnt").niceScroll({ cursorcolor: "#ccc" });
+        });
+
+    </script>
+
+    <style>
+        .message {
+            margin-top: 15px;
+            max-width:60%;
+            border-radius:10px;
+        }
+
+            .message div {
+                width: 100%;
+                margin-top: 5px;
+            }
+
+            .message .date {
+                font-family: 'open_sansregular';
+                font-size: 12px;
+                color: #fff;
+                text-align:right;
+            }
+
+        .left {
+            background-color: lightgray;
+            display: inline-block;
+            float: left;
+            padding: 10px;
+        }
+
+            .left div {
+                /*text-align: left;*/
+                float: left;
+            }
+
+        .right {
+            background-color:lightgreen;
+            display: inline-block;
+            float: right;
+            padding: 10px;
+        }
+
+            .right div {
+                /*text-align: right;*/
+                float: right;
+            }
+    </style>
+
+</head>
+<body style="background:#fff;">
+    <!--Main Content-->
+    <div class="mainContent newMessagePage clearfix" id="divMain">
+        <div class="title-content title-new-msg">
+            <h1><i class="icon3 iconMsg"></i><span>Mesajlar</span></h1>
+        </div>
+
+        <div class="nav">
+            <a href="mesajlar.html">Mesajlar</a><i></i>
+            <a href="#">{{fullName}} ile sohbet</a>
+        </div>
+
+        <!--New Messgage-->
+        <div class="new-msg-control">
+            <div class="title-other">
+                <span>{{fullName}}</span>
+            </div>
+            <div class="grid-row share">
+                <div class="writeComnt" style="height:500px;overflow-y:scroll;">
+                    <div ng-repeat="mess in oldMessages">
+                        <div class="message {{from==mess.message.FromId.Id ? 'left': 'right'}}">
+                            <div>
+                                <span class="date">{{mess.CreatedOnString}}</span>
+                            </div>
+                            <div>
+                                <span>{{mess.message.Content}}</span>
+                            </div>
+                        </div>
+
+                        <div class="fixer"></div>
+                    </div>
+
+                    <!--<div class="message right">
+                        <div>
+                            <span class="date">03.08.2015</span>
+                        </div>
+                        <div>
+                            <span>Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir hurufat numune kitabı oluşturmak üzere bir yazı galerisini a</span>
+                        </div>
+                    </div>
+
+                    <div class="fixer"></div>
+
+                    <div class="message right">
+                        <div>
+                            <span class="date">03.08.2015</span>
+                        </div>
+                        <div>
+                            <span>Lorem Ipsum</span>
+                        </div>
+                    </div>-->
+
+                </div>
+            </div>
+        </div>
+
+        <div class="grid-row share" style="margin-top:20px;">
+            <div class="writeComnt">
+                <textarea placeholder="Mesaj yaz..." ng-model="message"></textarea>
+                <div class="contentBtns"><a href="javascript:void(0);" class="btnDefault btnSend" ng-click="SendNewMessage();"><span>GÖNDER</span></a> </div>
+            </div>
+        </div>
+
+        <!--New Messgage-->
+        <div class="grid-row content" id="divRecentContacts">
+            <div class="title-bottom">
+                <h1>Gelen Kutusu</h1>
+            </div>
+        </div>
+
+        <!--Loading-->
+        <div class="popupContainer" style="background-color:transparent;margin-top:20px;">
+            <div class="popup popupMsgSend">
+                <div class="error" ng-show="showErrorHeader"><span id="lblErrorMain">{{errorText}}</span></div>
+                <!--Popup Body-->
+                <div class="popupBody" ng-show="showLoading">
+                    <!--Data-->
+                    <div class="data cnt">
+                        <div id="divLoadingMain" ng-show="showLoading" style="text-align:center;">
+                            <img src="images/loading.gif" width="48" />
+                            <br />
+                            <br />
+                            <h4 style="text-align:center;">Son görüşme bilgileri çekiliyor...</h4>
+                        </div>
+                    </div>
+                    <!--Data-->
+                </div>
+                <!--Popup Body-->
+            </div>
+        </div>
+        <!--Loading-->
+        <!--Get user Comments-->
+        <div class="grid-row content">
+            <div class="get-comment">
+                <div class="row row-user" ng-repeat="message in recentMessages">
+                    <div class="row-inline">
+                        <div class="avtr"><span class="avatar-bg" style="background-image:url({{attachmentUrl+message.ProfileImage}});"></span></div>
+                        <div class="info">
+                            <div class="colmn"><a href="#" ng-click="OpenUserChatPage(message.UserId ,message.UserIdName);"><span class="name">{{message.UserIdName}}</span></a></div>
+                            <div class="colmn"><span class="date">{{message.CreatedOnString}}</span></div>
+                        </div>
+                        <div class="row row-comment">
+                            <div class="user-comment">
+                                <p>{{message.Content}}</p>
+                            </div>
+                        </div>
+                        <div class="fixer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Get user Comments-->
+
+    </div>
+    <!--Main Content-->
+
+    <script type="text/javascript" language="javascript" src="./js/allScripts.js"></script>
+
+</body>
+</html>

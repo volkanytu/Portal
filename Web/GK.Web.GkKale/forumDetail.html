@@ -1,0 +1,131 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="forumDetailController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="js/jquery/jquery.widget.min.js"></script>
+    <script src="js/jquery/jquery.session.js"></script>
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js"></script>
+    <script src="js/pagescripts/languageMessagesJS.js"></script>
+    <script src="js/pagescripts/editforumsubjectJS.js"></script>
+    <script src="js/customPlugin.js"></script>
+</head>
+<body style="background:#fff;">
+    <!--Main Content-->
+    <div class="mainContent forumPage forumDetailPage clearfix" id="divMain">
+        <!--Content Header-->
+        <div class="title-content title-forum">
+            <h1><i class="icon3 iconForum"></i><span>Forum</span></h1>
+        </div>
+        <!--Content Header-->
+        <!--Content Nav-->
+        <div class="nav">
+            <a href="forum.html" id="btnMain">Forum</a><i></i>
+            <a href="forum.html">{{parentForumName}}</a><i></i>
+            <a href="#">{{forumName}}</a>
+        </div>
+        <!--Content Nav-->
+        <!--Loading-->
+        <div class="popupContainer" style="background-color:transparent;">
+            <div class="popup popupMsgSend">
+                <div class="error" ng-show="showErrorHeader"><span class="errorText">{{errorText}}</span></div>
+                <!--Popup Body-->
+                <div class="popupBody" ng-show="showLoading">
+                    <!--Data-->
+                    <div class="data cnt">
+                        <div id="divLoadingMain" ng-show="showLoading" style="text-align:center;">
+                            <img src="images/loading.gif" width="48" />
+                            <br />
+                            <br />
+                            <h4 style="text-align:center;">{{ ContentMessages["CM093"] }}</h4>
+                        </div>
+                    </div>
+                    <!--Data-->
+                </div>
+                <!--Popup Body-->
+            </div>
+        </div>
+        <!--Loading-->
+        <!--Main-->
+        <div class="grid-row grid-row-text" ng-show="showMain">
+            <div id="forumSubjectMain">
+                <!--Row-->
+                <div class="row row-user">
+                    <div class="row-inline">
+                        <div class="avtr"><span class="avatar-bg" style="background-image:url({{attachmentUrl+subject.PortalUserImage}});"></span></div>
+                        <div class="info">
+                            <div class="colmn">
+                                <a href="#" ng-click="EditUser(subject.User.Id);"><span class="name">{{subject.User.Name}}</span></a>
+                            </div>
+                            <div class="colmn">
+                                <span class="date">{{subject.CreatedOnString}}</span>
+                            </div>
+                        </div>
+                        <div class="user-comnt">
+                            <p ng-bind-html="subjectDesc"></p>
+                        </div>
+                        <div class="fixer"></div>
+                    </div>
+                </div>
+                <!--Row-->
+                <!--Row Social-->
+                <div class="row row-social">
+                    <div class="case">
+                        <a href="javascript:void(0);" class="like" title="Beğen" ng-click="Like(subject.Id);"><i></i><span>{{subject.LikeDetail==null ? "0" : subject.LikeDetail.LikeCount}}</span></a>
+                        <a href="javascript:void(0);" class="cmnt" title="Yorum"><i></i><span>{{subject.CommentList==null ? "0" : subject.CommentList.length}}</span></a>
+                    </div>
+                </div>
+                <!--Row Social-->
+            </div>
+            <!--Row Comments-->
+            <div id="rowComments" class="row-cmnts">
+                <p class="item-title"><i class="icon1 iconCmt"></i>Yorumlar</p>
+                <div class="error" ng-show="noCommentRecord"><span id="lblErrorComments">Yorum yok!</span></div>
+            </div>
+            <!--Row Comments-->
+            <!--Row User Comment-->
+            <div class="row">
+                <!--User-->
+                <div class="row row-user" ng-repeat="x in subject.CommentList">
+                    <div class="row-inline">
+                        <div class="avtr"><span class="avatar-bg" style="background-image:url({{attachmentUrl+x.PortalUserImage}});"></span></div>
+                        <div class="info">
+                            <div class="colmn">
+                                <a href="#" ng-click="EditUser(x.PortalUser.Id);"><span class="name">{{x.PortalUser.Name}}</span></a>
+                            </div>
+                            <div class="colmn">
+                                <span class="date">{{x.CreatedOnString}}</span>
+                            </div>
+                        </div>
+                        <div class="user-comnt"><p>{{x.Description}}</p></div>
+                        <div class="fixer"></div>
+                    </div>
+                </div>
+                <!--User-->
+            </div>
+            <!--User Comment Make-->
+            <div class="row row-comnt-make">
+                <div class="cmnt" data-role="input-control">
+                    <input type="text" placeholder="Yorum Yap" class="cmntInput" texttype="comment" ng-model="subject.commentText" />
+                    <a href="javascript:void(0);" class="btnCmnt" ng-click="sendComment(subject.Id,subject.commentText,subject.CommentList)"></a>
+                </div>
+            </div>
+            <!--User Comment Make-->
+            <!--Row user Comment-->
+        </div>
+        <!--main-->
+
+    </div>
+    <!--Main Content-->
+</body>
+</html>

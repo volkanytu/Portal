@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://api.dataport.com.tr/MessageServices.asmx?wsdl" docRef="http://api.dataport.com.tr/MessageServices.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://api.dataport.com.tr/MessageServices.asmx" xmlns:q1="http://sms.dataport.com.tr/" binding="q1:MessageServicesSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://api.dataport.com.tr/MessageServices.asmx" xmlns:q2="http://sms.dataport.com.tr/" binding="q2:MessageServicesSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

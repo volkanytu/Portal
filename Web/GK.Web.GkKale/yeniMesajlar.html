@@ -1,0 +1,127 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="newMessagesController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+    <link href="styles/jquery.tokenize.css" rel="stylesheet" />
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <script src="js/jquery-base.min.js"></script>
+    <script src="js/customPlugin.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/jquery/jquery.tokenize.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js"></script>
+    <script src="js/pagescripts/languageMessagesJS.js"></script>
+    <script src="js/pagescripts/newMessagesJS.js"></script>
+    <script src="js/socket.io.js"></script>
+    <style>
+        .tokenize-sample {
+            width: 300px;
+            margin-left: 20px;
+            /*overflow:hidden;*/
+        }
+    </style>
+
+
+
+</head>
+<body style="background:#fff;">
+    <!--Main Content-->
+    <div class="mainContent newMessagePage clearfix" id="divMain">
+        <div class="title-content title-new-msg">
+            <h1><i class="icon3 iconMsg"></i><span>Mesajlar</span></h1>
+        </div>
+
+        <div class="nav">
+            <a href="mesajlar.html">Mesajlar</a><i></i>
+            <a href="#">Yeni Mesaj</a>
+        </div>
+
+        <!--New Messgage-->
+        <div class="new-msg-control">
+            <div class="title-other">
+                <span style="float:left;margin-top:10px;">Alıcı:</span>
+                <select id="divTo" class="tokenize-sample" style="font-size:large;border:1px solid;"></select>
+
+            </div>
+            <div class="grid-row share">
+                <div class="shareHolder">
+                    <!--<div class="shareBtns">
+                        <div class="btn btn1 selected">
+                            <button id="" class="iconCmmnt"></button>
+                        </div>
+                        <div class="btn btn2">
+                            <button class="iconFoto" id="btnSelectPhoto"></button>
+                        </div>
+                        <div class="btn btn3">
+                            <button id="" class="iconCamera"></button>
+                        </div>
+                    </div>-->
+                </div>
+                <div class="writeComnt">
+                    <textarea placeholder="Mesaj yaz..." ng-model="message"></textarea>
+                    <div class="contentBtns"><a href="javascript:void(0);" class="btnDefault btnSend" ng-click="SendNewMessage();"><span>GÖNDER</span></a> </div>
+                </div>
+            </div>
+        </div>
+        <!--New Messgage-->
+        <div class="grid-row content" id="divRecentContacts">
+            <div class="title-bottom">
+                <h1>Gelen Kutusu</h1>
+            </div>
+        </div>
+
+        <!--Loading-->
+        <div class="popupContainer" style="background-color:transparent;margin-top:20px;">
+            <div class="popup popupMsgSend">
+                <div class="error" ng-show="showErrorHeader"><span id="lblErrorMain">{{errorText}}</span></div>
+                <!--Popup Body-->
+                <div class="popupBody" ng-show="showLoading">
+                    <!--Data-->
+                    <div class="data cnt">
+                        <div id="divLoadingMain" ng-show="showLoading" style="text-align:center;">
+                            <img src="images/loading.gif" width="48" />
+                            <br />
+                            <br />
+                            <h4 style="text-align:center;">Son görüşme bilgileri çekiliyor...</h4>
+                        </div>
+                    </div>
+                    <!--Data-->
+                </div>
+                <!--Popup Body-->
+            </div>
+        </div>
+        <!--Loading-->
+        <!--Get user Comments-->
+        <div class="grid-row content">
+            <div class="get-comment">
+                <div class="row row-user" ng-repeat="message in recentMessages">
+                    <div class="row-inline">
+                        <div class="avtr"><span class="avatar-bg" style="background-image:url({{attachmentUrl+message.ProfileImage}});"></span></div>
+                        <div class="info">
+                            <div class="colmn"><a href="#" ng-click="OpenUserChatPage(message.UserId ,message.UserIdName);"><span class="name">{{message.UserIdName}}</span></a></div>
+                            <div class="colmn"><span class="date">{{message.CreatedOnString}}</span></div>
+                        </div>
+                        <div class="row row-comment">
+                            <div class="user-comment">
+                                <p>{{message.Content}}</p>
+                            </div>
+                        </div>
+                        <div class="fixer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Get user Comments-->
+
+    </div>
+    <!--Main Content-->
+
+    <script type="text/javascript" language="javascript" src="./js/allScripts.js"></script>
+
+</body>
+</html>

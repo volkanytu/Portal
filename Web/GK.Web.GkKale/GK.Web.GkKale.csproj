@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D385DA89-8BF7-4E8B-8CDC-1ED478404E78}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GK.Web.GkKale</RootNamespace>
+    <AssemblyName>GK.Web.GkKale</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="microsoft.crm.sdk.proxy">
+      <HintPath>..\..\Library\Assemblies\microsoft.crm.sdk.proxy.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="microsoft.xrm.sdk">
+      <HintPath>..\..\Library\Assemblies\microsoft.xrm.sdk.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="arkadaslarim.html" />
+    <Content Include="attachments\test.png" />
+    <Content Include="bilgiKupu.html" />
+    <Content Include="isEmriGoruntule.html" />
+    <Content Include="isEmirleri.html" />
+    <Content Include="hediyeler.html" />
+    <Content Include="hediyelerDetay.html" />
+    <Content Include="images\164_ASM_220x304.png" />
+    <Content Include="images\164_CEC_220x304.png" />
+    <Content Include="images\164_KIS_220x304.png" />
+    <Content Include="images\ANAHTARCILAR_KULUBU_lg.png" />
+    <Content Include="images\Anahtarcilar_Logo_220x304.png" />
+    <Content Include="images\gift_arrow_select.png" />
+    <Content Include="images\hediyele_banner.jpg" />
+    <Content Include="images\iconAnket.png" />
+    <Content Include="images\iconGift.png" />
+    <Content Include="images\kale_anahtarcilar_son.jpg" />
+    <Content Include="images\kanuni_motorsiklet.jpg" />
+    <Content Include="images\kanuni_motorsiklet_detay.jpg" />
+    <Content Include="images\mondial_cooter.jpg" />
+    <Content Include="images\timer.jpg" />
+    <Content Include="js\jquery\jquery.maskedinput.js" />
+    <Content Include="js\jquery\jquery.nicescroll.js" />
+    <Content Include="js\jquery\jquery.tokenize.js" />
+    <Content Include="js\jquery\string.js" />
+    <Content Include="js\pagescripts\addforumsubjectJS.js" />
+    <Content Include="js\pagescripts\editassemblyrequestJS.js" />
+    <Content Include="js\pagescripts\assemblyrequestJS.js" />
+    <Content Include="js\pagescripts\changepassJS.js" />
+    <Content Include="js\pagescripts\editforumsubjectJS.js" />
+    <Content Include="js\pagescripts\discoveryformJS.js" />
+    <Content Include="js\pagescripts\giftDetailJS.js" />
+    <Content Include="js\pagescripts\giftListJS.js" />
+    <Content Include="js\pagescripts\messagesJS.js" />
+    <Content Include="js\pagescripts\chatJS.js" />
+    <Content Include="js\pagescripts\newMessagesJS.js" />
+    <Content Include="js\pagescripts\passrememberJS.js" />
+    <Content Include="js\ChatServer.js" />
+    <Content Include="nps.html" />
+    <Content Include="mesajlar.html" />
+    <Content Include="passwordChange.html" />
+    <Content Include="passwordForgot.html" />
+    <Content Include="styles\bootsdatetime.css" />
+    <Content Include="styles\jquery.tokenize.css" />
+    <Content Include="ucretsizKesifFormu.html" />
+    <Content Include="yapimAsamasinda.html" />
+    <Content Include="bilgiKupuSoru.html" />
+    <Content Include="duvarYazisi.html" />
+    <Content Include="duyurular.html" />
+    <Content Include="duyurularDetay.html" />
+    <Content Include="forum.html" />
+    <Content Include="forumDetail.html" />
+    <Content Include="forumSubject.html" />
+    <Content Include="images\camera-photo.png" />
+    <Content Include="images\cift_yildiz.jpg" />
+    <Content Include="images\iconCup.png" />
+    <Content Include="images\icon_box.png" />
+    <Content Include="images\tek_yildiz.jpg" />
+    <Content Include="images\timer24.png" />
+    <Content Include="images\trash.png" />
+    <Content Include="images\uc_yildiz.jpg" />
+    <Content Include="js\pagescripts\announcementlistJS.js" />
+    <Content Include="js\pagescripts\cubelevelJS.js" />
+    <Content Include="js\pagescripts\cubequestionJS.js" />
+    <Content Include="js\pagescripts\editannouncementJS.js" />
+    <Content Include="js\pagescripts\edituserJS.js" />
+    <Content Include="js\pagescripts\forumJS.js" />
+    <Content Include="js\pagescripts\forumsubjectlistJS.js" />
+    <Content Include="js\pagescripts\pagecontentJS.js" />
+    <Content Include="js\pagescripts\pointdetailJS.js" />
+    <Content Include="js\pagescripts\pointstatusJS.js" />
+    <Content Include="js\pagescripts\editarticleJS.js" />
+    <Content Include="js\pagescripts\editprofileJS.js" />
+    <Content Include="js\pagescripts\editvideoJS.js" />
+    <Content Include="js\pagescripts\videocategoryJS.js" />
+    <Content Include="js\pagescripts\videolistJS.js" />
+    <Content Include="pagecontent.html" />
+    <Content Include="popupArkadaslarim.html" />
+    <Content Include="popupVideolar.html" />
+    <Content Include="popupYeniKonuBasligi.html" />
+    <Content Include="puanDetay.html" />
+    <Content Include="puanlarim.html" />
+    <Content Include="videolarDetay.html" />
+    <Content Include="videolar.html" />
+    <Content Include="makalelerIcerikDetay.html" />
+    <Content Include="js\pagescripts\articlelistJS.js" />
+    <Content Include="makalelerDetay.html" />
+    <Content Include="js\pagescripts\articlecategoryJS.js" />
+    <Content Include="makaleler.html" />
+    <Content Include="egitimler.html" />
+    <Content Include="egitimlerDetay.html" />
+    <Content Include="egitimlerIcerikDetay.html" />
+    <Content Include="images\akademi.jpg" />
+    <Content Include="images\arwSml.png" />
+    <Content Include="images\avatar.jpg" />
+    <Content Include="images\bannerTest.png" />
+    <Content Include="images\bnr-akademi.jpg" />
+    <Content Include="images\bnr-video.jpg" />
+    <Content Include="images\bnrVideo.png" />
+    <Content Include="images\cmntArw.png" />
+    <Content Include="images\cmntBg.png" />
+    <Content Include="images\cmntBgLight.png" />
+    <Content Include="images\datetimePickBg.png" />
+    <Content Include="images\doors-akademi.jpg" />
+    <Content Include="images\egitici.jpg" />
+    <Content Include="images\faydali-bilgiler.jpg" />
+    <Content Include="images\iconAnn.png" />
+    <Content Include="images\iconArtc.png" />
+    <Content Include="images\iconCam.png" />
+    <Content Include="images\iconCmnt.png" />
+    <Content Include="images\iconCmntDark.png" />
+    <Content Include="images\iconEdu.png" />
+    <Content Include="images\iconForum.png" />
+    <Content Include="images\iconFoto.png" />
+    <Content Include="images\iconMbm.png" />
+    <Content Include="images\iconMsg.png" />
+    <Content Include="images\iconProfil.png" />
+    <Content Include="images\iconScore.png" />
+    <Content Include="images\iconSelectBg.png" />
+    <Content Include="images\iconStepArrow.png" />
+    <Content Include="images\iconVideo.png" />
+    <Content Include="images\iconWho.png" />
+    <Content Include="images\iNext.png" />
+    <Content Include="images\iPrevious.png" />
+    <Content Include="images\liderlik.jpg" />
+    <Content Include="images\likeBg.png" />
+    <Content Include="images\likeBgLight.png" />
+    <Content Include="images\loading.gif" />
+    <Content Include="images\loadingdots.gif" />
+    <Content Include="images\loginBg.png" />
+    <Content Include="images\loginBnr.png" />
+    <Content Include="images\logo.png" />
+    <Content Include="images\luxury.jpg" />
+    <Content Include="images\makaleler-bnr.png" />
+    <Content Include="images\medalicon.png" />
+    <Content Include="images\menuIcon1.png" />
+    <Content Include="images\menuIcon2.png" />
+    <Content Include="images\menuIcon3.png" />
+    <Content Include="images\menuIcon4.png" />
+    <Content Include="images\müsteri-deneyimi.jpg" />
+    <Content Include="images\no-user.png" />
+    <Content Include="images\no-video-bg.png" />
+    <Content Include="images\no-video-large.png" />
+    <Content Include="images\puanicon.png" />
+    <Content Include="images\removeicon.png" />
+    <Content Include="images\searchBtnBg.png" />
+    <Content Include="images\share-image.png" />
+    <Content Include="images\sprite1.png" />
+    <Content Include="images\sprite2.png" />
+    <Content Include="images\sprite3.png" />
+    <Content Include="images\sss.jpg" />
+    <Content Include="images\user1.jpg" />
+    <Content Include="images\user2.jpg" />
+    <Content Include="images\user3.jpg" />
+    <Content Include="images\videolar-bnr.png" />
+    <Content Include="images\videoPlayerBg.png" />
+    <Content Include="js\allScripts.js" />
+    <Content Include="js\customPlugin.js" />
+    <Content Include="js\date.format.js" />
+    <Content Include="js\jquery-base.min.js" />
+    <Content Include="js\jquery.maskedinput.js" />
+    <Content Include="js\jquery.scrollUp.js" />
+    <Content Include="js\jquery.simplePagination.js" />
+    <Content Include="js\jquery\angular.min.js" />
+    <Content Include="js\jquery\jquery.dataTables.js" />
+    <Content Include="js\jquery\jquery.easing.1.3.min.js" />
+    <Content Include="js\jquery\jquery.min.js" />
+    <Content Include="js\jquery\jquery.mousewheel.js" />
+    <Content Include="js\jquery\jquery.session.js" />
+    <Content Include="js\jquery\jquery.widget.min.js" />
+    <Content Include="js\jquery\notify.js" />
+    <Content Include="js\jquery\purl.js" />
+    <Content Include="profilDetay.html" />
+    <Content Include="styles\toastr.css" />
+    <Content Include="js\jquery\toastr.js" />
+    <Content Include="js\pagescripts\editeducationJS.js" />
+    <Content Include="js\pagescripts\educationcategoryJS.js" />
+    <Content Include="js\pagescripts\educationlistJS.js" />
+    <Content Include="js\pagescripts\friendshipJS.js" />
+    <Content Include="js\pagescripts\GlobalVariables.js" />
+    <Content Include="js\pagescripts\graffitiJS.js" />
+    <Content Include="js\pagescripts\mainJS.js" />
+    <Content Include="js\pagescripts\languageMessagesJS.js" />
+    <Content Include="js\pagescripts\loginJS.js" />
+    <Content Include="js\pagescripts\whoisJS.js" />
+    <Content Include="js\socket.io.js" />
+    <Content Include="kimKimdir.html" />
+    <Content Include="login.html" />
+    <Content Include="main.html" />
+    <Content Include="styles\bootstrap.min.css" />
+    <Content Include="styles\fonts\opensans\OpenSans-Bold-webfont.svg" />
+    <Content Include="styles\fonts\opensans\opensans-light-webfont.svg" />
+    <Content Include="styles\fonts\opensans\OpenSans-Regular-webfont.svg" />
+    <Content Include="styles\fonts\opensans\OpenSans-Semibold-webfont.svg" />
+    <Content Include="styles\main.css" />
+    <Content Include="videoPlayer.html" />
+    <Content Include="Web.config" />
+    <Content Include="chat.html" />
+    <Content Include="yeniMesajlar.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="uploadHelper.ashx.cs">
+      <DependentUpon>uploadHelper.ashx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="styles\fonts\opensans\OpenSans-Bold-webfont.eot" />
+    <Content Include="styles\fonts\opensans\OpenSans-Bold-webfont.ttf" />
+    <Content Include="styles\fonts\opensans\OpenSans-Bold-webfont.woff" />
+    <Content Include="styles\fonts\opensans\opensans-light-webfont.eot" />
+    <Content Include="styles\fonts\opensans\opensans-light-webfont.ttf" />
+    <Content Include="styles\fonts\opensans\opensans-light-webfont.woff" />
+    <Content Include="styles\fonts\opensans\OpenSans-Regular-webfont.eot" />
+    <Content Include="styles\fonts\opensans\OpenSans-Regular-webfont.ttf" />
+    <Content Include="styles\fonts\opensans\OpenSans-Regular-webfont.woff" />
+    <Content Include="styles\fonts\opensans\OpenSans-Semibold-webfont.eot" />
+    <Content Include="styles\fonts\opensans\OpenSans-Semibold-webfont.ttf" />
+    <Content Include="styles\fonts\opensans\OpenSans-Semibold-webfont.woff" />
+    <Content Include="uploadHelper.ashx" />
+    <None Include="Properties\PublishProfiles\volkan.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Library\GK.Library.Business\GK.Library.Business.csproj">
+      <Project>{091e15b6-8b10-4814-9eb3-d987bb27caed}</Project>
+      <Name>GK.Library.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Library\GK.Library.Utility\GK.Library.Utility.csproj">
+      <Project>{fedcb7f2-0afd-476f-8823-f78061d7e553}</Project>
+      <Name>GK.Library.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49734</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:49734/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

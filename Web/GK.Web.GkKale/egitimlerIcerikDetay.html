@@ -1,0 +1,124 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="editEducationController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="js/jquery/jquery.widget.min.js"></script>
+    <script src="js/jquery/jquery.session.js"></script>
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js"></script>
+    <script src="js/pagescripts/languageMessagesJS.js"></script>
+    <script src="js/pagescripts/editeducationJS.js"></script>
+    <script src="js/customPlugin.js"></script>
+
+</head>
+<body style="background:#fff;">
+
+    <!--Loading-->
+    <div class="popupContainer" style="background-color:transparent;">
+        <div class="popup popupMsgSend">
+            <div class="error" ng-show="showErrorHeader"><span class="errorText">{{errorText}}</span></div>
+            <!--Popup Body-->
+            <div class="popupBody" ng-show="showLoading">
+                <!--Data-->
+                <div class="data cnt">
+                    <div id="divLoadingMain" ng-show="showLoading" style="text-align:center;">
+                        <img src="images/loading.gif" width="48" />
+                        <br />
+                        <br CM057
+                        <h4 style="text-align:center;">{{ ContentMessages["CM057"] }}</h4>
+                    </div>
+                </div>
+                <!--Data-->
+            </div>
+            <!--Popup Body-->
+        </div>
+    </div>
+    <!--Loading-->
+    <!--Main Content-->
+    <div class="mainContent educationPage clearfix" id="divMain" ng-show="showMain">
+        <div class="title-content title-edu">
+            <h1><i class="icon3 iconEdu"></i><span>Eğitimler</span></h1>
+        </div>
+        <div class="nav">
+            <a href="egitimler.html" id="btnMain">Kategori</a><i></i>
+            <a href="#" ng-click="BackToCategory();">{{categoryName}}</a>
+            <i></i>
+            <a href="#">{{education.Name}}</a>
+        </div>
+        <div class="detail-title"><span>{{education.Name}}</span> </div>
+        <!--Content List-->
+        <div class="grid-row grid-row-text">
+            <div id="rowMainInfo">
+                <div class="bnr">
+                    <img src="{{attachmentUrl+education.ImagePath}}" imageonload />
+                    <div class="content-share">
+                        <a href="#" class="like" id="btnUp"><i></i><span>{{education.LikeDetail==null ? "0" : education.LikeDetail.LikeCount}}</span></a>
+                        <a href="#" class="comment"><i></i><span id="lblCommentCount">{{education.CommentList==null ? "0" : education.CommentList.length }}</span></a>
+                    </div>
+                </div>
+                <p class="item-title">{{education.Name}}:</p>
+                <div ng-bind-html="educationDesc">
+                </div>
+            </div>
+            <div id="rowDocs" class="docs">
+                <p class="item-title"><i class="icon4 iconDoc"></i>Dökümanlar</p>
+                <div class="error" ng-show="noDocRecord"><span id="lblErrorDocs">Doküman yok!</span></div>
+
+                <ul id="lstDocs" class="lst-docs">
+                    <li ng-repeat="attachment in education.AttachmentFileList">
+                        <a href="{{attachmentUrl+attachment.FilePath}}" target="_blank">{{attachment.Name}}</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="rowComments" class="row-cmnts">
+                <p class="item-title"><i class="icon1 iconCmt"></i>Yorumlar</p>
+                <div class="error" ng-show="noCommentRecord"><span id="lblErrorComments">Yorum yok!</span></div>
+            </div>
+
+            <div id="lstComments" class="row-lst-cmnts">
+                <!--Get user Comments-->
+                <div class="get-comment">
+                    <!--Comments-->
+                    <div class="comments">
+                        <div class="row row-user" ng-repeat="comment in education.CommentList">
+                            <div class="row-inline">
+                                <div class="avtr"><span class="avatar-bg" style="background-image:url({{attachmentUrl+comment.PortalUserImage}});"></span></div>
+                                <div class="info">
+                                    <div class="colmn">
+                                        <a href="#"><span class="name">{{comment.PortalUser.Name}}</span></a>
+                                    </div>
+                                    <div class="colmn"><span class="date">{{comment.CreatedOnString}}</span></div>
+                                </div>
+                                <div class="user-comnt"><p>{{comment.Description}}</p></div>
+                                <div class="fixer"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Comments-->
+                    <div class="row row-comnt-make">
+                        <div class="cmnt">
+                            <input type="text" placeholder="Yorum Yap" class="cmntInput" texttype="comment" ng-model="education.commentText" />
+                            <a href="javascript:void(0);" class="btnCmnt" ng-click="sendComment(education.EducationId,education.commentText)"></a>
+                        </div>
+                    </div>
+                </div>
+                <!--Get user Comments-->
+            </div>
+
+        </div>
+        <!--Content List-->
+    </div>
+    <!--Main Content-->
+</body>
+</html>

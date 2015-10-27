@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{17A9B599-F93B-4597-BB59-CF2E043B35A9}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GK.Web.FileUpload</RootNamespace>
+    <AssemblyName>GK.Web.FileUpload</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CsvParser">
+      <HintPath>..\..\Library\Assemblies\CsvParser.dll</HintPath>
+    </Reference>
+    <Reference Include="microsoft.crm.sdk.proxy">
+      <HintPath>..\..\Library\Assemblies\microsoft.crm.sdk.proxy.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="microsoft.xrm.sdk">
+      <HintPath>..\..\Library\Assemblies\microsoft.xrm.sdk.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\iconFont.css" />
+    <Content Include="css\metro-bootstrap-responsive.css" />
+    <Content Include="css\metro-bootstrap.css" />
+    <Content Include="fonts\iconFont.dev.svg" />
+    <Content Include="fonts\iconFont.svg" />
+    <Content Include="fonts\metroSysIcons.svg" />
+    <Content Include="scripts\jquery.scrollUp.js" />
+    <Content Include="scripts\jquery\angular.min.js" />
+    <Content Include="scripts\jquery\jquery-1.11.1.js" />
+    <Content Include="scripts\jquery\jquery.dataTables.js" />
+    <Content Include="scripts\jquery\jquery.easing.1.3.min.js" />
+    <Content Include="scripts\jquery\jquery.fileupload.js" />
+    <Content Include="scripts\jquery\jquery.iframe-transport.js" />
+    <Content Include="scripts\jquery\jquery.min.js" />
+    <Content Include="scripts\jquery\jquery.mousewheel.js" />
+    <Content Include="scripts\jquery\jquery.session.js" />
+    <Content Include="scripts\jquery\jquery.ui.widget.js" />
+    <Content Include="scripts\jquery\jquery.widget.min.js" />
+    <Content Include="scripts\jquery\purl.js" />
+    <Content Include="scripts\jquery\upload.js" />
+    <Content Include="scripts\load-metro.js" />
+    <Content Include="scripts\metro.min.js" />
+    <Content Include="scripts\metro\metro-accordion.js" />
+    <Content Include="scripts\metro\metro-button-set.js" />
+    <Content Include="scripts\metro\metro-calendar.js" />
+    <Content Include="scripts\metro\metro-carousel.js" />
+    <Content Include="scripts\metro\metro-core.js" />
+    <Content Include="scripts\metro\metro-countdown.js" />
+    <Content Include="scripts\metro\metro-date-format.js" />
+    <Content Include="scripts\metro\metro-datepicker.js" />
+    <Content Include="scripts\metro\metro-dialog.js" />
+    <Content Include="scripts\metro\metro-drag-tile.js" />
+    <Content Include="scripts\metro\metro-dropdown.js" />
+    <Content Include="scripts\metro\metro-fluentmenu.js" />
+    <Content Include="scripts\metro\metro-global.js" />
+    <Content Include="scripts\metro\metro-hint.js" />
+    <Content Include="scripts\metro\metro-initiator.js" />
+    <Content Include="scripts\metro\metro-input-control.js" />
+    <Content Include="scripts\metro\metro-listview.js" />
+    <Content Include="scripts\metro\metro-live-tile.js" />
+    <Content Include="scripts\metro\metro-loader.js" />
+    <Content Include="scripts\metro\metro-locale.js" />
+    <Content Include="scripts\metro\metro-notify.js" />
+    <Content Include="scripts\metro\metro-panel.js" />
+    <Content Include="scripts\metro\metro-plugin-template.js" />
+    <Content Include="scripts\metro\metro-progressbar.js" />
+    <Content Include="scripts\metro\metro-pull.js" />
+    <Content Include="scripts\metro\metro-rating.js" />
+    <Content Include="scripts\metro\metro-scroll.js" />
+    <Content Include="scripts\metro\metro-slider.js" />
+    <Content Include="scripts\metro\metro-stepper.js" />
+    <Content Include="scripts\metro\metro-streamer.js" />
+    <Content Include="scripts\metro\metro-tab-control.js" />
+    <Content Include="scripts\metro\metro-table.js" />
+    <Content Include="scripts\metro\metro-tile-transform.js" />
+    <Content Include="scripts\metro\metro-times.js" />
+    <Content Include="scripts\metro\metro-touch-handler.js" />
+    <Content Include="scripts\metro\metro-treeview.js" />
+    <Content Include="scripts\metro\metro-wizard.js" />
+    <Content Include="scripts\pagescripts\profileimageJS.js" />
+    <Content Include="scripts\pagescripts\fileuploadJS.js" />
+    <Content Include="scripts\pagescripts\GlobalVariables.js" />
+    <Content Include="scripts\pagescripts\test.js" />
+    <Content Include="scripts\pagescripts\uploadattachmentsJS.js" />
+    <Content Include="scripts\pagescripts\uploadprofileimageJS.js" />
+    <Content Include="uploadprofileimage.html" />
+    <Content Include="upload.html" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FileUploadHandler.ashx.cs">
+      <DependentUpon>FileUploadHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\iconFont.eot" />
+    <Content Include="fonts\iconFont.json" />
+    <Content Include="fonts\iconFont.ttf" />
+    <Content Include="fonts\iconFont.woff" />
+    <Content Include="fonts\metroSysIcons.ttf" />
+    <Content Include="fonts\metroSysIcons.woff" />
+    <Content Include="scripts\metro\README.md" />
+    <Content Include="FileUploadHandler.ashx" />
+    <None Include="Properties\PublishProfiles\volkanlocal.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Library\GK.Library.Business\GK.Library.Business.csproj">
+      <Project>{091e15b6-8b10-4814-9eb3-d987bb27caed}</Project>
+      <Name>GK.Library.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Library\GK.Library.Utility\GK.Library.Utility.csproj">
+      <Project>{fedcb7f2-0afd-476f-8823-f78061d7e553}</Project>
+      <Name>GK.Library.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>62383</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:62383/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

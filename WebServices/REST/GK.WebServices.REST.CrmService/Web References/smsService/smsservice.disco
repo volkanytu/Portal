@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://www.postaguvercini.com/api_ws/smsservice.asmx?wsdl" docRef="http://www.postaguvercini.com/api_ws/smsservice.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://www.postaguvercini.com/api_ws/smsservice.asmx" xmlns:q1="http://83.66.137.24/PgApiWs" binding="q1:smsserviceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://www.postaguvercini.com/api_ws/smsservice.asmx" xmlns:q2="http://83.66.137.24/PgApiWs" binding="q2:smsserviceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

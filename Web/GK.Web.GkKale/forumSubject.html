@@ -1,0 +1,82 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="forumSubjectController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="js/jquery/jquery.widget.min.js"></script>
+    <script src="js/jquery/jquery.session.js"></script>
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js"></script>
+    <script src="js/pagescripts/languageMessagesJS.js"></script>
+    <script src="js/pagescripts/forumsubjectlistJS.js"></script>
+    <script src="js/customPlugin.js"></script>
+</head>
+<body style="background:#fff;">
+    <!--Main Content-->
+    <div class="mainContent forumPage forumDetailPage clearfix" id="divMain">
+        <!--Content Header-->
+        <div class="title-content title-forum">
+            <h1><i class="icon3 iconForum"></i><span>Forum</span></h1>
+        </div>
+        <!--Content Header-->
+        <!--Content Nav-->
+        <div class="nav">
+            <a href="#" id="btnMain">Forum</a><i></i>
+            <a href="forum.html" id="btnCategory">{{parentForumName}}</a><i></i>
+            <a href="#" id="btnCategory">{{forumName}}</a>
+        </div>
+        <!--Content Nav-->
+        <!--Main-->
+        <div class="grid-row grid-row-text">
+            <div id="divMain">
+                <!--Button-->
+                <div class="row">
+                    <button type="button" class="btnNewForumSubj" ng-click="NewSubject();"><h4>Yeni Konu Başlığı Ekle</h4></button>
+                </div>
+                <!--Button-->
+                <!--Loading-->
+                <div class="popupContainer" style="background-color:transparent;">
+                    <div class="popup popupMsgSend">
+                        <div class="error" ng-show="showErrorHeader"><span class="errorText">{{errorText}}</span></div>
+                        <!--Popup Body-->
+                        <div class="popupBody" ng-show="showLoading">
+                            <!--Data-->
+                            <div class="data cnt">
+                                <div id="divLoadingMain" ng-show="showLoading" style="text-align:center;">
+                                    <img src="images/loading.gif" width="48" />
+                                    <br />
+                                    <br />
+                                    <h4 style="text-align:center;">{{ ContentMessages["CM093"] }}</h4>
+                                </div>
+                            </div>
+                            <!--Data-->
+                        </div>
+                        <!--Popup Body-->
+                    </div>
+                </div>
+                <!--Loading-->
+                <!--Subject List-->
+                <div class="row" ng-show="showMain">
+                    <div id="lstForumSubjects" class="listForumSubject" ng-repeat="subject in forumSubjects">
+                        <a href="#" type="subject" ng-click="EditForumSubject(subject.Id,subject.Name);"><p>{{subject.Name}}</p></a>
+                    </div>
+                </div>
+                <!--Subject List-->
+
+            </div>
+        </div>
+        <!--main-->
+
+    </div>
+    <!--Main Content-->
+</body>
+</html>

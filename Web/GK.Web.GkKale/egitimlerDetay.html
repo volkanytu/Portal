@@ -1,0 +1,84 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="educationListController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="js/jquery/jquery.widget.min.js"></script>
+    <script src="js/jquery/jquery.session.js"></script>
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js"></script>
+    <script src="js/pagescripts/languageMessagesJS.js"></script>
+    <script src="js/pagescripts/educationlistJS.js"></script>
+    <script src="js/customPlugin.js"></script>
+</head>
+<body style="background:#fff;">
+    <!--Main Content-->
+    <div class="mainContent educationPage clearfix" id="divMain">
+        <div class="title-content title-edu">
+            <h1><i class="icon3 iconEdu"></i><span>Eğitimler</span></h1>
+        </div>
+        <div class="nav">
+            <a href="egitimler.html" id="btnMain">Kategori</a><i></i>
+            <a href="#">{{categoryName}}</a>
+        </div>
+        <div class="title-other"><span id="lblCategory">{{categoryName}}:</span> </div>
+        <!--Edu List-->
+
+        <div id="educationList">
+            <div class="content-bnr"><img src="{{categoryImageUrl}}" /> </div>
+
+            <div class="content-list">
+
+                <!--Loading-->
+                <div class="popupContainer" style="background-color:transparent;">
+                    <div class="popup popupMsgSend">
+                        <div class="error no-save" ng-show="showErrorHeader" style="margin-top:20px;"><span id="lblOtherNotFound">! Kayıt bulunamadı</span></div>
+                        <!--Popup Body-->
+                        <div class="popupBody" ng-show="showLoading">
+                            <!--Data-->
+                            <div class="data cnt">
+                                <div id="divLoadingMain" ng-show="showLoading" style="text-align:center;">
+                                    <img src="images/loading.gif" width="48" />
+                                    <br />
+                                    <br />
+                                    <h4 style="text-align:center;">{{ ContentMessages["CM089"] }}</h4>
+                                </div>
+                            </div>
+                            <!--Data-->
+                        </div>
+                        <!--Popup Body-->
+                    </div>
+                </div>
+                <!--Loading-->
+
+                <div class="grid-row" ng-show="showMain">
+                    <div class="list-holder clearfix" ng-repeat="x in educations">
+                        <div class="img"><img src="{{attachmentUrl+x.ImagePath}}" style="height:145px;width:165px;" /></div>
+                        <div class="desc">
+                            <h1><a href="#" ng-click="EditEducation(x.EducationId,x.Name);">{{x.Name}}</a></h1>
+                        </div>
+                        <div class="descBtm">
+                            <p>{{x.Summary}}</p>
+                            <div class="content-share">
+                                <a href="#" class="like"><i></i><span>{{x.LikeDetail==null ? "0" : x.LikeDetail.LikeCount}}</span></a>
+                                <a href="#" class="comment"><i></i><span>{{x.CommentCount}}</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--edu List-->
+    </div>
+    <!--Main Content-->
+</body>
+</html>

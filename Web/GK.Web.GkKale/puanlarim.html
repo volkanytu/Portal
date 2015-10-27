@@ -1,0 +1,138 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="pointStatusController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="js/jquery/jquery.widget.min.js"></script>
+    <script src="js/jquery/jquery.session.js"></script>
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js"></script>
+    <script src="js/pagescripts/languageMessagesJS.js"></script>
+    <script src="js/pagescripts/pointstatusJS.js"></script>
+    <script src="js/customPlugin.js"></script>
+</head>
+<body style="background:#fff;">
+    <!--Loading-->
+    <div class="popupContainer" style="background-color:transparent;">
+        <div class="popup popupMsgSend">
+            <div class="error" ng-show="showErrorHeader"><span class="errorText">{{errorText}}</span></div>
+            <!--Popup Body-->
+            <div class="popupBody" ng-show="showLoading">
+                <!--Data-->
+                <div class="data cnt">
+                    <div id="divLoadingMain" ng-show="showLoading" style="text-align:center;">
+                        <img src="images/loading.gif" width="48" />
+                        <br />
+                        <br />
+                        <h4 style="text-align:center;">{{ ContentMessages["CM128"] }}</h4>
+                    </div>
+                </div>
+                <!--Data-->
+            </div>
+            <!--Popup Body-->
+        </div>
+    </div>
+    <!--Loading-->
+    <!--Main Content-->
+    <div class="mainContent scorePage clearfix" id="divMain" ng-show="showMain">
+        <div class="title-content title-score">
+            <h1><i class="icon3 iconScore"></i><span>Puanlarım<i></i></span></h1>
+        </div>
+        <div id="divMain">
+            <!--Score Line-->
+            <div class="row row-score">
+                <div class="col">
+                    <div class="score">
+                        <span class="scoreLbl lblText">Puan</span>
+                        <span class="caseTable"><img src="./images/puanicon.png" /><span class="text scoreText" id="lblPoint">{{currentUserStatus.Point}}</span></span>
+                    </div>
+                    <div class="sort">
+                        <span class="sortLbl lblText">Sıralama</span>
+                        <span class="caseTable"><img src="./images/medalicon.png" /><span class="text sortText" id="lblRank">{{currentUserStatus.Rank}}</span></span>
+                    </div>
+                    <div class="scoreBtn">
+                        <a href="puanDetay.html" class="btnOther btnScoreDetail"><span>PUAN DETAYLARI</span></a>
+                    </div>
+                </div>
+                <div class="fixer"></div>
+            </div>
+            <!--Score Line-->
+        </div>
+
+        <!--Sort List-->
+        <!--Title-->
+        <div class="detail-title"><span>Genel Sıralama</span></div>
+        <!--Title-->
+        <div class="row row-sort-list">
+            <!--Table-->
+            <div class="table" id="divResult">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="text-left">Sıralama</th>
+                            <th class="text-left">Ad Soyad</th>
+                            <th class="text-left">Puan</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblList">
+                        <tr ng-repeat="x in pointStatus" ng-class="x.className" ng-show="x.showRow">
+                            <td>{{x.Rank}}</td>
+                            <td class="right">{{x.UserId.Name}}</td>
+                            <td class="right">{{x.Point}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="btnAllWacht">
+                    <button id="btnShowAll" class="btnGray" ng-click="ShowAll();">TÜMÜNÜ GÖR</button>
+                </div>
+            </div>
+            <!--Table-->
+        </div>
+        <!--Sort List-->
+        <!--Title-->
+        <div class="detail-title"><span>Puan Sistemi</span></div>
+        <!--Title-->
+        <!--Score Sytsem List-->
+        <!--<div class="row row-system-list"><p class="info">Puan listesi için <a href="puanlarim.xlsx" style="color:blue;">Tıklayınız.</a></p></div>-->
+        <div class="row row-system-list">
+            <div class="table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Kod</th>
+                            <th>Puan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="row in pointTableData | orderBy:'-Point'">
+                            <td>{{row.Name}}</td>
+                            <td>{{row.Point}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--<div class="row row-system-list"><p class="info">İlk girişte 100 puan, diğer günlük girişlerinizde her gün 20 puan kazanırsınız.</p></div>
+        <div class="row row-system-list"><p class="info">İndirdiğiniz makale ve eğitimlerden günlük 10 puan kazanırsınız.</p></div>
+        <div class="row row-system-list"><p class="info">Profil fotoğrafı yüklediğinizde bir seferlik 30 puan, profilinizi güncellediğinizde bir seferlik 50 puan kazanırsınız.</p></div>
+        <div class="row row-system-list"><p class="info">Forumda açacağınız başlık onaylandığı taktirde bir günce 30 puan kazanırsınız.</p></div>
+        <div class="row row-system-list"><p class="info">İzlediğiniz videolardan bir günce 30 puan kazanırsınız.</p></div>
+        <div class="row row-system-list"><p class="info">Makalelere, Eğitimlere veya Videolara yaptığınız yorumlar Uygunsuz içerik nedeniyle kaldırılmadığı sürece bir günde 20 puan kazanırsınız.</p></div>
+        <div class="row row-system-list"><p class="info">Anket sorularını yanıtlayarak bir günde 10 puan kazanırsınız.</p></div>
+        <div class="row row-system-list"><p class="info">Bilgi küpü sorularında kolay seviyede her doğru için 10, orta seviyede 20, zor seviyede 30 puan kazanırsınız. Puan kazanmak için en fazla 3 soruyu yanıtlayabilirsiniz. Yanlış cevabınızdan puan kaybetmezsiniz. Ayrıca, Bilgime Güveniyorum'u işaretlediğiniz taktirde o soru için iki kat puan kazanırsınız.</p></div>
+        <div class="row row-system-list"><p class="info">Duvarınızda paylaştığınız içeriklerden bir günde 10 puan, fotoğraf, karikatür vb. paylaşımlarınızdan 20 puan kazanırsınız.</p></div>-->
+        <!--Score Sytsem List-->
+
+    </div>
+    <!--Main Content-->
+</body>
+</html>

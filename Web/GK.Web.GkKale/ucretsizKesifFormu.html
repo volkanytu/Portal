@@ -1,0 +1,182 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="discoveryController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+
+    <!--<link href="styles/bootstrap.min.css" rel="stylesheet" />-->
+    <link href="styles/bootsdatetime.css" rel="stylesheet" />
+    <link href="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/locales/bootstrap-datepicker.tr.js"></script>
+
+    <script src="js/jquery/jquery.widget.min.js"></script>
+    <script src="js/jquery/jquery.session.js"></script>
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/jquery/jquery.maskedinput.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js"></script>
+    <script src="js/pagescripts/languageMessagesJS.js"></script>
+    <script src="js/pagescripts/discoveryformJS.js"></script>
+    <script src="js/customPlugin.js"></script>
+</head>
+<body style="background:#fff;">
+    <!--Main Content-->
+    <div class="mainContent profileDetailPage clearfix">
+
+        <div id="divMain">
+
+            <!--Grid-->
+            <div class="grid-row grid-data">
+
+                <!--Title-->
+                <div class="title-content title-survey">
+                    <h1><i class="icon3 iconSurvey"></i><span>Kale Alarm Ücretsiz Keşif Formu<i></i></span></h1>
+                </div>
+                <!--Title-->
+                <!--Data Enter-->
+                <div class="row row-data-enter">
+
+                    <div class="data-holder left">
+                        <div class="ng-control"><label class="ng-binding">Ad</label></div>
+                        <div class="input-control">
+                            <input type="text" placeholder="" ng-model="discoveryForm.FirstName" />
+                        </div>
+                    </div>
+
+                    <div class="data-holder right">
+                        <div class="ng-control"><label class="ng-binding">Soyad</label></div>
+                        <div class="input-control">
+                            <input type="text" placeholder="" ng-model="discoveryForm.LastName" />
+                        </div>
+                    </div>
+                    <div class="fixer"></div>
+                </div>
+
+                <div class="row row-data-enter">
+
+                    <div class="data-holder left">
+                        <div class="ng-control"><label class="ng-binding">Telefon</label></div>
+                        <div class="input-control">
+                            <input type="text" id="txtPhoneNumber" placeholder="" ng-model="discoveryForm.PhoneNumber" />
+                        </div>
+                    </div>
+
+                    <div class="data-holder right">
+                        <div class="ng-control"><label class="ng-binding">Email</label></div>
+                        <div class="input-control">
+                            <input type="text" placeholder="" ng-model="discoveryForm.Email" />
+                        </div>
+                    </div>
+                    <div class="fixer"></div>
+                </div>
+
+                <div class="row row-data-enter">
+
+                    <div class="data-holder left">
+                        <div class="ng-control"><label class="ng-binding">İl</label></div>
+                        <div class="input-control select">
+                            <select ng-model="discoveryForm.CityId" id="cityId"
+                                    ng-options="city as city.Name for city in cities"
+                                    ng-change="CityChange();"></select>
+                        </div>
+                        <div class="fixer"></div>
+                    </div>
+
+                    <div class="data-holder right">
+                        <div class="ng-control"><label class="ng-binding">İlçe</label></div>
+                        <div class="input-control select">
+                            <select ng-model="discoveryForm.TownId"
+                                    ng-options="town as town.Name for town in towns"></select>
+                        </div>
+                        <div class="fixer"></div>
+                    </div>
+
+                    <!--Data Enter-->
+                </div>
+                <!--Grid-->
+                <div class="row row-data-enter" ng-show="false">
+                    <div class="data-holder left">
+                        <div class="ng-control"><label class="ng-binding">Konut Tipi</label></div>
+                        <div class="input-control select">
+                            <select type="text" id="" placeholder="" ng-model="discoveryForm.HomeType.AttributeValue">
+                                <option value="0">Seçiniz</option>
+                                <option value="100000000">Ev</option>
+                                <option value="100000001">İş Yeri</option>
+                            </select>
+                        </div>
+                        <div class="fixer"></div>
+                    </div>
+
+                    <div class="data-holder right">
+                        <div class="ng-control"><label class="ng-binding">En Uygun Tarih</label></div>
+                        <div class="input-control">
+                            <input id="txtDate" placeholder="" />
+                        </div>
+
+                        <div class="fixer"></div>
+                    </div>
+
+                    <div class="fixer"></div>
+                </div>
+
+                <div class="row row-data-enter" ng-show="false">
+                    <div class="data-holder left">
+                        <div class="ng-control"><label class="ng-binding">En Uygun Saat</label></div>
+                        <div class="input-control select">
+                            <select type="text" id="" placeholder="" ng-model="discoveryForm.VisitHour.AttributeValue">
+                                <option value="0">Seçiniz</option>
+                                <option value="100000000">09:00 - 12:00</option>
+                                <option value="100000001">12:00 - 15:00</option>
+                                <option value="100000002">15:00 - 18:00</option>
+                                <option value="100000003">18:00 - 20:00</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="data-holder right">
+                        <div class="ng-control"><label class="ng-binding">Kale 7/24'ü nereden duydunuz?</label></div>
+                        <div class="input-control select">
+                            <select type="text" id="" placeholder="" ng-model="discoveryForm.InformedBy.AttributeValue">
+                                <option value="0">Seçiniz</option>
+                                <option value="100000000">Sosyal Medya / İnternet</option>
+                                <option value="100000001">Basın</option>
+                                <option value="100000002">Broşür Çalışması</option>
+                            </select>
+                        </div>
+                        <div class="fixer"></div>
+                    </div>
+                    <div class="fixer"></div>
+                </div>
+
+                <!--Grid-->
+                <div class="grid-row grid-data-btn">
+                    <div class="row row-data-btn">
+                        <button class="btnPrfUpdate" ng-click="Send();">
+                            <span>GÖNDER</span>
+                        </button>
+                    </div>
+                </div>
+                <!--Grid-->
+                <!--Grid-->
+                <div class="grid-row grid-data-wrng">
+                    <div class="row row-data-wrng">
+                        <p>** çalışma saatlerimiz 07:30 ile 17:30 arasıdır. 17:30 sonrasında gelen talepler ile bir sonraki resmi iş günü irtibata geçilecektir.</p>
+                    </div>
+                </div>
+                <!--Grid-->
+
+            </div>
+        </div>
+    </div>
+    <!--Main Content-->
+</body>
+</html>

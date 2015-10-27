@@ -1,0 +1,87 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="messagesController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <script src="js/jquery-base.min.js"></script>
+    <script src="js/customPlugin.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js"></script>
+    <script src="js/pagescripts/languageMessagesJS.js"></script>
+    <script src="js/pagescripts/messagesJS.js"></script>
+</head>
+<body style="background:#fff;">
+    <!--Main Content-->
+    <div class="mainContent messagePage clearfix" id="divMain">
+        <div class="title-content title-msg">
+            <h1><i class="icon3 iconMsg"></i><span>Mesajlar</span></h1>
+        </div>
+
+        <!--User Info-->
+        <div class="grid-row content">
+            <!--Butons-->
+            <div class="btns-control message clearfix">
+                <div class="btn"><a href="yeniMesajlar.html" class="btnDefault btnReq"><span>YENİ MESAJ GÖNDER</span></a></div>
+            </div>
+            <!--Butons-->
+            <div class="title-bottom">
+                <h1>Gelen Kutusu</h1>
+            </div>
+        </div>
+
+        <!--Loading-->
+        <div class="popupContainer" style="background-color:transparent;margin-top:20px;">
+            <div class="popup popupMsgSend">
+                <div class="error" ng-show="showErrorHeader"><span id="lblErrorMain">{{errorText}}</span></div>
+                <!--Popup Body-->
+                <div class="popupBody" ng-show="showLoading">
+                    <!--Data-->
+                    <div class="data cnt">
+                        <div id="divLoadingMain" ng-show="showLoading" style="text-align:center;">
+                            <img src="images/loading.gif" width="48" />
+                            <br />
+                            <br />
+                            <h4 style="text-align:center;">Son görüşme bilgileri çekiliyor...</h4>
+                        </div>
+                    </div>
+                    <!--Data-->
+                </div>
+                <!--Popup Body-->
+            </div>
+        </div>
+        <!--Loading-->
+        <!--User Info-->
+        <!--Get user Comments-->
+        <div class="grid-row content" ng-show="showMain">
+            <div class="get-comment">
+                <div class="row row-user" ng-repeat="message in recentMessages">
+                    <div class="row-inline">
+                        <div class="avtr"><span class="avatar-bg" style="background-image:url({{attachmentUrl+message.ProfileImage}});"></span></div>
+                        <div class="info">
+                            <div class="colmn"><a href="#" ng-click="OpenUserChatPage(message.UserId ,message.UserIdName);"><span class="name">{{message.UserIdName}}</span></a></div>
+                            <div class="colmn"><span class="date">{{message.CreatedOnString}}</span></div>
+                        </div>
+                        <div class="row row-comment">
+                            <div class="user-comment">
+                                <p>{{message.Content}}</p>
+                            </div>
+                        </div>
+                        <div class="fixer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Get user Comments-->
+
+    </div>
+    <!--Main Content-->
+    <script type="text/javascript" language="javascript" src="./js/allScripts.js"></script>
+</body>
+</html>

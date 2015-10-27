@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AB3E136C-C5C6-42F8-A9D9-1A2B65F398C9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GK.Plugins.VideoLog</RootNamespace>
+    <AssemblyName>GK.Plugins.VideoLog</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>GK.Plugins.VideoLog.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="microsoft.crm.sdk.proxy">
+      <HintPath>..\..\Library\Assemblies\microsoft.crm.sdk.proxy.dll</HintPath>
+    </Reference>
+    <Reference Include="microsoft.xrm.sdk">
+      <HintPath>..\..\Library\Assemblies\microsoft.xrm.sdk.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Library\GK.Library.Business\AnnotationHelper.cs">
+      <Link>Business\AnnotationHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Business\AnnouncementHelper.cs">
+      <Link>Business\AnnouncementHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Business\AnswerHelper.cs">
+      <Link>Business\AnswerHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Business\ArticleHelper.cs">
+      <Link>Business\ArticleHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Business\AttachmentFileHelper.cs">
+      <Link>Business\AttachmentFileHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Business\CommentHelper.cs">
+      <Link>Business\CommentHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Business\ContactHelper.cs">
+      <Link>Business\ContactHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Business\EducationHelper.cs">
+      <Link>Business\EducationHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Business\ForumHelper.cs">
+      <Link>Business\ForumHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Business\FriendshipHelper.cs">
+      <Link>Business\FriendshipHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Business\GeneralHelper.cs">
+      <Link>Business\GeneralHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Business\GraffitiHelper.cs">
+      <Link>Business\GraffitiHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Business\LikeHelper.cs">
+      <Link>Business\LikeHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Business\LoginHelper.cs">
+      <Link>Business\LoginHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Business\PageContentHelper.cs">
+      <Link>Business\PageContentHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Business\PortalHelper.cs">
+      <Link>Business\PortalHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Business\PortalUserHelper.cs">
+      <Link>Business\PortalUserHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Business\QuestionHelper.cs">
+      <Link>Business\QuestionHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Business\ScoreHelper.cs">
+      <Link>Business\ScoreHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Business\SMSHelper.cs">
+      <Link>Business\SMSHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Business\SurveyHelper.cs">
+      <Link>Business\SurveyHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Business\VideoHelper.cs">
+      <Link>Business\VideoHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Utility\ClassDefinations.cs">
+      <Link>Utility\ClassDefinations.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Utility\Enumarations.cs">
+      <Link>Utility\Enumarations.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Utility\EventLogHelper.cs">
+      <Link>Utility\EventLogHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Utility\FileLogHelper.cs">
+      <Link>Utility\FileLogHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Utility\Globals.cs">
+      <Link>Utility\Globals.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Utility\MSCRM.cs">
+      <Link>Utility\MSCRM.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Utility\RegistryHelper.cs">
+      <Link>Utility\RegistryHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Library\GK.Library.Utility\SqlDataAccess.cs">
+      <Link>Utility\SqlDataAccess.cs</Link>
+    </Compile>
+    <Compile Include="PostCreate.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="GK.Plugins.VideoLog.snk" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
