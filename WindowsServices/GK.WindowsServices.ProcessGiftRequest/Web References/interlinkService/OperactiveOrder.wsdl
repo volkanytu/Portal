@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="OrderAdd">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="webPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="bussinesPartnerID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="createDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="productCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="count" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="address" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="city" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="county" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cityCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerSurName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneAreaCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="phoneNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobilePhoneAreaCode" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobilePhoneNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerTitle" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="orderId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="description" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="catalogId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OrderAddResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="OrderAddResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OrderCancel">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="webPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="orderId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="BusinesPartnerId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OrderCancelResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="OrderCancelResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OrderFinality">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="webPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="orderId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="BusinesPartnerId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="OrderFinalityResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="OrderFinalityResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProductList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="webPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CatalogId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="BusinesPartnerId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProductListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProductListResult" type="tns:ArrayOfSp_WsCatalogProductList_Result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSp_WsCatalogProductList_Result">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="sp_WsCatalogProductList_Result" nillable="true" type="tns:sp_WsCatalogProductList_Result" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="sp_WsCatalogProductList_Result">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ComplexObject">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="KatalogId" nillable="true" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Katalogad" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Kategori" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="KategoriKod" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="UrunKod" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Marka" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Model" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="UrunIsim" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Puan" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="info" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Resim" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Durum" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="BuyukResim" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ComplexObject" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:StructuralObject" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="StructuralObject" abstract="true" />
+      <s:element name="ProductDeatil">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="webPassword" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CatalogId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="itemCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="BusinesPartnerId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProductDeatilResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProductDeatilResult" type="tns:ArrayOfSp_WsCatalogProductDetail_Result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSp_WsCatalogProductDetail_Result">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="sp_WsCatalogProductDetail_Result" nillable="true" type="tns:sp_WsCatalogProductDetail_Result" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="sp_WsCatalogProductDetail_Result">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ComplexObject">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="KatalogId" nillable="true" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Katalogad" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Kategori" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="KategoriKod" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="UrunKod" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Marka" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Model" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="UrunIsim" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Puan" type="s:decimal" />
+              <s:element minOccurs="0" maxOccurs="1" name="info" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Resim" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="Durum" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ProductDetailAvo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="webPassword" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="itemCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProductDetailAvoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ProductDetailAvoResult" type="tns:ArrayOfSp_WsCatalogProductDetailAvo_Result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSp_WsCatalogProductDetailAvo_Result">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="sp_WsCatalogProductDetailAvo_Result" nillable="true" type="tns:sp_WsCatalogProductDetailAvo_Result" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="sp_WsCatalogProductDetailAvo_Result">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:ComplexObject">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="itemImageID" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="Marka" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Model" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="UrunIsim" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="info" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Resim" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="OrderAddSoapIn">
+    <wsdl:part name="parameters" element="tns:OrderAdd" />
+  </wsdl:message>
+  <wsdl:message name="OrderAddSoapOut">
+    <wsdl:part name="parameters" element="tns:OrderAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="OrderCancelSoapIn">
+    <wsdl:part name="parameters" element="tns:OrderCancel" />
+  </wsdl:message>
+  <wsdl:message name="OrderCancelSoapOut">
+    <wsdl:part name="parameters" element="tns:OrderCancelResponse" />
+  </wsdl:message>
+  <wsdl:message name="OrderFinalitySoapIn">
+    <wsdl:part name="parameters" element="tns:OrderFinality" />
+  </wsdl:message>
+  <wsdl:message name="OrderFinalitySoapOut">
+    <wsdl:part name="parameters" element="tns:OrderFinalityResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProductListSoapIn">
+    <wsdl:part name="parameters" element="tns:ProductList" />
+  </wsdl:message>
+  <wsdl:message name="ProductListSoapOut">
+    <wsdl:part name="parameters" element="tns:ProductListResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProductDeatilSoapIn">
+    <wsdl:part name="parameters" element="tns:ProductDeatil" />
+  </wsdl:message>
+  <wsdl:message name="ProductDeatilSoapOut">
+    <wsdl:part name="parameters" element="tns:ProductDeatilResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProductDetailAvoSoapIn">
+    <wsdl:part name="parameters" element="tns:ProductDetailAvo" />
+  </wsdl:message>
+  <wsdl:message name="ProductDetailAvoSoapOut">
+    <wsdl:part name="parameters" element="tns:ProductDetailAvoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="OperactiveOrderSoap">
+    <wsdl:operation name="OrderAdd">
+      <wsdl:input message="tns:OrderAddSoapIn" />
+      <wsdl:output message="tns:OrderAddSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OrderCancel">
+      <wsdl:input message="tns:OrderCancelSoapIn" />
+      <wsdl:output message="tns:OrderCancelSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="OrderFinality">
+      <wsdl:input message="tns:OrderFinalitySoapIn" />
+      <wsdl:output message="tns:OrderFinalitySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProductList">
+      <wsdl:input message="tns:ProductListSoapIn" />
+      <wsdl:output message="tns:ProductListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProductDeatil">
+      <wsdl:input message="tns:ProductDeatilSoapIn" />
+      <wsdl:output message="tns:ProductDeatilSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProductDetailAvo">
+      <wsdl:input message="tns:ProductDetailAvoSoapIn" />
+      <wsdl:output message="tns:ProductDetailAvoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OperactiveOrderSoap" type="tns:OperactiveOrderSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="OrderAdd">
+      <soap:operation soapAction="http://tempuri.org/OrderAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderCancel">
+      <soap:operation soapAction="http://tempuri.org/OrderCancel" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderFinality">
+      <soap:operation soapAction="http://tempuri.org/OrderFinality" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProductList">
+      <soap:operation soapAction="http://tempuri.org/ProductList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProductDeatil">
+      <soap:operation soapAction="http://tempuri.org/ProductDeatil" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProductDetailAvo">
+      <soap:operation soapAction="http://tempuri.org/ProductDetailAvo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="OperactiveOrderSoap12" type="tns:OperactiveOrderSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="OrderAdd">
+      <soap12:operation soapAction="http://tempuri.org/OrderAdd" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderCancel">
+      <soap12:operation soapAction="http://tempuri.org/OrderCancel" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="OrderFinality">
+      <soap12:operation soapAction="http://tempuri.org/OrderFinality" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProductList">
+      <soap12:operation soapAction="http://tempuri.org/ProductList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProductDeatil">
+      <soap12:operation soapAction="http://tempuri.org/ProductDeatil" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProductDetailAvo">
+      <soap12:operation soapAction="http://tempuri.org/ProductDetailAvo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OperactiveOrder">
+    <wsdl:port name="OperactiveOrderSoap" binding="tns:OperactiveOrderSoap">
+      <soap:address location="http://www.kurumsalwsdl.com/Operactive/OrderWebService/OperactiveOrder.asmx" />
+    </wsdl:port>
+    <wsdl:port name="OperactiveOrderSoap12" binding="tns:OperactiveOrderSoap12">
+      <soap12:address location="http://www.kurumsalwsdl.com/Operactive/OrderWebService/OperactiveOrder.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

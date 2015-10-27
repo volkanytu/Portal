@@ -77,6 +77,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GK.WebServices.SOAP.Discove
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GK.WebServices.SOAP.EmosService", "WebServices\SOAP\GK.WebServices.SOAP.EmosService\GK.WebServices.SOAP.EmosService.csproj", "{7DE665AF-D340-4EBB-9F6B-067E008518CB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WindowsServices", "WindowsServices", "{D936A1DE-83FB-47F5-845C-C46575EE0C7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GK.WindowsServices.ProcessDiscoveryForms", "WindowsServices\GK.WindowsServices.ProcessDiscoveryForms\GK.WindowsServices.ProcessDiscoveryForms.csproj", "{F22094D4-3BED-4067-B3D3-36FBB6F2084F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GK.WindowsServices.ProcessGiftRequest", "WindowsServices\GK.WindowsServices.ProcessGiftRequest\GK.WindowsServices.ProcessGiftRequest.csproj", "{AF6F15F7-8C9D-407F-A072-AAD4CFC6DDF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GK.WindowsServices.SendNpsSurvey", "WindowsServices\GK.WindowsServices.SendNpsSurvey\GK.WindowsServices.SendNpsSurvey.csproj", "{D110EB4C-F3B6-4918-B869-5DDEC5078ED1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GK.WindowsServices.SendSms", "WindowsServices\GK.WindowsServices.SendSms\GK.WindowsServices.SendSms.csproj", "{A31D5E02-8579-4120-ABAD-AA479DE890EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -155,6 +165,22 @@ Global
 		{7DE665AF-D340-4EBB-9F6B-067E008518CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DE665AF-D340-4EBB-9F6B-067E008518CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DE665AF-D340-4EBB-9F6B-067E008518CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F22094D4-3BED-4067-B3D3-36FBB6F2084F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F22094D4-3BED-4067-B3D3-36FBB6F2084F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F22094D4-3BED-4067-B3D3-36FBB6F2084F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F22094D4-3BED-4067-B3D3-36FBB6F2084F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF6F15F7-8C9D-407F-A072-AAD4CFC6DDF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF6F15F7-8C9D-407F-A072-AAD4CFC6DDF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF6F15F7-8C9D-407F-A072-AAD4CFC6DDF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF6F15F7-8C9D-407F-A072-AAD4CFC6DDF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D110EB4C-F3B6-4918-B869-5DDEC5078ED1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D110EB4C-F3B6-4918-B869-5DDEC5078ED1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D110EB4C-F3B6-4918-B869-5DDEC5078ED1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D110EB4C-F3B6-4918-B869-5DDEC5078ED1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A31D5E02-8579-4120-ABAD-AA479DE890EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A31D5E02-8579-4120-ABAD-AA479DE890EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A31D5E02-8579-4120-ABAD-AA479DE890EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A31D5E02-8579-4120-ABAD-AA479DE890EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -181,5 +207,9 @@ Global
 		{8F17586D-1105-43E9-BC4C-6A3E0781B591} = {6800C4D2-6296-42EF-A408-DE2FCC93A932}
 		{9618E2C3-388D-4602-938D-B279FAC0E54F} = {DD9450AC-A81E-44D5-BFD3-BFE2BCDCA816}
 		{7DE665AF-D340-4EBB-9F6B-067E008518CB} = {DD9450AC-A81E-44D5-BFD3-BFE2BCDCA816}
+		{F22094D4-3BED-4067-B3D3-36FBB6F2084F} = {D936A1DE-83FB-47F5-845C-C46575EE0C7B}
+		{AF6F15F7-8C9D-407F-A072-AAD4CFC6DDF4} = {D936A1DE-83FB-47F5-845C-C46575EE0C7B}
+		{D110EB4C-F3B6-4918-B869-5DDEC5078ED1} = {D936A1DE-83FB-47F5-845C-C46575EE0C7B}
+		{A31D5E02-8579-4120-ABAD-AA479DE890EE} = {D936A1DE-83FB-47F5-845C-C46575EE0C7B}
 	EndGlobalSection
 EndGlobal
