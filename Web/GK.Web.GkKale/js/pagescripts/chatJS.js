@@ -353,87 +353,87 @@ function chatController($scope) {
 
     parent.angular.element('html').scope().showMessageNotification = false;
 
-    $scope.ListenSocketOldMessages = function () {
-        SendMessagesHelper.ListenSocketOldMessages(function (e) {
+    //$scope.ListenSocketOldMessages = function () {
+    //    SendMessagesHelper.ListenSocketOldMessages(function (e) {
 
-            var a = JSON.stringify(e);
+    //        var a = JSON.stringify(e);
 
-            //var categories = [];
+    //        //var categories = [];
 
-            //$.each(e, function (index, value) {
+    //        //$.each(e, function (index, value) {
 
-            //    if (value.message.FromId.Id != SendMessagesHelper.UserId) {
-            //        if ($.inArray(value.message.FromId.Id, categories) === -1) {
-            //            categories.push(value.message.FromId.Id);
-            //        }
-            //    }
+    //        //    if (value.message.FromId.Id != SendMessagesHelper.UserId) {
+    //        //        if ($.inArray(value.message.FromId.Id, categories) === -1) {
+    //        //            categories.push(value.message.FromId.Id);
+    //        //        }
+    //        //    }
 
-            //    if (value.message.ToId.Id != SendMessagesHelper.UserId) {
-            //        if ($.inArray(value.message.ToId.Id, categories) === -1) {
-            //            categories.push(value.message.ToId.Id);
-            //        }
-            //    }
-            //});
+    //        //    if (value.message.ToId.Id != SendMessagesHelper.UserId) {
+    //        //        if ($.inArray(value.message.ToId.Id, categories) === -1) {
+    //        //            categories.push(value.message.ToId.Id);
+    //        //        }
+    //        //    }
+    //        //});
 
-            //var recent = [];
-            //for (var i = 0; i < e.length; i++) {
+    //        //var recent = [];
+    //        //for (var i = 0; i < e.length; i++) {
 
-            //    if ($.inArray(e[i].message.FromId.Id, categories) === -1) {
+    //        //    if ($.inArray(e[i].message.FromId.Id, categories) === -1) {
 
-            //    }
-            //    else {
-            //        var mes = {};
-            //        mes.Id = e[i].message.FromId.Id;
-            //        mes.Message = e[i].message.Content;
+    //        //    }
+    //        //    else {
+    //        //        var mes = {};
+    //        //        mes.Id = e[i].message.FromId.Id;
+    //        //        mes.Message = e[i].message.Content;
 
-            //        recent.push(mes);
-            //    }
-            //}
-
-
-
-            if (e != null) {
-                $scope.$apply(function () {
-
-                    $scope.oldMessages = e;
-
-                    for (var i = 0; i < e.length; i++) {
-                        e[i].message.Content = FindAndReplaceAll(e[i].message.Content);
-                    }
-
-                    setTimeout(function () {
-                        $(".writeComnt").scrollTop(5000);
-                    }, 500);
-                });
-            }
-        });
-    };
-
-    $scope.ListenSocketMessages = function () {
-        SendMessagesHelper.ListenSocketMessages(function (e) {
-
-            if (e != null) {
-                $scope.$apply(function () {
-
-                    $scope.newMessage = e;
-
-                    e.message.Content = FindAndReplaceAll(e.message.Content);
-
-                    $scope.oldMessages.push(e);
-
-                    $scope.message = null;
-
-                    //parent.angular.element('html').scope().showMessageNotification = true;
-
-                    setTimeout(function () {
-                        $(".writeComnt").scrollTop(5000);
+    //        //        recent.push(mes);
+    //        //    }
+    //        //}
 
 
-                    }, 500);
-                });
-            }
-        });
-    };
+
+    //        if (e != null) {
+    //            $scope.$apply(function () {
+
+    //                $scope.oldMessages = e;
+
+    //                for (var i = 0; i < e.length; i++) {
+    //                    e[i].message.Content = FindAndReplaceAll(e[i].message.Content);
+    //                }
+
+    //                setTimeout(function () {
+    //                    $(".writeComnt").scrollTop(5000);
+    //                }, 500);
+    //            });
+    //        }
+    //    });
+    //};
+
+    //$scope.ListenSocketMessages = function () {
+    //    SendMessagesHelper.ListenSocketMessages(function (e) {
+
+    //        if (e != null) {
+    //            $scope.$apply(function () {
+
+    //                $scope.newMessage = e;
+
+    //                e.message.Content = FindAndReplaceAll(e.message.Content);
+
+    //                $scope.oldMessages.push(e);
+
+    //                $scope.message = null;
+
+    //                //parent.angular.element('html').scope().showMessageNotification = true;
+
+    //                setTimeout(function () {
+    //                    $(".writeComnt").scrollTop(5000);
+
+
+    //                }, 500);
+    //            });
+    //        }
+    //    });
+    //};
 
     parent.IndexHelper.CheckSession(true, $scope.token, function (e) {
         $scope.$apply(function () {
@@ -447,7 +447,7 @@ function chatController($scope) {
                 $scope.portalId = e.ReturnObject.PortalId;
                 $scope.from = e.ReturnObject.PortalUserId;
 
-                SendMessagesHelper.ConstructSocketIo();
+                //SendMessagesHelper.ConstructSocketIo();
 
                 $scope.ListenSocketOldMessages();
                 $scope.ListenSocketMessages();

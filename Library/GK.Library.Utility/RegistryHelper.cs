@@ -15,8 +15,8 @@ namespace GK.Library.Utility
 
         private RegistryHelper()
         {
-            baseKey = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Wow6432Node\\DOTest", RegistryKeyPermissionCheck.ReadWriteSubTree, System.Security.AccessControl.RegistryRights.ReadKey);
-            //baseKey = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Wow6432Node\\Kale", RegistryKeyPermissionCheck.ReadWriteSubTree, System.Security.AccessControl.RegistryRights.ReadKey);
+            //baseKey = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Wow6432Node\\DOTest", RegistryKeyPermissionCheck.ReadWriteSubTree, System.Security.AccessControl.RegistryRights.ReadKey);
+            baseKey = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Wow6432Node\\Kale", RegistryKeyPermissionCheck.ReadWriteSubTree, System.Security.AccessControl.RegistryRights.ReadKey);
         }
 
         public string Value(string keyName)

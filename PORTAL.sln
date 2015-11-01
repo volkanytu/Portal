@@ -87,6 +87,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GK.WindowsServices.SendNpsS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GK.WindowsServices.SendSms", "WindowsServices\GK.WindowsServices.SendSms\GK.WindowsServices.SendSms.csproj", "{A31D5E02-8579-4120-ABAD-AA479DE890EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GK.Web.GkSocketIo", "Web\GK.Web.GkSocketIo\GK.Web.GkSocketIo.csproj", "{CA86FF65-2D94-47CC-83FD-DC5B05B38EC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -181,6 +183,10 @@ Global
 		{A31D5E02-8579-4120-ABAD-AA479DE890EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A31D5E02-8579-4120-ABAD-AA479DE890EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A31D5E02-8579-4120-ABAD-AA479DE890EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA86FF65-2D94-47CC-83FD-DC5B05B38EC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA86FF65-2D94-47CC-83FD-DC5B05B38EC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA86FF65-2D94-47CC-83FD-DC5B05B38EC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA86FF65-2D94-47CC-83FD-DC5B05B38EC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -211,5 +217,6 @@ Global
 		{AF6F15F7-8C9D-407F-A072-AAD4CFC6DDF4} = {D936A1DE-83FB-47F5-845C-C46575EE0C7B}
 		{D110EB4C-F3B6-4918-B869-5DDEC5078ED1} = {D936A1DE-83FB-47F5-845C-C46575EE0C7B}
 		{A31D5E02-8579-4120-ABAD-AA479DE890EE} = {D936A1DE-83FB-47F5-845C-C46575EE0C7B}
+		{CA86FF65-2D94-47CC-83FD-DC5B05B38EC5} = {F986117E-9B76-4EC2-9A1B-B5F16BCCF1BA}
 	EndGlobalSection
 EndGlobal

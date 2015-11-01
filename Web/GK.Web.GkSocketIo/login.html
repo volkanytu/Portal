@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Chat</title>
+
+    <style>
+    </style>
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            var socket = io.connect();
+
+            $("#btnLogin").click(function (e) {
+
+                var userId = $("#txtLoginName").val();
+
+                //socket.emit("user_login", userId);
+
+                document.location.href = "/" + userId + "?userid=" + userId;
+            });
+        });
+
+    </script>
+
+</head>
+<body>
+    <h2 id="lblChat">Login Chat Application</h2>
+    <input type="text" id="txtLoginName" />
+    <input type="button" value="Login" id="btnLogin" />
+
+</body>
+</html>

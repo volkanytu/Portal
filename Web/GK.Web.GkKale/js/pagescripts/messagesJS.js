@@ -127,7 +127,12 @@ function messagesController($scope) {
     $scope.OpenUserChatPage = function (toId, toName) {
 
         //$("#ifrmContent", parent.document).attr("src", "chat.html?to=" + toId + "&fullname=" + toName);
-        $("#ifrmContent", parent.document).attr("src", "http://localhost:3000/chat?targetuserid=" + toId + "&targetuseridname=" + toName);
+        //$("#ifrmContent", parent.document).attr("src", "http://localhost:3000/chat?targetuserid=" + toId + "&targetuseridname=" + toName);
+
+        var userId = parent.IndexHelper.UserId;
+        var userIdName = parent.IndexHelper.userIdName;
+
+        $("#ifrmContent", parent.document).attr("src", "http://kaleanahtarcilarkulubu.com.tr:5555/chat?targetuserid=" + toId + "&targetuseridname=" + toName + "&userid=" + userId + "&useridname=" + userIdName);
     };
 };
 
