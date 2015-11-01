@@ -126,7 +126,8 @@ function messagesController($scope) {
 
     $scope.OpenUserChatPage = function (toId, toName) {
 
-        $("#ifrmContent", parent.document).attr("src", "chat.html?to=" + toId + "&fullname=" + toName);
+        //$("#ifrmContent", parent.document).attr("src", "chat.html?to=" + toId + "&fullname=" + toName);
+        $("#ifrmContent", parent.document).attr("src", "http://localhost:3000/chat?targetuserid=" + toId + "&targetuseridname=" + toName);
     };
 };
 
