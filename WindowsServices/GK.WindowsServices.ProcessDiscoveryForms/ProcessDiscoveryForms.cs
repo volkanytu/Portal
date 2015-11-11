@@ -129,9 +129,24 @@ namespace GK.WindowsServices.ProcessDiscoveryForms
                 //             , discoveryForm.VisitHour.Value, discoveryForm.CityId.Name, discoveryForm.TownId.Name, discoveryForm.HomeType.Value
                 //             , "", ((DateTime)discoveryForm.VisitDate).ToString("dd.MM.yyyy HH:mm"), discoveryForm.InformedBy.Value);
 
+                MsCrmResultObject resultUser = PortalUserHelper.GetPortalUserDetail(new Guid(Globals.DefaultPortalId), discoveryForm.UserId.Id, _sda);
+
+                string userName = "";
+
+                if (resultUser.Success)
+                {
+                    PortalUser portalUser = (PortalUser)resultUser.ReturnObject;
+
+                    userName = portalUser.ContactInfo.Title;
+                }
+                else
+                {
+                    userName = discoveryForm.UserId.Name;
+                }
+
                 lotusService.RESPONSE result = lotus.CREATERECORD("A3108", Convert.ToDouble(discoveryForm.FormCode), discoveryForm.FirstName, discoveryForm.LastName, discoveryForm.Email, discoveryForm.PhoneNumber
                              , string.Empty, discoveryForm.CityId.Name, discoveryForm.TownId.Name, string.Empty
-                             , "", string.Empty, string.Empty);
+                             , "", string.Empty, string.Empty, userName);
 
 
                 if (result.ERRORCODE == 0)

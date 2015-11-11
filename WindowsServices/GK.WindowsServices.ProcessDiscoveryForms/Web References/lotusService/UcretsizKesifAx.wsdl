@@ -15,6 +15,7 @@
       <xsd:element name="OKUNDU" type="xsd:string" />
       <xsd:element name="BASVURUTARIH" type="xsd:string" />
       <xsd:element name="NEREDEGORDUNUZ" type="xsd:string" />
+      <xsd:element name="ANAHTARCI" type="xsd:string" />
       <xsd:complexType name="RESPONSE">
         <xsd:sequence>
           <xsd:element name="ERRORCODE" type="xsd:short" />
@@ -38,6 +39,7 @@
     <wsdl:part name="OKUNDU" element="impl:OKUNDU" />
     <wsdl:part name="BASVURUTARIH" element="impl:BASVURUTARIH" />
     <wsdl:part name="NEREDEGORDUNUZ" element="impl:NEREDEGORDUNUZ" />
+    <wsdl:part name="ANAHTARCI" element="impl:ANAHTARCI" />
   </wsdl:message>
   <wsdl:message name="CREATERECORDResponse">
     <wsdl:part name="CREATERECORDReturn" element="impl:CREATERECORDReturn" />
@@ -62,7 +64,7 @@
   </wsdl:binding>
   <wsdl:service name="UcretsizKesifService">
     <wsdl:port name="Domino" binding="impl:DominoSoapBinding">
-      <wsdlsoap:address location="http://lotus.kale724.com.tr:80/wslayer.nsf/UcretsizKesifA?OpenWebService" />
+      <wsdlsoap:address location="http://lotus.kale724.com.tr:80/wslayer.nsf/UcretsizKesifAx?OpenWebService" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
