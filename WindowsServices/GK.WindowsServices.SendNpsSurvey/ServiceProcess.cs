@@ -20,9 +20,12 @@ namespace GK.WindowsServices.SendNpsSurvey
 
         private string LOG_PATH;
         private string ERROR_LOG_PATH;
-        private string FROM_MAILADDRESS = "";
-        private string SMTP_USERNAME = "";
-        private string SMTP_PASSWORD = "";
+
+        private string FROM_MAILADDRESS;
+        private string SMTP_USERNAME;
+        private string SMTP_PASSWORD;
+        private string MAIL_HOST;
+        private string PORT;
 
         public ServiceProcess(SqlDataAccess sda, IOrganizationService service)
         {
@@ -34,6 +37,9 @@ namespace GK.WindowsServices.SendNpsSurvey
 
             SMTP_USERNAME = ConfigurationManager.AppSettings["username"].ToString();
             SMTP_PASSWORD = ConfigurationManager.AppSettings["password"].ToString();
+            FROM_MAILADDRESS = ConfigurationManager.AppSettings["mailaddress"].ToString();
+            MAIL_HOST = ConfigurationManager.AppSettings["hostaddress"].ToString();
+            PORT = ConfigurationManager.AppSettings["port"].ToString();
         }
 
         public void Process(SqlDataAccess sda)
@@ -132,11 +138,11 @@ namespace GK.WindowsServices.SendNpsSurvey
                 mail.Body = mailBody;
 
                 SmtpClient smtp = new SmtpClient();
-                smtp.Host = "smtp.gmail.com";
-                smtp.Port = 587;
+                smtp.Host = MAIL_HOST;
+                smtp.Port = Convert.ToInt32(PORT);
 
                 smtp.Credentials = new NetworkCredential(SMTP_USERNAME, SMTP_PASSWORD);
-                smtp.EnableSsl = true;
+                smtp.EnableSsl = false;
 
                 smtp.Send(mail);
 

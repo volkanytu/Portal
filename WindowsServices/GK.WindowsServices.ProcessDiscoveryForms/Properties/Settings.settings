@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="GK_WindowsServices_ProcessDiscoveryForms_lotusService_UcretsizKesifService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://lotus.kale724.com.tr:80/wslayer.nsf/UcretsizKesifA?OpenWebService</Value>
+      <Value Profile="(Default)">http://lotus.kale724.com.tr:80/wslayer.nsf/UcretsizKesifAx?OpenWebService</Value>
     </Setting>
   </Settings>
 </SettingsFile>

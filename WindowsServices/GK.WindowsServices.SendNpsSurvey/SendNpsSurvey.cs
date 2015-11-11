@@ -11,6 +11,8 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Net.Mail;
+using System.Net;
 
 namespace GK.WindowsServices.SendNpsSurvey
 {
@@ -62,6 +64,7 @@ namespace GK.WindowsServices.SendNpsSurvey
 
         internal void DebugService(string[] args)
         {
+            MsCrmResult result = SendMail("serter.volkan@gmail.com", "TEST-KALE", "TEST MAILIDIR.");
             StartOperations();
         }
 
@@ -116,6 +119,41 @@ namespace GK.WindowsServices.SendNpsSurvey
             {
                 FileLogHelper.LogFunction(this.GetType().Name, "SendNpsSurvey_timer_Elapsed_EXCEPTION:" + ex.Message, ERROR_LOG_PATH);
             }
+        }
+
+        private MsCrmResult SendMail(string emailAddress, string subject, string mailBody)
+        {
+            MsCrmResult returnValue = new MsCrmResult();
+
+            try
+            {
+                MailAddress to = new MailAddress(emailAddress);
+                MailAddress from = new MailAddress("Kalekilitesatis@kalekilit.com.tr");
+
+                MailMessage mail = new MailMessage(from, to);
+
+                mail.Subject = subject;
+                mail.Body = mailBody;
+
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "mail.kalekilit.com.tr";
+                smtp.Port = 25;
+
+                smtp.Credentials = new NetworkCredential("Kalekilitesatis", "q1w2e3");
+                smtp.EnableSsl = false;
+
+                smtp.Send(mail);
+
+                returnValue.Success = true;
+
+            }
+            catch (Exception ex)
+            {
+                returnValue.HasException = true;
+                returnValue.Result = ex.Message;
+            }
+
+            return returnValue;
         }
     }
 }
