@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Socket.Io Chat Uygulaması V2</title>
+
+    <style>
+        body {
+            font-family: Arial;
+        }
+    </style>
+
+
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/static/purl.js"></script>
+
+    <script type="text/javascript">
+
+        var userId;
+
+        $(document).ready(function () {
+
+            var url = $.url(document.location);
+
+            userId = url.param("userid");
+
+            $("#btnChat").click(function () {
+
+                var targetUserId = $("#txtUserId").val();
+
+                $("#ifrChat").show();
+                $("#ifrChat").attr("src", "/chat?targetuserid=" + targetUserId);
+            });
+        });
+
+    </script>
+
+</head>
+<body>
+    <h2>CHAT APPLICATION</h2>
+    <h3 style="margin-bottom:5px;">User Id</h3>
+    <input type="text" id="txtUserId" />
+    <input type="button" value="Start Chat" id="btnChat" />
+
+    <iframe src="/chat" style="width:100%; height:500px; display:none;border:none;" id="ifrChat"></iframe>
+
+</body>
+</html>

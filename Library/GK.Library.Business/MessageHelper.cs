@@ -144,30 +144,30 @@ namespace GK.Library.Business
 	                                FROM
 	                                (
 		                                SELECT
-			                                m.new_messageId AS Id
-			                                ,m.new_name AS Name
-			                                ,m.new_portalId AS PortalId
-			                                ,m.new_portalIdName AS PortalIdName
+			                                m.Id
+			                                --,m.new_name AS Name
+			                                ,PortalId
+			                                ,PortalIdName
 			                                ,'new_portal' AS PortalIdTypeName
-			                                ,m.new_from AS FromId
-			                                ,m.new_fromName AS FromIdName
+			                                ,m.FromId
+			                                ,m.FromIdName
 			                                ,'new_user' AS FromIdTypeName
-			                                ,m.new_to AS ToId
-			                                ,m.new_toName AS ToIdName
+			                                ,m.ToId
+			                                ,m.ToIdName
 			                                ,'new_user' AS ToIdTypeName
-			                                ,m.new_content AS Content
+			                                ,m.Content
 			                                ,m.CreatedOn
-			                                ,m.StatusCode
-			                                ,CASE WHEN m.new_from='{0}' THEN m.new_to ELSE m.new_from END AS UserId
-			                                ,CASE WHEN m.new_from='{0}' THEN m.new_toName ELSE m.new_fromName END AS UserIdName
+			                                --,m.StatusCode
+			                                ,CASE WHEN m.FromId='{0}' THEN m.ToId ELSE m.FromId END AS UserId
+			                                ,CASE WHEN m.FromId='{0}' THEN m.ToIdName ELSE m.FromIdName END AS UserIdName
 		                                FROM
-		                                new_message AS m (NOLOCK)
+		                                v_Messages AS m (NOLOCK)
 		                                WHERE
-		                                m.new_portalId='{1}'
+		                                m.PortalId='{1}'
 		                                AND
-		                                (m.new_from='{0}' OR new_to='{0}')
-		                                AND
-		                                m.statecode=0
+		                                (m.FromId='{0}' OR ToId='{0}')
+		                                --AND
+		                                --m.statecode=0
 	                                ) AS A
                                 ) AS B
 	                                JOIN

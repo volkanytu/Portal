@@ -111,10 +111,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://lotus.kale724.com.tr/wslayer.nsf/UcretsizKesifA%3fWSDL">
+    <WebReferenceUrl Include="http://lotus.kale724.com.tr/wslayer.nsf/UcretsizKesifAx%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\lotusService\</RelPath>
-      <UpdateFromURL>http://lotus.kale724.com.tr/wslayer.nsf/UcretsizKesifA%3fWSDL</UpdateFromURL>
+      <UpdateFromURL>http://lotus.kale724.com.tr/wslayer.nsf/UcretsizKesifAx%3fWSDL</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -136,7 +136,7 @@
     <None Include="Web References\lotusService\RESPONSE.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\lotusService\UcretsizKesifA.wsdl" />
+    <None Include="Web References\lotusService\UcretsizKesifAx.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

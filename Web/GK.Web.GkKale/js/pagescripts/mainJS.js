@@ -1320,11 +1320,8 @@ var IndexHelper = {
     },
     "ConstructSocketIo": function () {
         try {
-            IndexHelper.Socket = io.connect("http://kaleanahtarcilarkulubu.com.tr:5555/"
-                , { query: "from=" + IndexHelper.UserId + "&portalid=" + IndexHelper.PortalId });
+            IndexHelper.Socket = io.connect("http://kaleanahtarcilarkulubu.com.tr:5555/");
 
-            //IndexHelper.Socket = io.connect("http://localhost:5555/"
-            //    , { query: "from=" + IndexHelper.UserId + "&portalid=" + IndexHelper.PortalId });
 
         } catch (e) {
             alert(e);
@@ -1415,7 +1412,8 @@ function mainController($scope) {
                 $scope.portalId = e.ReturnObject.PortalId;
 
                 IndexHelper.ConstructSocketIo();
-                $scope.ListenSocketMessages();
+                //IndexHelper.Socket.emit("user_login", IndexHelper.UserId);
+                //$scope.ListenSocketMessages();
             }
             else {
                 return;
@@ -1558,14 +1556,15 @@ function mainController($scope) {
     };
 
     $scope.ListenSocketMessages = function () {
-        IndexHelper.ListenSocketMessages(function (e) {
 
-            if (e != null) {
-                $scope.$apply(function () {
+        IndexHelper.Socket.on("has_message", function (data) {
 
-                    $scope.showMessageNotification = true;
-                });
-            }
+            $scope.$apply(function () {
+
+                $scope.showMessageNotification = true;
+            });
+
         });
+
     };
 }

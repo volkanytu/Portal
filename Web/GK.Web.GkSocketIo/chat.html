@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>CHAT IFRAME</title>
+
+    <style>
+        .message {
+            margin-top: 5px;
+            max-width: 70%;
+            min-width: 30%;
+            border-radius: 10px;
+        }
+
+            .message div {
+                width: 100%;
+                margin-top: 5px;
+            }
+
+            .message .date {
+                font-family: 'open_sansregular';
+                font-size: 12px;
+                color: #fff;
+                text-align: right;
+                margin-right: 5px;
+            }
+
+        .left {
+            background-color: #e8e1da;
+            display: inline-block;
+            float: left;
+            padding: 0px 0px 5px 10px;
+        }
+
+            .left div {
+                /*text-align: left;*/
+                float: left;
+            }
+
+        .right {
+            background-color: #a0f5a8;
+            display: inline-block;
+            float: right;
+            padding: 0px 0px 5px 10px;
+        }
+
+            .right div {
+                /*text-align: right;*/
+                float: right;
+            }
+    </style>
+
+    <!--<link href="/static/main.css" rel="stylesheet" />-->
+    <link href="/static/main.css" rel="stylesheet" />
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/static/purl.js"></script>
+    <script src="/static/jquery.nicescroll.js"></script>
+    <script src="/static/customPlugin.js"></script>
+    <script src="/static/allScripts.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#divChat").niceScroll();
+
+            var url = $.url(document.location);
+
+            var targetUserId = url.param("targetuserid");
+            var targetUserIdName = url.param("targetuseridname");;
+
+            //var userId = parent.IndexHelper.UserId.toLowerCase();
+            //var userIdName = parent.IndexHelper.UserName;
+
+            var userId = url.param("userid").toLowerCase();
+            var userIdName = url.param("useridname")
+
+            $("#lblChat").html(targetUserIdName + " ile sohbet");
+
+            $("#lblTargetUser").html(targetUserIdName);
+
+            var socket = io.connect();
+
+            socket.emit("user_login", userId);
+
+            socket.emit("start_chatwith", targetUserId, function (e) {
+
+                if (e.Success == true) {
+
+                    $("#lblChat").css("color", "green");
+                }
+                else {
+                    $("#lblChat").css("color", "red ");
+                }
+            });
+
+            socket.on("update_target_status", function (data) {
+
+                if (data.Status == true) {
+                    $("#lblChat").css("color", "green");
+                }
+                else {
+                    $("#lblChat").css("color", "red ");
+                }
+            });
+
+            socket.on("update_user_writing", function (data) {
+
+                if (data == true) {
+                    $("#lblUserWriting").html("<span style='font-weight:bold;font-size:small;font-style:italic;color:gray;'>" + targetUserIdName + "</span> yazıyor");
+                }
+                else {
+                    $("#lblUserWriting").html("");
+                }
+
+            });
+
+            socket.on("new_message", function (data) {
+
+                var date = new Date();
+                var options = { day: "numeric", month: "numeric", year: "numeric", hour: "2-digit", minute: "2-digit" };
+
+                var dateStr = date.toLocaleDateString("tr-TR", options);
+
+                $("#divChat").append("<div><div class='message left'><div><span style='color:#808080;font-size:small;'>" + data + "</span></div><div style='text-align:right;margin-top:-3px;'><span class='date'>" + dateStr + "</span></div></div><div class='fixer'></div></div>");
+                $("#txtChat").val(null);
+
+                $("#divChat").scrollTop(5000);
+            });
+
+            socket.emit("get_old_messages", null, function (e) {
+
+                if (e) {
+                    for (var i = e.length - 1; i >= 0; i--) {
+
+                        var date = new Date();
+                        var options = { day: "numeric", month: "numeric", year: "numeric", hour: "2-digit", minute: "2-digit" };
+
+                        var dateStr = date.toLocaleDateString("tr-TR", options);
+
+                        $("#divChat").append("<div><div class='message " + (e[i].FromId.toLowerCase() == userId ? "right" : "left") + "'><div><span style='color:#808080;font-size:small;'>" + e[i].Content + "</span></div><div style='text-align:right;margin-top:-3px;'><span class='date'>" + dateStr + "</span></div></div><div class='fixer'></div></div>");
+                    }
+
+                    $("#divChat").scrollTop(5000);
+                }
+            });
+
+            $("#txtChat").focusin(function (event) {
+
+                socket.emit("user_writing", true);
+            });
+
+            $("#txtChat").focusout(function (event) {
+
+                socket.emit("user_writing", false);
+            });
+
+            $("#btnSend").click(function () {
+
+                var message = $("#txtChat").val();
+
+                socket.emit("send_new_message", message, function (e) {
+
+                    if (e.Success == false) {
+
+                        alert(e.Result);
+                    }
+                    else {
+                        var date = new Date();
+                        var options = { day: "numeric", month: "numeric", year: "numeric", hour: "2-digit", minute: "2-digit" };
+
+                        var dateStr = date.toLocaleDateString("tr-TR", options);
+
+                        $("#divChat").append("<div><div class='message right'><div><span style='color:#808080;font-size:small;'>" + message + "</span></div><div style='text-align:right;margin-top:-3px;'><span class='date'>" + dateStr + "</span></div></div><div class='fixer'></div></div>");
+                        $("#txtChat").val(null);
+
+                        $("#divChat").scrollTop(5000);
+                    }
+                });
+            });
+        });
+
+    </script>
+
+</head>
+<body>
+    <div class="mainContent newMessagePage clearfix" id="divMain">
+        <div class="title-content title-new-msg">
+            <h1><i class="icon3 iconMsg"></i><span>Mesajlar</span></h1>
+        </div>
+
+        <div class="nav">
+            <a href="http://kaleanahtarcilarkulubu.com.tr/mesajlar.html">Mesajlar</a><i></i>
+            <a href="#"><span id="lblChat"></span></a>
+        </div>
+
+        <!--<div class="grid-row share" style="margin-top:20px;">
+            <h3 id="lblChat"><span id="lblTargetUser"></span> ile sohbet</h3>
+        </div>-->
+
+        <div class="grid-row share">
+            <div id="divChat" class="writeComnt" style="height:390px;overflow-y:scroll;overflow-x:hidden;padding-top:10px;">
+            </div>
+
+        </div>
+
+        <div class="grid-row share">
+            <p id="lblUserWriting" style="min-height:20px;font-style:italic;font-size:smaller;color:gray;"></p>
+        </div>
+
+        <div class="grid-row share" style="margin-top:20px;">
+            <div class="writeComnt">
+                <textarea placeholder="Mesaj yaz..." id="txtChat" ng-model="message"></textarea>
+                <div class="contentBtns"><a href="#" id="btnSend" class="btnDefault btnSend" ng-click="SendNewMessage();"><span>GÖNDER</span></a> </div>
+            </div>
+        </div>
+
+        <!--<div style="margin-top:30px;">
+            <input type="text" id="txtChat" size="85" maxlength="200" />
+            <input type="button" value="Send" id="btnSend" />
+        </div>-->
+
+    </div>
+
+
+</body>
+</html>
