@@ -208,8 +208,8 @@ namespace GK.Library.Business
                                         ,pc.new_townid AS TownId
                                         ,pc.new_townidName AS TownIdName
                                         ,'new_town' AS TownIdTypeName
-                                        ,pc.new_userid AS userId
-                                        ,pc.new_useridName AS userIdName
+                                        ,pc.new_userid AS UserId
+                                        ,pc.new_useridName AS UserIdName
                                         ,'new_user' AS UserIdTypeName
                                         --,pc.new_hometype AS HomeType
                                         --,smHomeType.Value AS HomeTypeValue

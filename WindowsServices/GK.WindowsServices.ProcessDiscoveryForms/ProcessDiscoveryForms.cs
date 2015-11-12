@@ -129,6 +129,11 @@ namespace GK.WindowsServices.ProcessDiscoveryForms
                 //             , discoveryForm.VisitHour.Value, discoveryForm.CityId.Name, discoveryForm.TownId.Name, discoveryForm.HomeType.Value
                 //             , "", ((DateTime)discoveryForm.VisitDate).ToString("dd.MM.yyyy HH:mm"), discoveryForm.InformedBy.Value);
 
+
+
+                FileLogHelper.LogFunction(this.GetType().Name, "DefaultPortalId:" + Globals.DefaultPortalId, @Globals.FileLogPath);
+                FileLogHelper.LogFunction(this.GetType().Name, "UserParameter:" + (discoveryForm.UserId != null ? discoveryForm.UserId.Id.ToString() : "No User Info"), @Globals.FileLogPath);
+
                 MsCrmResultObject resultUser = PortalUserHelper.GetPortalUserDetail(new Guid(Globals.DefaultPortalId), discoveryForm.UserId.Id, _sda);
 
                 string userName = "";
