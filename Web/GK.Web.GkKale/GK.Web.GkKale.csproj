@@ -101,6 +101,7 @@
     <Content Include="js\pagescripts\discoveryformJS.js" />
     <Content Include="js\pagescripts\giftDetailJS.js" />
     <Content Include="js\pagescripts\giftListJS.js" />
+    <Content Include="js\pagescripts\npsJS.js" />
     <Content Include="js\pagescripts\messagesJS.js" />
     <Content Include="js\pagescripts\chatJS.js" />
     <Content Include="js\pagescripts\newMessagesJS.js" />

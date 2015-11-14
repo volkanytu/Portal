@@ -1,12 +1,12 @@
 ﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html ng-app="" ng-controller="loginController">
+<html ng-app="" ng-controller="npsController">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Kale Kilit Platformu</title>
     <meta id="myViewport" name="viewport" content="width=device-width, initial-scale=0.7, maximum-scale=0.7, minimum-scale=0.7, target-densitydpi=device-dpi, user-scalable=no" />
 
     <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
-    <!--<link href="styles/bootstrap.min.css" rel="stylesheet" />-->
+    <link href="styles/toastr.css" rel="stylesheet" />
 
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -15,56 +15,44 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
 
     <script src="js/jquery/jquery.widget.min.js"></script>
-    <script src="js/jquery/purl.js"></script>
-    <script src="js/pagescripts/loginJS.js"></script>
     <script src="js/pagescripts/GlobalVariables.js"></script>
+    <script src="js/jquery/purl.js"></script>
     <script src="js/jquery/jquery.session.js"></script>
-    <script src="js/pagescripts/languageMessagesJS.js"></script>
+    <script src="js/customPlugin.js"></script>
+    <script src="js/jquery/notify.js"></script>
+    <script src="js/jquery/toastr.js"></script>
+    <script type="text/javascript" language="javascript" src="./js/allScripts.js"></script>
+    <script src="js/pagescripts/npsJS.js"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
+
+    <style>
+        .modal20 > .modal-dialog {
+            width: 20% !important;
+        }
+
+        .modal50 > .modal-dialog {
+            width: 50% !important;
+        }
+
+        .modal100 > .modal-dialog {
+            width: 100% !important;
+        }
+
+        .modal90 > .modal-dialog {
+            width: 90% !important;
+        }
+
+        .modal80 > .modal-dialog {
+            width: 80% !important;
+        }
+    </style>
+
 
     <script type="text/javascript">
 
         $(function () {
-            //debugger;
-            LoginHelper.OnLoad();
-
-
-
+            NpsHelper.OnLoad();
         });
-
-        function test() {
-
-            var asd = grecaptcha.getResponse();
-
-            var jData = {};
-            jData.secret = "6Le-IA4TAAAAAElIB77hMVvtZhBV1x80uYGQGct6";
-            jData.response = asd;
-
-            var jSonData = JSON.stringify(jData);
-
-            //debugger;
-            $.ajax({
-                url: "https://www.google.com/recaptcha/api/siteverify",
-                async: false,
-                dataType: "json",
-                contentType: "application/json;",
-                type: "POST",
-
-                success: function (data) {
-                    //debugger;
-                    if (data != null) {
-
-                        return;
-                    }
-                    else {
-                        return false;
-                    }
-                },
-                error: function (a, b, c) {
-                    debugger;
-                }
-            });
-        }
 
     </script>
 
@@ -104,7 +92,7 @@
                                 </div>-->
                                 <div class="boxFields boxMemberFields" ng-hide="showCheckLoading">
                                     <span class="name">Aldığınız hizmeti bir yakınınıza tavsiye eder misiniz?</span> <span class="control">
-                                        <select style="width:100%;">
+                                        <select style="width:100%;" id="suggest">
                                             <option value="-1"></option>
                                             <option value="100000000">Evet</option>
                                             <option value="100000001">Hayır</option>
@@ -113,7 +101,7 @@
                                 </div>
                                 <div class="boxFields boxMemberFields" ng-hide="showCheckLoading">
                                     <span class="name">Cevabınız evet ise 1 -10 arasında  not verir misiniz?</span> <span class="control">
-                                        <select style="width:100%;">
+                                        <select style="width:100%;" id="suggestPoint">
                                             <option value="-1"></option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
@@ -131,19 +119,13 @@
                                 </div>
                                 <div class="boxFooter boxMemberFooter" ng-hide="showCheckLoading">
                                     <div class="boxBtnsCntrl boxMembrBtnsCntrl">
-                                        <a href="javascript:void(0);" class="btnDefault btnLogin" onclick="test();">
+                                        <a href="#" class="btnDefault btnLogin" id="btnSave">
                                             <span>GÖNDER</span>
                                         </a>
                                     </div>
                                     <div class="fixer"></div>
                                 </div>
                             </div>
-                            <div style="width:100%;" class="g-recaptcha" data-sitekey="6Le-IA4TAAAAAC8K28baHPhw_rgV2fxW2BST1viQ" data-size="compact"></div>
-                            <!--<div class="error" ng-show="showError"><span class="errorText">{{errorText}}</span></div>
-                            <div class="loginInfo">
-                                <span class="infoText">Üyelik için <a href="mailto:uye@kaleanahtarcilarkulubu.com.tr" style="font-weight:bold;">uye@kaleanahtarcilarkulubu.com.tr</a> ile iletişime geçebilirsiniz.</span>
-                            </div>-->
-
                         </div>
                     </div>
                 </div>
