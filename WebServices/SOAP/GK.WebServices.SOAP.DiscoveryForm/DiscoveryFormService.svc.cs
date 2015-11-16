@@ -53,6 +53,8 @@ namespace GK.WebServices.SOAP.DiscoveryFormService
                     DiscoveryForm formInfo = (DiscoveryForm)resultFormInfo.ReturnObject;
 
                     formInfo.Status = new OptionSetValueWrapper() { AttributeValue = (int)DiscoveryFormStatus.LotusConfirmed };
+
+                    DiscoveryFormHelper.UpdateDiscoveryForm(formInfo, _service);
                 }
                 else
                 {

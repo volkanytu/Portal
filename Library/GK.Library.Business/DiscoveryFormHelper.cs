@@ -119,7 +119,7 @@ namespace GK.Library.Business
 
                 if (dt.Rows.Count > 0)
                 {
-                    List<PointCode> pCode = dt.ToList<PointCode>();
+                    List<DiscoveryForm> pCode = dt.ToList<DiscoveryForm>();
 
                     returnValue.Success = true;
                     returnValue.ReturnObject = pCode[0];
