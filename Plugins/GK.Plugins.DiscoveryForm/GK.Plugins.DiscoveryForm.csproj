@@ -72,6 +72,9 @@
     <Compile Include="..\..\Library\GK.Library.Business\ArticleHelper.cs">
       <Link>Business\ArticleHelper.cs</Link>
     </Compile>
+    <Compile Include="..\..\Library\GK.Library.Business\AssemblyRequestHelper.cs">
+      <Link>Business\AssemblyRequestHelper.cs</Link>
+    </Compile>
     <Compile Include="..\..\Library\GK.Library.Business\AttachmentFileHelper.cs">
       <Link>Business\AttachmentFileHelper.cs</Link>
     </Compile>
