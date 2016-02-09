@@ -22,7 +22,9 @@ namespace GK.WindowsServices.SendNpsSurvey
                                                                     AND
                                                                     s.StatusCode=@statusCode
                                                                     AND
-                                                                    er.new_emailaddress IS NOT NULL";
+                                                                    er.new_emailaddress IS NOT NULL
+                                                                    --AND
+                                                                    --DATEDIFF(DD,s.CreatedOn,GETUTCDATE())>6";
 
         public const string SURVEY_MAILD_BODY = @"Sayın {0}, </br>
                                                     almış olduğunuz hizmeti aşağıdaki linkten değerlendirebilirsiniz. </br>
