@@ -779,7 +779,26 @@ namespace GK.Library.Utility
         [CrmFieldName("statuscode")]
         public OptionSetValueWrapper Status { get; set; }
 
-        public DateTime? CreatedOn { get; set; }
+        public DateTime? CreatedOn
+        {
+            get
+            {
+                return _createDate;
+            }
+            set
+            {
+                _createDate = value;
+
+                if (value != null)
+                {
+                    CreatedOnString = ((DateTime)value).ToString("dd.MM.yyyy HH:mm");
+                }
+            }
+        }
+
+        private DateTime? _createDate = null;
+
+        public string CreatedOnString { get; set; }
 
     }
     #endregion

@@ -301,5 +301,77 @@ namespace GK.Library.Business
             }
             return returnValue;
         }
+
+        public static MsCrmResultObj<List<DiscoveryForm>> GetUserDiscoveryFormList(Guid userId, SqlDataAccess sda)
+        {
+            MsCrmResultObj<List<DiscoveryForm>> returnValue = new MsCrmResultObj<List<DiscoveryForm>>();
+
+            try
+            {
+                #region | SQL QUERY |
+
+                string sqlQuery = @"SELECT
+	                                    pc.new_discoveryformId AS Id
+	                                    ,pc.new_name AS Name
+	                                    ,pc.new_firstname AS FirstName
+	                                    ,pc.new_lastname AS LastName
+	                                    ,pc.new_phonenumber AS PhoneNumber
+	                                    ,pc.new_email AS Email
+	                                    ,pc.new_cityid AS CityId
+	                                    ,pc.new_cityidName AS CityIdName
+	                                    ,'new_city' AS CityIdTypeName
+	                                    ,pc.new_townid AS TownId
+	                                    ,pc.new_townidName AS TownIdName
+	                                    ,'new_town' AS TownIdTypeName
+	                                    ,pc.new_userid AS UserId
+	                                    ,pc.new_useridName AS UserIdName
+	                                    ,'new_user' AS UserIdTypeName
+	                                    ,pc.new_portalid AS PortalId
+	                                    ,pc.new_portalidName AS PortalIdName
+	                                    ,'new_portal' AS PortalIdTypeName
+	                                    ,pc.new_hometype AS HomeType
+	                                    ,pc.new_informedby AS InformedBy
+	                                    ,pc.new_visithour AS VisitHour
+	                                    ,pc.new_visitdate AS VisitDate
+	                                    ,pc.new_formcode AS FormCode
+	                                    ,pc.statuscode AS Status
+                                        ,sm.Value AS StatusValue
+	                                    ,pc.CreatedOn AS CreatedOn
+                                    FROM
+                                    new_discoveryform AS pc (NOLOCK)
+                                        JOIN
+                                            StringMap AS sm (NOLOCK)
+                                                ON
+                                                sm.ObjectTypeCode=(SELECT TOP 1 ObjectTypeCode FROM Entity WHERE Name='new_discoveryform')
+                                                AND
+                                                sm.AttributeName='statuscode'
+                                                AND
+                                                sm.AttributeValue=pc.statuscode
+                                    WHERE
+                                    pc.new_userid='{0}'";
+
+                #endregion
+
+                DataTable dt = sda.getDataTable(string.Format(sqlQuery, userId));
+
+                if (dt.Rows.Count > 0)
+                {
+                    List<DiscoveryForm> discoveryForm = dt.ToList<DiscoveryForm>();
+
+                    returnValue.Success = true;
+                    returnValue.ReturnObject = discoveryForm;
+                }
+                else
+                {
+                    returnValue.Result = "Kayıt bulunamadı.";
+                }
+            }
+            catch (Exception ex)
+            {
+                returnValue.Result = ex.Message;
+            }
+
+            return returnValue;
+        }
     }
 }

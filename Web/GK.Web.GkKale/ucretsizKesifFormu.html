@@ -30,7 +30,7 @@
 </head>
 <body style="background:#fff;">
     <!--Main Content-->
-    <div class="mainContent profileDetailPage clearfix">
+    <div class="mainContent scorePage profileDetailPage clearfix">
 
         <div id="divMain">
 
@@ -173,8 +173,42 @@
                     </div>
                 </div>
                 <!--Grid-->
-
             </div>
+            <!--Grid-->
+            <div class="grid-row grid-data-wrng" ng-show="showOldForms">
+                <div class="detail-title"><span>Eski Ücretsiz Keşif Formları</span></div>
+                <div class="row row-system-list">
+                    <div class="table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ad</th>
+                                    <th>Soyad</th>
+                                    <th>İl</th>
+                                    <th>İlçe</th>
+                                    <th>Durum</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="row in oldForms | orderBy:'-CreatedOn'">
+                                    <td style="padding-left:0px;">{{row.FirstName}}</td>
+                                    <td>{{row.LastName}}</td>
+                                    <td>{{row.CityId.Name}}</td>
+                                    <td>{{row.TownId.Name}}</td>
+                                    <td>{{row.Status.Value}}</td>
+                                    <td style="padding:10px;">
+                                        <button class="btnPrfUpdate" style="padding:5px; margin:0px;" ng-click="Edit(row.Id);">
+                                            <span>>></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--Grid-->
         </div>
     </div>
     <!--Main Content-->

@@ -451,5 +451,10 @@ namespace GK.WebServices.REST.CrmService
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json
             , UriTemplate = "/AnswerNpsSurvey")]
         MsCrmResult AnswerNpsSurvey(string npsSurveyId, int suggest, int suggestPoint);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json
+            , UriTemplate = "/GetUserDiscoveryFormList")]
+        MsCrmResultObj<List<DiscoveryForm>> GetUserDiscoveryFormList(string token);
     }
 }

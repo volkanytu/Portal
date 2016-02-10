@@ -55,6 +55,9 @@ namespace GK.Plugins.DiscoveryForm
                 string customerFullName = null;
                 string assemblerFullName = null;
 
+                int statusCode = 0;
+                int oldStatusCode = 0;
+
                 AssemblerInfo assemblerInfo = null;
                 List<ScoreLimit> lstLimits = new List<ScoreLimit>();
 
@@ -82,7 +85,6 @@ namespace GK.Plugins.DiscoveryForm
                     }
 
                 }
-                #endregion
 
                 if (preImage.Contains("new_firstname") && preImage["new_firstname"] != null)
                 {
@@ -104,9 +106,6 @@ namespace GK.Plugins.DiscoveryForm
                     customerFullName = customerFirstName + " " + customerLastName;
                 }
 
-                int statusCode = 0;
-                int oldStatusCode = 0;
-
                 if (entity.Contains("statuscode") && entity["statuscode"] != null)
                 {
                     statusCode = ((OptionSetValue)entity["statuscode"]).Value;
@@ -116,7 +115,7 @@ namespace GK.Plugins.DiscoveryForm
                 {
                     oldStatusCode = ((OptionSetValue)preImage["statuscode"]).Value;
                 }
-
+                #endregion
 
                 if (statusCode != oldStatusCode && (statusCode == (int)DiscoveryFormStatus.CrmConfirmed || statusCode == (int)DiscoveryFormStatus.Result_Negative))
                 {
@@ -145,7 +144,6 @@ namespace GK.Plugins.DiscoveryForm
                 if (entity.Contains("statuscode") && entity["statuscode"] != null
                     && ((OptionSetValue)entity["statuscode"]).Value == (int)DiscoveryFormStatus.CrmConfirmed)
                 {
-
                     MsCrmResultObject limitRes = ScoreHelper.GetScoreLimitsByType(ScoreType.KGSSales, sda);
 
                     if (limitRes.Success)

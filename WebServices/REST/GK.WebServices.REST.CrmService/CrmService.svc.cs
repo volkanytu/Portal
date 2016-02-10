@@ -4516,6 +4516,60 @@ namespace GK.WebServices.REST.CrmService
 
             return returnValue;
         }
+
+        public MsCrmResultObj<List<DiscoveryForm>> GetUserDiscoveryFormList(string token)
+        {
+            MsCrmResultObj<List<DiscoveryForm>> returnValue = new MsCrmResultObj<List<DiscoveryForm>>();
+            LoginSession ls = new LoginSession();
+
+            try
+            {
+                if (!string.IsNullOrEmpty(token))
+                {
+                    #region | CHECK SESSION |
+                    MsCrmResultObject sessionResult = GetUserSession(token);
+
+                    if (!sessionResult.Success)
+                    {
+                        returnValue.Result = sessionResult.Result;
+                        return returnValue;
+                    }
+                    else
+                    {
+                        ls = (LoginSession)sessionResult.ReturnObject;
+                    }
+
+                    #endregion
+
+                    IOrganizationService service = MSCRM.GetOrgService(true);
+
+                    sda = new SqlDataAccess();
+                    sda.openConnection(Globals.ConnectionString);
+
+
+                    returnValue = DiscoveryFormHelper.GetUserDiscoveryFormList(ls.PortalUserId, sda);
+
+                }
+                else
+                {
+                    returnValue.Success = false;
+                    returnValue.Result = "M003"; //"Eksik parametre!";
+                }
+            }
+            catch (Exception ex)
+            {
+                returnValue.Result = ex.Message;
+            }
+            finally
+            {
+                if (sda != null)
+                {
+                    sda.closeConnection();
+                }
+            }
+
+            return returnValue;
+        }
         #endregion
 
         #region | ASSEMBLY REQUESTS |
