@@ -705,6 +705,22 @@ namespace GK.Library.Utility
         [CrmFieldName("new_ordercode")]
         public string OrderCode { get; set; }
 
+        [CrmFieldDataType(CrmDataType.STRING)]
+        [CrmFieldName("new_shippingcompany")]
+        public string ShippingCompany { get; set; }
+
+        [CrmFieldDataType(CrmDataType.STRING)]
+        [CrmFieldName("new_shippingno")]
+        public string ShippingNo { get; set; }
+
+        [CrmFieldDataType(CrmDataType.STRING)]
+        [CrmFieldName("new_note")]
+        public string Note { get; set; }
+
+        [CrmFieldDataType(CrmDataType.STRING)]
+        [CrmFieldName("new_servicestatus")]
+        public string ServiceStatus { get; set; }
+
         public DateTime? CreatedOn { get; set; }
         public string CreatedOnString { get; set; }
     }
@@ -1095,6 +1111,38 @@ namespace GK.Library.Utility
                 return _schemaName;
             }
         }
+    }
+
+    public class GiftServiceResult
+    {
+        public string message { get; set; }
+    }
+
+    public class GiftServiceInfo
+    {
+        public string api_key { get; set; }
+        public string id { get; set; }
+        public string created_at { get; set; }
+        public string name { get; set; }
+        public string surname { get; set; }
+        public string address { get; set; }
+        public string city { get; set; }
+        public string district { get; set; }
+        public string tc { get; set; }
+        public string product_category { get; set; }
+        public string product_name { get; set; }
+        public string product_quantity { get; set; }
+        public string status { get; set; }
+    }
+
+    public class GiftUpdateInfo
+    {
+        public string api_key { get; set; }
+        public string id { get; set; }
+        public string shipping_company { get; set; }
+        public string shipping_no { get; set; }
+        public string note { get; set; }
+        public string status { get; set; }
     }
 
     public enum CrmDataType

@@ -71,6 +71,9 @@
     <Content Include="arkadaslarim.html" />
     <Content Include="attachments\test.png" />
     <Content Include="bilgiKupu.html" />
+    <Content Include="images\ntf.png" />
+    <Content Include="images\ntfBellIcon.png" />
+    <Content Include="images\ntfPopupArow.png" />
     <Content Include="isEmriGoruntule.html" />
     <Content Include="isEmirleri.html" />
     <Content Include="hediyeler.html" />
@@ -113,6 +116,7 @@
     <Content Include="passwordForgot.html" />
     <Content Include="styles\bootsdatetime.css" />
     <Content Include="styles\jquery.tokenize.css" />
+    <Content Include="styles\main - Copy.css" />
     <Content Include="ucretsizKesifFormu.html" />
     <Content Include="yapimAsamasinda.html" />
     <Content Include="bilgiKupuSoru.html" />

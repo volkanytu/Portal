@@ -112,11 +112,28 @@
 
                 <!--Mobile Logout-->
                 <div class="mLogout">
-                    <div class="mLogoutHldr">
-                        <div class="prf"><a href="javascript:void(0);" class="prfbtn"><span>{{contact.FirstName+" "+contact.LastName}}</span><i class="icon1 iconMember"></i></a></div>
-                        <div class="mLogoutSub">
-                            <a href="javascript:void(0);" id="btnMyProfile" ng-click="openPage($event,'profilDetay.html')"><i class="icon4 iconPrf"></i>Profilim</a>
-                            <a href="javascript:void(0);" id="btnLogOut" ng-click="CloseSession()"><i class="icon4 iconLogout"></i>Çıkış</a>
+                    <div class="logoutWrp">
+                        <div class="ntfPp">
+                            <span>2</span><i></i>
+                            <!--Notification-->
+                            <div class="ntfPopup">
+                                <h2>Bildirimler</h2>
+                                <div class="ntfHolder">
+                                    <ul>
+                                        <li><a href="javascript:void(0);"><div class="ntfUserImg"><img src="images/ntf.png" /></div><div class="ntfComment"><p><b>Erdem.özsen</b>Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including </p></div></a></li>
+                                        <li><a href="javascript:void(0);"><div class="ntfUserImg"><img src="images/ntf.png" /></div><div class="ntfComment"><p><b>Erdem.özsen</b>Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including </p></div></a></li>
+                                    </ul>
+                                    <div class="showAll"><a href="javascript:void(0);">Tümünü Göster</a></div>
+                                </div>
+                            </div>
+                            <!--Notification-->
+                        </div>
+                        <div class="mLogoutHldr">
+                            <div class="prf"><a href="javascript:void(0);" class="prfbtn"><span>{{contact.FirstName+" "+contact.LastName}}</span><i class="icon1 iconMember"></i></a></div>
+                            <div class="mLogoutSub">
+                                <a href="javascript:void(0);" id="btnMyProfile" ng-click="openPage($event,'profilDetay.html')"><i class="icon4 iconPrf"></i>Profilim</a>
+                                <a href="javascript:void(0);" id="btnLogOut" ng-click="CloseSession()"><i class="icon4 iconLogout"></i>Çıkış</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -132,7 +149,9 @@
                             <!--Profile Img-->
                             <!--Profile Info-->
                             <div class="prfInf">
-                                <h1>{{contact.FirstName+" "+contact.LastName}}</h1>
+                                <h1>
+                                    {{contact.FirstName+" "+contact.LastName}}
+                                </h1>
                                 <span>{{contact.Title}}</span>
                             </div>
                             <!--Profile Info-->

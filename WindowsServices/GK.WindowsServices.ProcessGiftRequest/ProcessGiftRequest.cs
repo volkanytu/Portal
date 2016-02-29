@@ -1,14 +1,19 @@
 ﻿using GK.Library.Business;
 using GK.Library.Utility;
+using GK.ServiceLibrary.GiftServiceLayer;
+using GK.ServiceLibrary.GiftServiceLayer.Interface;
 using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.ServiceProcess;
 using System.Text;
+using System.Web;
+using System.Web.Script.Serialization;
 
 namespace GK.WindowsServices.ProcessGiftRequest
 {
@@ -112,7 +117,7 @@ namespace GK.WindowsServices.ProcessGiftRequest
 
                     foreach (UserGiftRequest req in lstRequests)
                     {
-                        MsCrmResult result = SendToService(req);
+                        MsCrmResult result = SendToServiceBirIleri(req);
 
                         if (result.Success)
                         {
@@ -240,6 +245,158 @@ namespace GK.WindowsServices.ProcessGiftRequest
             }
 
             return returnValue;
+        }
+
+        private MsCrmResult SendToServiceBirIleri(UserGiftRequest request)
+        {
+            MsCrmResult returnValue = new MsCrmResult();
+
+            try
+            {
+                string cityCode = string.Empty;
+
+                MsCrmResultObject resultGetGiftInfo = GiftHelper.GetGiftInfo(request.GiftId.Id, _sda);
+                MsCrmResultObject resultUserInfo = PortalUserHelper.GetPortalUserDetail(request.PortalId.Id, request.UserId.Id, _sda);
+
+                if (!resultGetGiftInfo.Success)
+                {
+                    returnValue.Result = resultGetGiftInfo.Result;
+
+                    return returnValue;
+                }
+
+                if (!resultUserInfo.Success)
+                {
+                    returnValue.Result = resultUserInfo.Result;
+
+                    return returnValue;
+                }
+
+                Gift gift = resultGetGiftInfo.GetReturnObject<Gift>();
+                PortalUser userInfo = resultUserInfo.GetReturnObject<PortalUser>();
+
+                StringBuilder sb = new StringBuilder();
+                bool checkFailed = false;
+
+                if (userInfo.ContactInfo.CityId == null)
+                {
+                    sb.AppendLine("İl bilgisi eksik");
+                    checkFailed = true;
+                }
+
+                if (userInfo.ContactInfo.TownId == null)
+                {
+                    sb.AppendLine("İlçe bilgisi eksik");
+                    checkFailed = true;
+                }
+
+                if (string.IsNullOrWhiteSpace(userInfo.ContactInfo.MobilePhone))
+                {
+                    sb.AppendLine("Cep telefonu bilgisi eksik.");
+                    checkFailed = true;
+                }
+
+                TelephoneNumber telNo = ValidationHelper.CheckTelephoneNumber(userInfo.ContactInfo.MobilePhone);
+
+                if (!telNo.isFormatOK)
+                {
+                    sb.AppendLine("Telefon numarası formatı hatalı.");
+                    checkFailed = true;
+                }
+
+
+                if (checkFailed)
+                {
+                    returnValue.Result = sb.ToString();
+
+                    return returnValue;
+                }
+
+                NameValueCollection formData = new NameValueCollection();
+
+                GiftServiceInfo giftServiceInfo = new GiftServiceInfo();
+                giftServiceInfo.api_key = "6r9ZTok8zp4yZxKq";
+                formData["api_key"] = "6r9ZTok8zp4yZxKq";
+
+                giftServiceInfo.id = request.Id.ToString();
+                formData["id"] = request.Id.ToString();
+
+                giftServiceInfo.created_at = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                formData["created_at"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+                giftServiceInfo.name = userInfo.ContactInfo.FirstName;
+                formData["name"] = userInfo.ContactInfo.FirstName;
+
+                giftServiceInfo.surname = userInfo.ContactInfo.LastName;
+                formData["surname"] = userInfo.ContactInfo.LastName;
+
+                giftServiceInfo.address = userInfo.ContactInfo.AddressDetail;
+                formData["address"] = userInfo.ContactInfo.AddressDetail;
+
+                giftServiceInfo.city = userInfo.ContactInfo.CityId.Name;
+                formData["city"] = userInfo.ContactInfo.CityId.Name;
+
+                giftServiceInfo.district = userInfo.ContactInfo.TownId.Name;
+                formData["district"] = userInfo.ContactInfo.TownId.Name;
+
+                giftServiceInfo.tc = userInfo.ContactInfo.IdentityNumber;
+                formData["tc"] = userInfo.ContactInfo.IdentityNumber;
+
+                giftServiceInfo.product_category = gift.CategoryId.Name;
+                formData["product_category"] = gift.CategoryId.Name;
+
+                giftServiceInfo.product_name = gift.Name;
+                formData["product_name"] = gift.Name;
+
+                giftServiceInfo.product_quantity = "1";
+                formData["product_quantity"] = "1";
+
+                giftServiceInfo.status = "Servise Gönderildi";
+                formData["status"] = "Servise Gönderildi";
+
+                //var js = new JavaScriptSerializer();
+                //string json = js.Serialize(giftServiceInfo);
+
+                string formDataStr = SerializePostData(formData);
+
+                ISendGiftRequestService giftReqService = new SendGiftRequestService();
+
+                GiftServiceResult serviceResult = giftReqService.SendGiftRequest(formDataStr);
+
+                FileLogHelper.LogFunction(this.GetType().Name, "Result:" + serviceResult.message + ",Id:" + request.Id.ToString(), @Globals.FileLogPath);
+
+                string errorText = string.Empty;
+
+                if (serviceResult.message.ToLower() == "success")
+                {
+                    returnValue.Result = serviceResult.message;
+                    returnValue.Success = true;
+                }
+                else
+                {
+                    returnValue.Result = serviceResult.message;
+                }
+            }
+            catch (Exception ex)
+            {
+                returnValue.Result = ex.StackTrace;
+            }
+
+            return returnValue;
+        }
+
+        private string SerializePostData(NameValueCollection formData)
+        {
+            var parameters = new StringBuilder();
+
+            foreach (string key in formData.Keys)
+            {
+                parameters.AppendFormat("{0}={1}&",
+                    HttpUtility.UrlEncode(key),
+                    HttpUtility.UrlEncode(formData[key]));
+            }
+
+            return parameters.Remove(parameters.Length - 1, 1).ToString(); // remove the last '&'
         }
     }
 }
