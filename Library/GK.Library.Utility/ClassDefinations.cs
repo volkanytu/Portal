@@ -1133,6 +1133,7 @@ namespace GK.Library.Utility
         public string product_name { get; set; }
         public string product_quantity { get; set; }
         public string status { get; set; }
+        public string tel { get; set; }
     }
 
     public class GiftUpdateInfo
@@ -1145,6 +1146,45 @@ namespace GK.Library.Utility
         public string status { get; set; }
     }
 
+    public class Message
+    {
+        [CrmFieldDataType(CrmDataType.UNIQUEIDENTIFIER)]
+        public Guid Id { get; set; }
+
+        [CrmFieldDataType(CrmDataType.STRING)]
+        public string Content { get; set; }
+
+        [CrmFieldDataType(CrmDataType.ENTITYREFERENCE)]
+        public EntityReferenceWrapper ToId { get; set; }
+
+        [CrmFieldDataType(CrmDataType.ENTITYREFERENCE)]
+        public EntityReferenceWrapper FromId { get; set; }
+
+        [CrmFieldDataType(CrmDataType.DATETIME)]
+        public DateTime? CreatedOn
+        {
+            get
+            {
+                return _createDate;
+            }
+            set
+            {
+                _createDate = value;
+
+                if (value != null)
+                {
+                    CreatedOnString = ((DateTime)value).ToString("dd.MM.yyyy HH:mm");
+                }
+            }
+        }
+
+        [CrmFieldDataType(CrmDataType.BOOL)]
+        public bool? HasSeen { get; set; }
+
+        public DateTime? _createDate { get; set; }
+        public string CreatedOnString { get; set; }
+    }
+
     public enum CrmDataType
     {
         UNIQUEIDENTIFIER,
@@ -1154,6 +1194,7 @@ namespace GK.Library.Utility
         ENTITYREFERENCE,
         OPTIONSETVALUE,
         MONEY,
-        DECIMAL
+        DECIMAL,
+        BOOL
     }
 }

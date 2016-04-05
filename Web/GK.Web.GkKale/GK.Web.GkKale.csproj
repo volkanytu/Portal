@@ -110,6 +110,7 @@
     <Content Include="js\pagescripts\newMessagesJS.js" />
     <Content Include="js\pagescripts\passrememberJS.js" />
     <Content Include="js\ChatServer.js" />
+    <Content Include="js\underscore-min.js" />
     <Content Include="nps.html" />
     <Content Include="mesajlar.html" />
     <Content Include="passwordChange.html" />

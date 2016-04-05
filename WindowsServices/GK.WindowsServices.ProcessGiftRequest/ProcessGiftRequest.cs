@@ -351,6 +351,9 @@ namespace GK.WindowsServices.ProcessGiftRequest
                 giftServiceInfo.product_quantity = "1";
                 formData["product_quantity"] = "1";
 
+                giftServiceInfo.tel = userInfo.ContactInfo.MobilePhone;
+                formData["tel"] = userInfo.ContactInfo.MobilePhone;
+
                 giftServiceInfo.status = "Servise Gönderildi";
                 formData["status"] = "Servise Gönderildi";
 

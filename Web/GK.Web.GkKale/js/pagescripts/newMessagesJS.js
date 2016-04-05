@@ -302,55 +302,20 @@ function newMessagesController($scope) {
             return;
         }
 
-        //var jData = {
-        //    token: NewMessagesHelper.Token,
-        //    message: {
-        //        Portal: {
-        //            Id: NewMessagesHelper.PortalId,
-        //            LogicalName: "new_portal"
-        //        },
-        //        FromId: {
-        //            Id: NewMessagesHelper.UserId,
-        //            Name: parent.IndexHelper.UserName,
-        //            LogicalName: "new_user"
-        //        },
-        //        ToId: {
-        //            Id: toId,
-        //            Name: toIdName,
-        //            LogicalName: "new_user"
-        //        },
-        //        Content: message
-        //    }
-        //};
-
-        //NewMessagesHelper.Socket.emit("input", jData);
-
-        //$("#ifrmContent", parent.document).attr("src", "chat.html?to=" + toId + "&fullname=" + toIdName);
-        //$("#ifrmContent", parent.document).attr("src", "http://localhost:3000/chat?targetuserid=" + toId + "&targetuseridname=" + toIdName);
         var userId = parent.IndexHelper.UserId;
         var userIdName = parent.IndexHelper.userIdName;
-        $("#ifrmContent", parent.document).attr("src", "http://kaleanahtarcilarkulubu.com.tr:5555/chat?targetuserid=" + toId + "&targetuseridname=" + toIdName + "&userid=" + userId + "&useridname=" + userIdName);
 
-        //NewMessagesHelper.SendNewMessage(message, function (e) {
+        //$("#ifrmContent", parent.document).attr("src", "http://kaleanahtarcilarkulubu.com.tr:5555/chat?targetuserid=" + toId + "&targetuseridname=" + toIdName + "&userid=" + userId + "&useridname=" + userIdName);
+        $("#ifrmContent", parent.document).attr("src", "http://localhost:3000/chat?targetuserid=" + toId + "&targetuseridname=" + toIdName + "&userid=" + userId + "&useridname=" + userIdName);
 
-        //    if (e != null) {
-        //        parent.IndexHelper.ShowDialog("Mesajınız olşuturulmuştur.", null, null, true, function () {
-
-        //        });
-        //    }
-        //    else {
-        //        parent.IndexHelper.ToastrShow("error", ReturnMessage(parent.IndexHelper.LanguageCode, e.Result), "Hata");
-        //    }
-        //});
     };
 
     $scope.OpenUserChatPage = function (toId, toName) {
-
-        //$("#ifrmContent", parent.document).attr("src", "http://localhost:3000/chat?targetuserid=" + toId + "&targetuseridname=" + toName);
         var userId = parent.IndexHelper.UserId;
         var userIdName = parent.IndexHelper.userIdName;
 
-        $("#ifrmContent", parent.document).attr("src", "http://kaleanahtarcilarkulubu.com.tr:5555/chat?targetuserid=" + toId + "&targetuseridname=" + toName + "&userid=" + userId + "&useridname=" + userIdName);
+        //$("#ifrmContent", parent.document).attr("src", "http://kaleanahtarcilarkulubu.com.tr:5555/chat?targetuserid=" + toId + "&targetuseridname=" + toName + "&userid=" + userId + "&useridname=" + userIdName);
+        $("#ifrmContent", parent.document).attr("src", "http://localhost:3000/chat?targetuserid=" + toId + "&targetuseridname=" + toName + "&userid=" + userId + "&useridname=" + userIdName);
     };
 };
 

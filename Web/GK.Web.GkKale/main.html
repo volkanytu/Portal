@@ -48,6 +48,7 @@
     <script src="js/jquery/jquery.simplemodal.js"></script>
     <script src="js/jquery/osx.js"></script>
     <script src="js/socket.io.js"></script>
+    <script src="js/underscore-min.js"></script>
 
     <script type="text/javascript">
 
@@ -114,16 +115,25 @@
                 <div class="mLogout">
                     <div class="logoutWrp">
                         <div class="ntfPp">
-                            <span>2</span><i></i>
+                            <span>{{notificationCount}}</span><i></i>
                             <!--Notification-->
                             <div class="ntfPopup">
                                 <h2>Bildirimler</h2>
                                 <div class="ntfHolder">
                                     <ul>
-                                        <li><a href="javascript:void(0);"><div class="ntfUserImg"><img src="images/ntf.png" /></div><div class="ntfComment"><p><b>Erdem.özsen</b>Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including </p></div></a></li>
-                                        <li><a href="javascript:void(0);"><div class="ntfUserImg"><img src="images/ntf.png" /></div><div class="ntfComment"><p><b>Erdem.özsen</b>Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including </p></div></a></li>
+                                        <li ng-repeat="mess in Unreads" fromid="{{mess.FromId.Id}}">
+                                            <a href="javascript:void(0);" ng-click="OpenUserChatPage(mess.FromId.Id,mess.FromId.Name);">
+                                                <div class="ntfUserImg">
+                                                    <img src="images/ntf.png" />
+                                                </div>
+                                                <div class="ntfComment">
+                                                    <p><b>{{mess.FromId.Name}}</b>{{mess.Content}}</p>
+                                                    <p class="pull-right" style="font-size:xx-small;">{{mess.CreatedOnString}}</p>
+                                                </div>
+                                            </a>
+                                        </li>
                                     </ul>
-                                    <div class="showAll"><a href="javascript:void(0);">Tümünü Göster</a></div>
+                                    <!--<div class="showAll"><a href="javascript:void(0);">Tümünü Göster</a></div>-->
                                 </div>
                             </div>
                             <!--Notification-->
