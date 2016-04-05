@@ -71,6 +71,7 @@
     <Content Include="arkadaslarim.html" />
     <Content Include="attachments\test.png" />
     <Content Include="bilgiKupu.html" />
+    <Content Include="images\loginmain.png" />
     <Content Include="images\ntf.png" />
     <Content Include="images\ntfBellIcon.png" />
     <Content Include="images\ntfPopupArow.png" />

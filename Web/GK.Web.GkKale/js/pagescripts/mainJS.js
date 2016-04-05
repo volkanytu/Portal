@@ -1320,7 +1320,7 @@ var IndexHelper = {
     },
     "ConstructSocketIo": function () {
         try {
-            IndexHelper.Socket = io.connect("http://kaleanahtarcilarkulubu.com.tr:5555/");
+            IndexHelper.Socket = io.connect("http://84.51.31.57:8080/");
 
 
         } catch (e) {
@@ -1599,7 +1599,7 @@ function mainController($scope) {
         var userId = IndexHelper.UserId;
         var userIdName = IndexHelper.userIdName;
 
-        $("#ifrmContent").attr("src", "http://kaleanahtarcilarkulubu.com.tr:5555/chat?targetuserid=" + toId + "&targetuseridname=" + toName + "&userid=" + userId + "&useridname=" + userIdName);
+        $("#ifrmContent").attr("src", "http://84.51.31.57:8080/chat?targetuserid=" + toId + "&targetuseridname=" + toName + "&userid=" + userId + "&useridname=" + userIdName);
         //$("#ifrmContent").attr("src", "http://localhost:3000/chat?targetuserid=" + toId + "&targetuseridname=" + toName + "&userid=" + userId + "&useridname=" + userIdName);
 
         $("li[fromid='" + toId + "']").remove();

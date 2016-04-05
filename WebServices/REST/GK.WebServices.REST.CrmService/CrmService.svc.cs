@@ -702,7 +702,7 @@ namespace GK.WebServices.REST.CrmService
                                 LogicalName = "new_portal"
                             },
                             Contact = new EntityReference("contact", new Guid(contactId)),
-                            Content = "Kale Anahtarcılar Kulübü Doğrulama Kodunuz: " + returnValue.Result,
+                            Content = "Platform DEMO Doğrulama Kodunuz: " + returnValue.Result,
                         };
 
                         //MsCrmResult resultSmsRecord = SMSHelper.CreateOrUpdateSendSmsRecord(smsRec, service);

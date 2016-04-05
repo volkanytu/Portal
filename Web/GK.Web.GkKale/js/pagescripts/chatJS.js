@@ -175,7 +175,7 @@ var SendMessagesHelper = {
     },
     "ConstructSocketIo": function () {
         try {
-            SendMessagesHelper.Socket = io.connect("http://kaleanahtarcilarkulubu.com.tr:5555/"
+            SendMessagesHelper.Socket = io.connect("http://84.51.31.57:8080/"
                     , { query: "from=" + SendMessagesHelper.From + "&to=" + SendMessagesHelper.To + "&portalid=" + SendMessagesHelper.PortalId });
 
             //SendMessagesHelper.Socket = io.connect("http://localhost:5555/"
