@@ -82,6 +82,50 @@ var DiscoveryFormHelper = {
         });
 
     },
+    "GetUserDiscoveryFormList": function (callBackFunction) {
+        //debugger;
+        var jData = {};
+
+        jData.token = DiscoveryFormHelper.Token;
+
+        var jSonData = JSON.stringify(jData);
+
+        //debugger;
+        $.ajax({
+            url: CustomServiceUrl + "CrmService.svc/GetUserDiscoveryFormList",
+            async: true,
+            dataType: "json",
+            contentType: "application/json;",
+            type: "POST",
+            data: jSonData,
+            beforeSend: function () {
+                parent.IndexHelper.ShowLoading("Mevcut formlar çekiliyor...", null);
+            },
+            complete: function () {
+                parent.IndexHelper.AutoResize("ifrmContent");
+                parent.IndexHelper.CloseDialog();
+            },
+            success: function (data) {
+                //debugger;
+                if (data != null) {
+
+                    callBackFunction(data);
+
+                    return;
+                }
+                else {
+                    parent.IndexHelper.ShowAlertDialog(3, ReturnMessage(parent.IndexHelper.LanguageCode, "M059"), ReturnMessage(parent.IndexHelper.LanguageCode, "M002") + "<br />GetUserDiscoveryFormList");
+                    return false;
+                }
+            },
+            error: function (a, b, c) {
+                debugger;
+                parent.IndexHelper.ShowAlertDialog(3, ReturnMessage(parent.IndexHelper.LanguageCode, "M059"), c + "<br />GetUserDiscoveryFormList");
+                return false;
+            }
+        });
+
+    },
     "GetCitites": function (callBackFunction) {
         //debugger;
         var jData = {};
@@ -197,7 +241,10 @@ function discoveryController($scope, $sce) {
     $scope.showMain = false;
     $scope.errorText = "";
 
+    $scope.showOldForms = false;
+
     $scope.discoveryForm = null;
+
 
     parent.IndexHelper.CheckSession(true, $scope.token, function (e) {
         $scope.$apply(function () {
@@ -235,6 +282,19 @@ function discoveryController($scope, $sce) {
 
     });
 
+    DiscoveryFormHelper.GetUserDiscoveryFormList(function (e) {
+
+        if (e.Success == true) {
+
+            $scope.$apply(function () {
+
+                $scope.oldForms = e.ReturnObject;
+                $scope.showOldForms = true;
+            });
+        }
+
+    });
+
     $scope.CityChange = function () {
 
         var city = $scope.discoveryForm.CityId
@@ -261,4 +321,33 @@ function discoveryController($scope, $sce) {
             }
         });
     };
+
+    $scope.Edit = function (id) {
+
+        var elementPos = $scope.oldForms.map(function (x) { return x.Id; }).indexOf(id);
+        var formInfo = $scope.oldForms[elementPos];
+
+        var html = "";
+        html += "<div class='popupContainer'>";
+        html += "<div class='popup popupFriend'>";
+        html += " <div class='popupBody'>";
+        html += "<div class='popupInfo clearfix' style='width:100%;height:390px;'>";
+        html += "	<div class='popupTitle'><h2>Keşif Form Bilgisi</h2></div>";
+        html += "	<ul>";
+        html += "		<li><div class='clmn txt'><span>Ad</span></div><div class='clmn dtl'><span>" + formInfo.FirstName + "</span></div></li>";
+        html += "		<li><div class='clmn txt'><span>Soyad Telefonu</span></div><div class='clmn dtl'><span>" + formInfo.LastName + "</span></div></li>";
+        html += "		<li><div class='clmn txt'><span>İl</span></div><div class='clmn dtl'><span>" + formInfo.CityId.Name + "</span></div></li>";
+        html += "		<li><div class='clmn txt'><span>İlçe</span></div><div class='clmn dtl'><span>" + formInfo.TownId.Name + "</span></div></li>";
+        html += "		<li><div class='clmn txt'><span>Telefon</span></div><div class='clmn dtl'><span>" + formInfo.PhoneNumber + "</span></div></li>";
+        html += "		<li><div class='clmn txt'><span>Email</span></div><div class='clmn dtl'><span>" + formInfo.Email + "</span></div></li>";
+        html += "		<li><div class='clmn txt'><span>Oluşturma Tarihi</span></div><div class='clmn dtl'><span>" + formInfo.CreatedOnString + "</span></div></li>";
+        html += "		<li><div class='clmn txt'><span>Durum</span></div><div class='clmn dtl'><span>" + formInfo.Status.Value + "</span></div></li>";
+        html += "	</ul>";
+        html += "</div>";
+        html += "</div>";
+        html += "</div>";
+        html += "</div>";
+        parent.IndexHelper.ShowDialog(html, null, null, true);        
+
+    }
 }

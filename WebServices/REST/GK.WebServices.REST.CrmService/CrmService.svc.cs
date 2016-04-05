@@ -3924,7 +3924,7 @@ namespace GK.WebServices.REST.CrmService
             return json;
         }
 
-        public string GetGiftList(string token, string categoryId, string sortyType)
+        public string GetGiftList(string token, string categoryId, string sortType)
         {
             MsCrmResultObject returnValue = new MsCrmResultObject();
 
@@ -3954,7 +3954,7 @@ namespace GK.WebServices.REST.CrmService
                     sda = new SqlDataAccess();
                     sda.openConnection(Globals.ConnectionString);
 
-                    returnValue = GiftHelper.GetGiftList(ls.PortalId, ls.PortalUserId, new Guid(categoryId), sortyType, sda);
+                    returnValue = GiftHelper.GetGiftList(ls.PortalId, ls.PortalUserId, new Guid(categoryId), sortType, sda);
                 }
                 else
                 {
@@ -4324,6 +4324,62 @@ namespace GK.WebServices.REST.CrmService
             return messageInfo;
         }
 
+        public MsCrmResultObj<List<Message>> GetUnReadMessages(string token, string requestId)
+        {
+            MsCrmResultObj<List<Message>> returnValue = new MsCrmResultObj<List<Message>>();
+            LoginSession ls = new LoginSession();
+
+            try
+            {
+                if (!string.IsNullOrEmpty(token) || !string.IsNullOrEmpty(requestId))
+                {
+                    #region | CHECK SESSION |
+                    MsCrmResultObject sessionResult = GetUserSession(token);
+
+                    if (!sessionResult.Success)
+                    {
+                        returnValue.Result = sessionResult.Result;
+                        return returnValue;
+                    }
+                    else
+                    {
+                        ls = (LoginSession)sessionResult.ReturnObject;
+                    }
+
+                    #endregion
+
+                    sda = new SqlDataAccess();
+                    sda.openConnection(Globals.ConnectionString);
+
+
+                    List<Message> lstMessages = MessageHelper.GetUnReadMessages(ls.PortalUserId, sda);
+
+                    returnValue.ReturnObject = lstMessages;
+
+                    returnValue.Success = true;
+
+                }
+                else
+                {
+                    returnValue.Success = false;
+                    returnValue.Result = "M003"; //"Eksik parametre!";
+                }
+            }
+            catch (Exception ex)
+            {
+                returnValue.Result = ex.Message;
+            }
+            finally
+            {
+                if (sda != null)
+                {
+                    sda.closeConnection();
+                }
+            }
+
+            return returnValue;
+        }
+
 
         #endregion
 
@@ -4512,6 +4568,60 @@ namespace GK.WebServices.REST.CrmService
             catch (Exception ex)
             {
                 returnValue.Result = ex.Message;
+            }
+
+            return returnValue;
+        }
+
+        public MsCrmResultObj<List<DiscoveryForm>> GetUserDiscoveryFormList(string token)
+        {
+            MsCrmResultObj<List<DiscoveryForm>> returnValue = new MsCrmResultObj<List<DiscoveryForm>>();
+            LoginSession ls = new LoginSession();
+
+            try
+            {
+                if (!string.IsNullOrEmpty(token))
+                {
+                    #region | CHECK SESSION |
+                    MsCrmResultObject sessionResult = GetUserSession(token);
+
+                    if (!sessionResult.Success)
+                    {
+                        returnValue.Result = sessionResult.Result;
+                        return returnValue;
+                    }
+                    else
+                    {
+                        ls = (LoginSession)sessionResult.ReturnObject;
+                    }
+
+                    #endregion
+
+                    IOrganizationService service = MSCRM.GetOrgService(true);
+
+                    sda = new SqlDataAccess();
+                    sda.openConnection(Globals.ConnectionString);
+
+
+                    returnValue = DiscoveryFormHelper.GetUserDiscoveryFormList(ls.PortalUserId, sda);
+
+                }
+                else
+                {
+                    returnValue.Success = false;
+                    returnValue.Result = "M003"; //"Eksik parametre!";
+                }
+            }
+            catch (Exception ex)
+            {
+                returnValue.Result = ex.Message;
+            }
+            finally
+            {
+                if (sda != null)
+                {
+                    sda.closeConnection();
+                }
             }
 
             return returnValue;

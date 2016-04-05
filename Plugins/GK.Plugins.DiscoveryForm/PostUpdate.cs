@@ -49,6 +49,16 @@ namespace GK.Plugins.DiscoveryForm
                 #endregion
 
                 #region | VARIABLES |
+                string customerFirstName = null;
+                string customerLastName = null;
+                string customerMobilePhone = null;
+                string customerFullName = null;
+                string assemblerFullName = null;
+
+                int statusCode = 0;
+                int oldStatusCode = 0;
+
+                AssemblerInfo assemblerInfo = null;
                 List<ScoreLimit> lstLimits = new List<ScoreLimit>();
 
                 EntityReference portal = null;
@@ -62,13 +72,78 @@ namespace GK.Plugins.DiscoveryForm
                 if (preImage.Contains("new_userid") && preImage["new_userid"] != null)
                 {
                     user = (EntityReference)preImage["new_userid"];
+
+                    MsCrmResultObj<AssemblerInfo> resultAssembler = AssemblyRequestHelper.GetAssemblerInfo(user.Id, sda);
+
+                    if (resultAssembler.Success)
+                    {
+                        assemblerInfo = resultAssembler.ReturnObject;
+                    }
+                    else
+                    {
+                        throw new Exception("Anahtarcı bilgisi alınamadı.Hata:" + resultAssembler.Result);
+                    }
+
+                }
+
+                if (preImage.Contains("new_firstname") && preImage["new_firstname"] != null)
+                {
+                    customerFirstName = preImage["new_firstname"].ToString();
+                }
+
+                if (preImage.Contains("new_lastname") && preImage["new_lastname"] != null)
+                {
+                    customerLastName = preImage["new_lastname"].ToString();
+                }
+
+                if (preImage.Contains("new_mobilephone") && preImage["new_mobilephone"] != null)
+                {
+                    customerMobilePhone = preImage["new_mobilephone"].ToString();
+                }
+
+                if (!string.IsNullOrWhiteSpace(customerFirstName) && !string.IsNullOrWhiteSpace(customerLastName))
+                {
+                    customerFullName = customerFirstName + " " + customerLastName;
+                }
+
+                if (entity.Contains("statuscode") && entity["statuscode"] != null)
+                {
+                    statusCode = ((OptionSetValue)entity["statuscode"]).Value;
+                }
+
+                if (preImage.Contains("statuscode") && preImage["statuscode"] != null)
+                {
+                    oldStatusCode = ((OptionSetValue)preImage["statuscode"]).Value;
                 }
                 #endregion
+
+                if (statusCode != oldStatusCode && (statusCode == (int)DiscoveryFormStatus.CrmConfirmed || statusCode == (int)DiscoveryFormStatus.Result_Negative))
+                {
+                    string statusText = string.Empty;
+
+                    if (statusCode == (int)DiscoveryFormStatus.CrmConfirmed)
+                    {
+                        statusText = "Kale Onayladı";
+                    }
+                    else if (statusCode == (int)DiscoveryFormStatus.Result_Negative)
+                    {
+                        statusText = "Sonuç Olumsuz";
+                    }
+
+                    string customerSmsText = @"Sayın {0}, {1} müşterisine ait Ücretsiz Keşif Formu durumu {2} olarak değişmiştir. Bilgilerinize.";
+
+                    Entity ent = new Entity("new_sms");
+                    ent["new_message"] = string.Format(customerSmsText, assemblerFullName, customerFullName, statusText);
+                    ent["new_phonenumber"] = assemblerInfo.MobilePhoneNumber;
+                    ent["new_name"] = customerFirstName + " " + customerLastName + "|KGS Formu Durum Değişimi";
+                    ent["new_userid"] = user;
+
+                    service.Create(ent);
+                }
 
                 if (entity.Contains("statuscode") && entity["statuscode"] != null
                     && ((OptionSetValue)entity["statuscode"]).Value == (int)DiscoveryFormStatus.CrmConfirmed)
                 {
-
                     MsCrmResultObject limitRes = ScoreHelper.GetScoreLimitsByType(ScoreType.KGSSales, sda);
 
                     if (limitRes.Success)

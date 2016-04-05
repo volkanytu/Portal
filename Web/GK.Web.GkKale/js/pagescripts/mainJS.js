@@ -1365,6 +1365,46 @@ var IndexHelper = {
             return;
         });
     },
+    "GetUnReadMessages": function (token, callBackFunction) {
+
+        //debugger;
+        var jData = {};
+        jData.token = token;
+
+        var jSonData = JSON.stringify(jData);
+
+        //debugger;
+        $.ajax({
+            url: CustomServiceUrl + "CrmService.svc/GetUnReadMessages",
+            async: true,
+            dataType: "json",
+            contentType: "application/json;",
+            type: "POST",
+            data: jSonData,
+            beforeSend: function () {
+            },
+            complete: function () {
+            },
+            success: function (data) {
+                //debugger;
+                if (data != null) {
+
+                    callBackFunction(data);
+
+                    return;
+                }
+                else {
+                    IndexHelper.ToastrShow("error", ReturnMessage(IndexHelper.LanguageCode, "M002") + "<br />GetUnReadMessages", "Hata");
+                    return false;
+                }
+            },
+            error: function (a, b, c) {
+                debugger;
+                IndexHelper.ToastrShow("error", c + "<br />GetUnReadMessages", "Hata");
+                return false;
+            }
+        });
+    },
     "DocumentBaseUrl": "",
     "ProfileImagePath": "",
     "UserName": "",
@@ -1400,6 +1440,8 @@ function mainController($scope) {
     $scope.showMain = false;
     $scope.errorText = "";
     $scope.showMessageNotification = false;
+    $scope.notificationCount = 0;
+
 
     IndexHelper.CheckSession(false, $scope.token, function (e) {
         $scope.$apply(function () {
@@ -1493,6 +1535,7 @@ function mainController($scope) {
     };
 
     $scope.showCodeMessage = false;
+
     $scope.codeMessage = null;
 
     $scope.UseCode = function () {
@@ -1538,6 +1581,30 @@ function mainController($scope) {
         if (userId.toLowerCase() != IndexHelper.UserId.toLowerCase()) {
             IndexHelper.ShowDialog("<iframe src='popupArkadaslarim.html?userid=" + userId + "' style='width:100%;height:570px;' />", null, null, true);
         }
+    };
+
+    IndexHelper.GetUnReadMessages($scope.token, function (e) {
+        $scope.$apply(function () {
+            if (e.Success == true) {
+
+                $scope.Unreads = e.ReturnObject;
+
+                $scope.notificationCount = e.ReturnObject.length;
+            }
+        });
+    });
+
+    $scope.OpenUserChatPage = function (toId, toName) {
+
+        var userId = IndexHelper.UserId;
+        var userIdName = IndexHelper.userIdName;
+
+        $("#ifrmContent").attr("src", "http://kaleanahtarcilarkulubu.com.tr:5555/chat?targetuserid=" + toId + "&targetuseridname=" + toName + "&userid=" + userId + "&useridname=" + userIdName);
+        //$("#ifrmContent").attr("src", "http://localhost:3000/chat?targetuserid=" + toId + "&targetuseridname=" + toName + "&userid=" + userId + "&useridname=" + userIdName);
+
+        $("li[fromid='" + toId + "']").remove();
+
+        $scope.notificationCount = $(".ntfHolder ul li").length;
     };
 
     $scope.Like = function (entityId, entityName, callBack) {

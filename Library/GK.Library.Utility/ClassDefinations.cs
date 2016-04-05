@@ -705,6 +705,22 @@ namespace GK.Library.Utility
         [CrmFieldName("new_ordercode")]
         public string OrderCode { get; set; }
 
+        [CrmFieldDataType(CrmDataType.STRING)]
+        [CrmFieldName("new_shippingcompany")]
+        public string ShippingCompany { get; set; }
+
+        [CrmFieldDataType(CrmDataType.STRING)]
+        [CrmFieldName("new_shippingno")]
+        public string ShippingNo { get; set; }
+
+        [CrmFieldDataType(CrmDataType.STRING)]
+        [CrmFieldName("new_note")]
+        public string Note { get; set; }
+
+        [CrmFieldDataType(CrmDataType.STRING)]
+        [CrmFieldName("new_servicestatus")]
+        public string ServiceStatus { get; set; }
+
         public DateTime? CreatedOn { get; set; }
         public string CreatedOnString { get; set; }
     }
@@ -779,7 +795,26 @@ namespace GK.Library.Utility
         [CrmFieldName("statuscode")]
         public OptionSetValueWrapper Status { get; set; }
 
-        public DateTime? CreatedOn { get; set; }
+        public DateTime? CreatedOn
+        {
+            get
+            {
+                return _createDate;
+            }
+            set
+            {
+                _createDate = value;
+
+                if (value != null)
+                {
+                    CreatedOnString = ((DateTime)value).ToString("dd.MM.yyyy HH:mm");
+                }
+            }
+        }
+
+        private DateTime? _createDate = null;
+
+        public string CreatedOnString { get; set; }
 
     }
     #endregion
@@ -1078,6 +1113,78 @@ namespace GK.Library.Utility
         }
     }
 
+    public class GiftServiceResult
+    {
+        public string message { get; set; }
+    }
+
+    public class GiftServiceInfo
+    {
+        public string api_key { get; set; }
+        public string id { get; set; }
+        public string created_at { get; set; }
+        public string name { get; set; }
+        public string surname { get; set; }
+        public string address { get; set; }
+        public string city { get; set; }
+        public string district { get; set; }
+        public string tc { get; set; }
+        public string product_category { get; set; }
+        public string product_name { get; set; }
+        public string product_quantity { get; set; }
+        public string status { get; set; }
+        public string tel { get; set; }
+    }
+
+    public class GiftUpdateInfo
+    {
+        public string api_key { get; set; }
+        public string id { get; set; }
+        public string shipping_company { get; set; }
+        public string shipping_no { get; set; }
+        public string note { get; set; }
+        public string status { get; set; }
+    }
+
+    public class Message
+    {
+        [CrmFieldDataType(CrmDataType.UNIQUEIDENTIFIER)]
+        public Guid Id { get; set; }
+
+        [CrmFieldDataType(CrmDataType.STRING)]
+        public string Content { get; set; }
+
+        [CrmFieldDataType(CrmDataType.ENTITYREFERENCE)]
+        public EntityReferenceWrapper ToId { get; set; }
+
+        [CrmFieldDataType(CrmDataType.ENTITYREFERENCE)]
+        public EntityReferenceWrapper FromId { get; set; }
+
+        [CrmFieldDataType(CrmDataType.DATETIME)]
+        public DateTime? CreatedOn
+        {
+            get
+            {
+                return _createDate;
+            }
+            set
+            {
+                _createDate = value;
+
+                if (value != null)
+                {
+                    CreatedOnString = ((DateTime)value).ToString("dd.MM.yyyy HH:mm");
+                }
+            }
+        }
+
+        [CrmFieldDataType(CrmDataType.BOOL)]
+        public bool? HasSeen { get; set; }
+
+        public DateTime? _createDate { get; set; }
+        public string CreatedOnString { get; set; }
+    }
+
     public enum CrmDataType
     {
         UNIQUEIDENTIFIER,
@@ -1087,6 +1194,7 @@ namespace GK.Library.Utility
         ENTITYREFERENCE,
         OPTIONSETVALUE,
         MONEY,
-        DECIMAL
+        DECIMAL,
+        BOOL
     }
 }

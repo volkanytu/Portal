@@ -25,7 +25,8 @@ namespace GK.Library.Utility
         ServiceSent = 100000000,
         ServiceError = 100000001,
         LotusConfirmed = 100000002,
-        CrmConfirmed = 100000003
+        CrmConfirmed = 100000003,
+        Result_Negative = 100000004
     }
 
     public enum GiftStatus

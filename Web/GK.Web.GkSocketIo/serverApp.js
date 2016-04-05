@@ -19,8 +19,8 @@ var config = {
 }
 
 app.use('/static', express.static(__dirname));
-
-app.use('/styles', express.static(__dirname+"/styles"));
+app.use('/styles', express.static(__dirname + "/styles"));
+app.use('/images', express.static(__dirname + "/images"));
 
 app.get("/", function (req, res) {
 
@@ -83,6 +83,10 @@ io.sockets.on("connection", function (socket) {
             callBack({ "Success": false, "Result": "Off-line!" });
         }
 
+        UpdateMessagesAsSeen(socket.userId, data, function (e) {
+
+        });
+
         socket.targetUserId = data;
     });
 
@@ -93,7 +97,7 @@ io.sockets.on("connection", function (socket) {
 
                 users[socket.targetUserId].emit("new_message", data);
 
-                InsertMessageToSql(socket.userId, socket.targetUserId, data, function (e) {
+                InsertMessageToSql(socket.userId, socket.targetUserId, data, 1, function (e) {
 
                 });
 
@@ -101,10 +105,11 @@ io.sockets.on("connection", function (socket) {
 
             }
             else {
-                InsertMessageToSql(socket.userId, socket.targetUserId, data, function (e) {
+                InsertMessageToSql(socket.userId, socket.targetUserId, data, 0, function (e) {
 
                 });
 
+                users[socket.targetUserId].emit("has_message", data);
                 callBack({ "Success": true, "Result": "The user is off-line!" });
             }
         }
@@ -121,6 +126,15 @@ io.sockets.on("connection", function (socket) {
             callBack(e);
         });
     });
+
+    socket.on("get_unread_messages", function (data, callBack) {
+
+        GetUnReadMessagesFromSql(socket.userId, function (e) {
+
+            callBack(e);
+        });
+    });
+
 
     socket.on("disconnect", function (data) {
 
@@ -187,14 +201,34 @@ function GetOldMessagesFromSql(fromId, toId, callBack) {
     });
 }
 
-function InsertMessageToSql(fromId, toId, message, callBack) {
+function GetUnReadMessagesFromSql(userId, callBack) {
+
+    var sqlQuery = "";
+    sqlQuery += "SELECT";
+    sqlQuery += " TOP 20";
+    sqlQuery += " *";
+    sqlQuery += " FROM";
+    sqlQuery += " v_Messages";
+    sqlQuery += " WHERE";
+    sqlQuery += " ToId='" + userId + "'";
+    sqlQuery += " AND";
+    sqlQuery += " HasSeen=0";
+    sqlQuery += " ORDER BY";
+    sqlQuery += "	CreatedOn DESC";
+
+    ExecuteSqlQuery(sqlQuery, function (e) {
+        callBack(e);
+    });
+}
+
+function InsertMessageToSql(fromId, toId, message, hasSeen, callBack) {
     var returnObject = [];
 
     var sqlQuery = "";
     sqlQuery += "INSERT ";
     sqlQuery += "INTO ";
-    sqlQuery += " Tbl_Messages (ToId, FromId, PortalId, [Content])";
-    sqlQuery += " VALUES (@toId, @fromId, '3E5556D2-9124-E411-8DA6-005056A5340F', @message)";
+    sqlQuery += " Tbl_Messages (ToId, FromId, PortalId, [Content],HasSeen)";
+    sqlQuery += " VALUES (@toId, @fromId, '068B1218-632E-E511-80C4-000D3A216510', @message, @hasSeen)";
 
     sql.connect(config, function (err) {
         // ... error checks 
@@ -204,6 +238,7 @@ function InsertMessageToSql(fromId, toId, message, callBack) {
         request.input('toId', toId);
         request.input('fromId', fromId);
         request.input('message', message);
+        request.input('hasSeen', hasSeen);
 
         request.stream = true; // You can set streaming differently for each request 
         request.query(sqlQuery); // or request.execute(procedure); 
@@ -233,6 +268,17 @@ function InsertMessageToSql(fromId, toId, message, callBack) {
     //ExecuteSqlQuery(sqlQuery, function (e) {
     //    callBack(e);
     //});
+}
+
+function UpdateMessagesAsSeen(fromId, toId, callBack) {
+    var returnObject = [];
+
+    var sqlQuery = "";
+    sqlQuery += "UPDATE Tbl_Messages SET HasSeen=1 WHERE ToId='" + fromId + "' AND FromId='" + toId + "' AND HasSeen=0 ";
+
+    ExecuteSqlQuery(sqlQuery, function (e) {
+        callBack(e);
+    });
 }
 
 function ExecuteSqlQuery(query, callBack) {
