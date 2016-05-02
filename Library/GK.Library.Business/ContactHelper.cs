@@ -38,10 +38,10 @@ namespace GK.Library.Business
                     ent["gendercode"] = new OptionSetValue((int)contact.Gender);
                 }
 
-                if (contact.BirthDate != null)
-                {
-                    ent["birthdate"] = contact.BirthDate;
-                }
+                //if (contact.BirthDate != null)
+                //{
+                ent["birthdate"] = contact.BirthDate;
+                //}
 
                 if (!string.IsNullOrEmpty(contact.Description))
                 {
@@ -168,7 +168,7 @@ namespace GK.Library.Business
                     _contact.WorkPhone = dt.Rows[0]["Telephone1"] != DBNull.Value ? dt.Rows[0]["Telephone1"].ToString() : string.Empty;
                     _contact.IdentityNumber = dt.Rows[0]["IdentityNo"] != DBNull.Value ? dt.Rows[0]["IdentityNo"].ToString() : string.Empty;
                     if (dt.Rows[0]["GenderCode"] != DBNull.Value) { _contact.Gender = (int)dt.Rows[0]["GenderCode"]; }
-                    if (dt.Rows[0]["BirthDate"] != DBNull.Value) { _contact.BirthDate = (DateTime)dt.Rows[0]["BirthDate"]; }
+                    if (dt.Rows[0]["BirthDate"] != DBNull.Value) { _contact.BirthDate = ((DateTime)dt.Rows[0]["BirthDate"]).ToLocalTime(); }
                     _contact.Description = dt.Rows[0]["Description"] != DBNull.Value ? dt.Rows[0]["Description"].ToString() : string.Empty;
 
                     _contact.MarkContact = dt.Rows[0]["MarkContact"] != DBNull.Value ? (bool)dt.Rows[0]["MarkContact"] : false;
