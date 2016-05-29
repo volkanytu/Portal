@@ -392,6 +392,7 @@ namespace GK.Library.Utility
     {
         public EntityReference UserId { get; set; }
         public int Point { get; set; }
+        public int AllPoints { get; set; }
         public int Rank { get; set; }
     }
 

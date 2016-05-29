@@ -336,6 +336,20 @@ var EditProfileHelper = {
             }
         });
     },
+    "GetDateString": function (controlDate) {
+        var adate = new Date(parseInt(controlDate.replace("/Date(", "").replace(")/", ""), 10));
+        var day = adate.getDate().toString().length == 1 ? "0" + adate.getDate().toString() : adate.getDate().toString();
+        var month = (adate.getMonth() + 1).toString().length == 1 ? "0" + (adate.getMonth() + 1).toString() : (adate.getMonth() + 1).toString();
+        var accessTime = day + "." + month + "." + adate.getFullYear();
+        return accessTime;
+    },
+    "ToDate": function (strDate) {
+        var dateParts = strDate.split(".");
+
+        var date = new Date(dateParts[2], (dateParts[1] - 1), dateParts[0]);
+
+        return "/Date(" + date.getTime() + ")/";
+    },
     "ImageFile": null,
     "UserId": "",
     "PortalId": "",
@@ -349,6 +363,7 @@ function editProfileController($scope, $sce) {
     $.mask.definitions['~'] = "[+-]";
     $("#txtMobilePhone").mask("+90-888-8888888");
     $("#txtWorkPhone").mask("+90-888-8888888");
+    $("#txtBirthDate").mask("88.88.8888");
 
     $(parent.window).scrollTop(0);
 
@@ -412,6 +427,10 @@ function editProfileController($scope, $sce) {
                     else if ($scope.userInfo.ContactInfo.MarkContact == false)
                         $scope.userInfo.ContactInfo.MarkContact = "0";
 
+                    if ($scope.userInfo.ContactInfo.BirthDate != null || $scope.userInfo.ContactInfo.BirthDate != undefined) {
+                        $scope.userInfo.ContactInfo.BirthDateStr = EditProfileHelper.GetDateString($scope.userInfo.ContactInfo.BirthDate);
+                    }
+
                     if ($scope.userInfo.ContactInfo.CityId != null) {
 
                         var elementPos = $scope.cities.map(function (x) { return x.Id; }).indexOf($scope.userInfo.ContactInfo.CityId.Id);
@@ -473,6 +492,14 @@ function editProfileController($scope, $sce) {
     });
 
     $scope.UpdateProfile = function () {
+
+        if ($scope.userInfo.ContactInfo.BirthDateStr != null && $scope.userInfo.ContactInfo.BirthDateStr != undefined
+            && $scope.userInfo.ContactInfo.BirthDateStr != "") {
+            $scope.userInfo.ContactInfo.BirthDate = EditProfileHelper.ToDate($scope.userInfo.ContactInfo.BirthDateStr);
+        }
+        else {
+            $scope.userInfo.ContactInfo.BirthDate = null;
+        }
 
         EditProfileHelper.UpdateProfile($scope.userInfo.ContactInfo, function (e) {
 

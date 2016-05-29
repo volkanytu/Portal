@@ -423,18 +423,20 @@ namespace GK.Library.Business
                                 (
                                     SELECT
                                         *
-                                        ,DENSE_RANK() OVER (ORDER BY B.TotalPoint DESC) AS Ranking
+                                        ,DENSE_RANK() OVER (ORDER BY B.AllPoints DESC) AS Ranking
                                     FROM
                                     (
                                         SELECT
                                             A.UserId
                                             ,ISNULL(SUM(A.Point),0) AS TotalPoint
+                                            ,ISNULL(SUM(CASE WHEN A.ScoreType=100000012 THEN 0 ELSE A.Point END),0) AS AllPoints
                                         FROM
                                         (
                                             SELECT DISTINCT
                                                 u.new_userId AS UserId
                                                 ,a.new_point AS Point
                                                 ,a.new_scoreId AS AnswerId
+                                                ,a.new_scoretype AS ScoreType
                                             FROM
                                                 new_user AS u (NOLOCK)
                                                     LEFT JOIN
@@ -516,6 +518,7 @@ namespace GK.Library.Business
                         }
 
                         _cubeStatus.Point = dt.Rows[i]["TotalPoint"] != DBNull.Value ? Convert.ToInt32(dt.Rows[i]["TotalPoint"]) : 0;
+                        _cubeStatus.AllPoints = dt.Rows[i]["AllPoints"] != DBNull.Value ? Convert.ToInt32(dt.Rows[i]["AllPoints"]) : 0;
                         _cubeStatus.Rank = dt.Rows[i]["Ranking"] != DBNull.Value ? Convert.ToInt32(dt.Rows[i]["Ranking"]) : 0;
 
                         returnList.Add(_cubeStatus);

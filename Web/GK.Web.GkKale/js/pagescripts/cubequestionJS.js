@@ -83,6 +83,47 @@ var CubeQuestionHelper = {
             }
         });
     },
+    "CheckUserHasLimit": function (callBackFunction) {
+        //debugger;
+        var jData = {};
+        jData.token = CubeQuestionHelper.Token;
+
+        var jSonData = JSON.stringify(jData);
+
+        //debugger;
+        $.ajax({
+            url: CustomServiceUrl + "CrmService.svc/HasUserQuestionLimit",
+            async: true,
+            dataType: "json",
+            contentType: "application/json;",
+            type: "POST",
+            data: jSonData,
+            beforeSend: function () {
+            },
+            complete: function () {
+                parent.IndexHelper.AutoResize("ifrmContent");
+            },
+            success: function (data) {
+                //debugger;
+                if (data != null) {
+
+                    callBackFunction(data);
+
+                    return;
+                }
+                else {
+                    $("#lblErrorMain").show();
+                    $("#lblErrorMain").html("<h1 class='fg-yellow'><i class='icon-warning'></i></h1><br />" + ReturnMessage(IndexHelper.LanguageCode, "M002") + "<br />CheckUserHasLimit");
+                    return false;
+                }
+            },
+            error: function (a, b, c) {
+                debugger;
+                parent.IndexHelper.ShowAlertDialog(3, ReturnMessage(IndexHelper.LanguageCode, "M059"), "Error:" + c + "<br />CheckUserHasLimit");
+                return false;
+            }
+        });
+    },
     "StartTimer": function (countdownSecond, callbackFunction) {
         var time = countdownSecond;
         var timeStr = time.toString();
@@ -300,21 +341,47 @@ function cubeQuestionController($scope, $sce) {
         });
     });
 
-    CubeQuestionHelper.SelectQuestion(function (e) {
+    $scope.SelectQuestion = function () {
+        CubeQuestionHelper.SelectQuestion(function (e) {
+
+            $scope.$apply(function () {
+                var a = JSON.stringify(e);
+
+                if (e.Success == true) {
+
+                    $scope.questionInfo = e.ReturnObject;
+                    CubeQuestionHelper.QuestionId = e.ReturnObject.Id;
+                    CubeQuestionHelper.Point = e.ReturnObject.Point;
+
+                    CubeQuestionHelper.StartTimer(e.ReturnObject.Time, function () {
+
+                        $scope.SaveAnswer(undefined, true);
+                    });
+
+                    setTimeout(function () {
+                        parent.IndexHelper.AutoResize("ifrmContent");
+                    }, 500);
+
+                    $scope.showErrorHeader = false;
+                    $scope.showLoading = false;
+                    $scope.showMain = true;
+                }
+                else {
+                    $scope.showErrorHeader = true;
+                    $scope.showLoading = false;
+                    $scope.showMain = false;
+                    $scope.errorText = ReturnMessage(parent.IndexHelper.LanguageCode, e.Result);
+                }
+            });
+        });
+    }
+
+    CubeQuestionHelper.CheckUserHasLimit(function (e) {
 
         $scope.$apply(function () {
             var a = JSON.stringify(e);
 
             if (e.Success == true) {
-
-                $scope.questionInfo = e.ReturnObject;
-                CubeQuestionHelper.QuestionId = e.ReturnObject.Id;
-                CubeQuestionHelper.Point = e.ReturnObject.Point;
-
-                CubeQuestionHelper.StartTimer(e.ReturnObject.Time, function () {
-
-                    $scope.SaveAnswer(undefined, true);
-                });
 
                 setTimeout(function () {
                     parent.IndexHelper.AutoResize("ifrmContent");
@@ -323,6 +390,9 @@ function cubeQuestionController($scope, $sce) {
                 $scope.showErrorHeader = false;
                 $scope.showLoading = false;
                 $scope.showMain = true;
+
+                $scope.SelectQuestion();
+
             }
             else {
                 $scope.showErrorHeader = true;
@@ -331,6 +401,7 @@ function cubeQuestionController($scope, $sce) {
                 $scope.errorText = ReturnMessage(parent.IndexHelper.LanguageCode, e.Result);
             }
         });
+
     });
 
 

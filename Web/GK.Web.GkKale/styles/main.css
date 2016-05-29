@@ -194,7 +194,7 @@ a.btnAlternate{background:#4682f0;}
 .header .col{width:100%; float:none;}
 .header .grid1{}
 .header .grid2{ float:inherit; width:inherit; position:relative;}
-.header .grid a{font-family: 'open_sanssemibold'; color:#fff; font-size:14px;}
+.header .grid a{font-family: 'open_sanssemibold'; color:#fff; font-size:14px; display: inline-block; position: relative; z-index: 1;}
 .header .headerMenu{padding-left:220px;}
 .header .headerMenu ul li {display:inline-block;}
 .header .headerMenu ul li a {border-right:1px solid #31373c; padding:23px 20px; display:inline-block; -webkit-transition: color .25s ease-out; -moz-transition: color .25s ease-out; -o-transition: color .25s ease-out; transition: color .25s ease-out;}
@@ -647,6 +647,7 @@ position:relative; top:2px;}
 
 /*popup user*/
 .popup .popupUsr{padding-bottom:20px; border-bottom:1px solid #eff2f3;}
+.popup .popupUsr .prfImg span.avatar-bg{display:block; width:100px; height:100px; background-size:100%;} 
 .popup .popupUsr .prfImg{float:left; width:165px;}
 .popup .popupUsr .prfImg img{-moz-border-radius:5px; -webkit-border-radius:5px; border-radius:5px;}
 .popup .popupUsr .prfDetail{margin-left:165px; padding-left:20px; padding-top:2px; padding-right:5px;}
@@ -803,6 +804,7 @@ top:2px;}
 }
 
 @media only screen and (max-width:780px) {
+.header .grid a{width: auto; height: auto;}
 .ntfPopup{position:fixed; left:0; right:0; top:20%; margin:0 auto; width:95%;}
 
 /*İframe Holder*/
