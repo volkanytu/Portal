@@ -24,11 +24,7 @@ var DiscoveryFormHelper = {
         //debugger;
         var jData = {};
 
-        var visitDate = $('#txtDate').datepicker("getDate");
-
-        if (visitDate != null) {
-            data.VisitDate = "/Date(" + visitDate.getTime() + ")/";
-        }
+        var visitDate = null;
 
         data.UserId = {};
         data.UserId.Id = DiscoveryFormHelper.UserId;
@@ -217,11 +213,6 @@ function discoveryController($scope, $sce) {
 
     $.mask.definitions['~'] = "[+-]";
     $("#txtPhoneNumber").mask("+90-888-8888888");
-
-    $('#txtDate').datepicker({
-        language: 'tr',
-        autoclose: true
-    });
 
     $(parent.window).scrollTop(0);
 
