@@ -461,5 +461,10 @@ namespace GK.WebServices.REST.CrmService
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json
             , UriTemplate = "/GetUnReadMessages")]
         MsCrmResultObj<List<Message>> GetUnReadMessages(string token, string requestId);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json
+            , UriTemplate = "/RegisterUser")]
+        MsCrmResult RegisterUser(Contact contact);
     }
 }

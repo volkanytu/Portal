@@ -97,5 +97,11 @@ namespace GK.Library.Utility
         {
             get { return RegistryHelper.Get.Value("DefaultPortalId"); }
         }
+
+        public static string IsSendMailActive
+        {
+            get { return RegistryHelper.Get.Value("IsSendMailActive"); }
+        }
+
     }
 }

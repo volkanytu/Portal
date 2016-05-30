@@ -836,6 +836,135 @@ namespace GK.WebServices.REST.CrmService
             return returnValue;
         }
 
+        public MsCrmResult RegisterUser(Contact contact)
+        {
+            MsCrmResult returnValue = new MsCrmResult();
+
+            #region | VALIDATION |
+
+            if (string.IsNullOrWhiteSpace(contact.FirstName))
+            {
+                returnValue.Result = "Ad alanı boş olamaz";
+                return returnValue;
+            }
+
+            if (string.IsNullOrWhiteSpace(contact.LastName))
+            {
+                returnValue.Result = "Soyadı alanı boş olamaz";
+                return returnValue;
+            }
+
+            if (string.IsNullOrWhiteSpace(contact.MobilePhone))
+            {
+                returnValue.Result = "Telefon Numarası alanı boş olamaz";
+                return returnValue;
+            }
+            else
+            {
+                TelephoneNumber telNo = ValidationHelper.CheckTelephoneNumber(contact.MobilePhone);
+
+                if (!telNo.isFormatOK)
+                {
+                    returnValue.Success = false;
+                    returnValue.Result = "Cep telefonu formatı hatalıdır.";
+
+                    return returnValue;
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(contact.EmailAddress))
+            {
+                returnValue.Result = "Email alanı boş olamaz";
+                return returnValue;
+            }
+
+            if (contact.CityId == null || contact.CityId.Id == Guid.Empty)
+            {
+                returnValue.Result = "İl alanı boş olamaz";
+                return returnValue;
+            }
+
+            if (contact.TownId == null || contact.TownId.Id == Guid.Empty)
+            {
+                returnValue.Result = "İlçe alanı boş olamaz";
+                return returnValue;
+            }
+
+            if (string.IsNullOrWhiteSpace(contact.AddressDetail))
+            {
+                returnValue.Result = "Adres detayı alanı boş olamaz.";
+                return returnValue;
+            }
+
+            #endregion
+
+
+            try
+            {
+                IOrganizationService service = MSCRM.GetOrgService(true);
+
+                List<Entity> toPartyList = new List<Entity>();
+                List<Entity> fromPartyList = new List<Entity>();
+
+                EntityReference erKamil = new EntityReference("contact", new Guid("D30F27E1-AC2F-E511-80C4-000D3A216510"));
+                EntityReference erTest = new EntityReference("contact", new Guid("5B65085C-662E-E511-80C4-000D3A216510"));
+
+                string subject = "Yeni Üyelik Başvurusu";
+
+                StringBuilder sb = new StringBuilder();
+
+                sb.AppendLine("Merhabalar,</br>");
+                sb.AppendLine("Yeni üyelik başvurusu bilgileri aşağıdaki gibidir: </br></br>");
+
+                sb.AppendLine("<strong><u>Kişisel Bilgiler</u></strong></br>");
+                sb.AppendLine("<strong>Ad:</strong>" + contact.FirstName + "</br>");
+                sb.AppendLine("<strong>Soyad:</strong>" + contact.LastName + "</br>");
+                sb.AppendLine("<strong>Firma Adı:</strong>" + contact.Title + "</br>");
+                sb.AppendLine("<strong>Cinsiyet:</strong>" + (contact.Gender != null ? (contact.Gender == 1 ? "Bay" : "Bayan") : "---") + "</br>");
+                sb.AppendLine("<strong>Cep Telefonu:</strong>" + contact.MobilePhone + "</br>");
+                sb.AppendLine("<strong>Email:</strong>" + contact.EmailAddress + "</br></br>");
+
+                sb.AppendLine("<strong><u>Adres Bilgileri</u></strong></br>");
+                sb.AppendLine("<strong>İl:</strong>" + contact.CityId.Name + "</br>");
+                sb.AppendLine("<strong>İlçe:</strong>" + contact.TownId.Name + "</br>");
+                sb.AppendLine("<strong>Adres Detayı:</strong>" + contact.AddressDetail + "</br>");
+
+                sb.AppendLine("</br></br></br>");
+                sb.AppendLine("İyi çalışmalar...");
+
+
+                Entity fromParty = new Entity("activityparty");
+                fromParty["partyid"] = new EntityReference("systemuser", new Guid(Globals.AdminId));
+
+                fromPartyList.Add(fromParty);
+
+                Entity toParty1 = new Entity("activityparty");
+                toParty1["partyid"] = erKamil;
+
+                Entity toParty2 = new Entity("activityparty");
+                toParty2["partyid"] = erTest;
+
+                Entity toParty3 = new Entity("activityparty");
+                toParty3["addressused"] = "uye@kaleanahtarcilarkulubu.com.tr";
+
+                toPartyList.Add(toParty1);
+                toPartyList.Add(toParty2);
+                toPartyList.Add(toParty3);
+
+                GeneralHelper.SendMail(Guid.Empty, string.Empty, fromPartyList.ToArray(), toPartyList.ToArray(), subject, sb.ToString(), service);
+
+                returnValue.Success = true;
+
+            }
+            catch (Exception ex)
+            {
+
+                returnValue.Result = ex.Message;
+            }
+
+            return returnValue;
+        }
+
         #endregion
 
         #region | GRAFFITI OPERATIONS |
