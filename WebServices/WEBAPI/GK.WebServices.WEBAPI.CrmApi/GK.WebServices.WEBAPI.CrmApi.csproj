@@ -233,6 +233,13 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\..\Library\Data\GK.Library.Data.ElasticDataLayer\GK.Library.Data.ElasticDataLayer.csproj">
       <Project>{57907362-034d-4568-afaf-e3921f3620e1}</Project>
       <Name>GK.Library.Data.ElasticDataLayer</Name>
@@ -285,13 +292,6 @@
       <Project>{fedcb7f2-0afd-476f-8823-f78061d7e553}</Project>
       <Name>GK.Library.Utility</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

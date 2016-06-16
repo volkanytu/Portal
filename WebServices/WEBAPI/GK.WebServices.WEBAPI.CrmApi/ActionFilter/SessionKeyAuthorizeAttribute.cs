@@ -27,7 +27,9 @@ namespace GK.WebServices.WEBAPI.CrmApi.ActionFilter
 
         protected override bool IsAuthorized(HttpActionContext actionContext)
         {
-            if (actionContext.ControllerContext.Controller.GetType() == typeof(EducationController))
+            if (actionContext.ControllerContext.Controller.GetType() == typeof(EducationController)
+                ||
+                actionContext.ControllerContext.Controller.GetType() == typeof(PortalController))
             {
                 actionContext.RequestContext.RouteData.Values.Add("test", new Education() { Name = "VOLKAN" });
                 return true;

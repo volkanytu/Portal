@@ -169,10 +169,6 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Library\Data\VNET.Library.Data.Interfaces\GK.Library.Data.Interfaces.csproj">
-      <Project>{86f2a605-41b6-4158-8c44-b49410ab4c70}</Project>
-      <Name>GK.Library.Data.Interfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Library\Data\VNET.Library.Data.SqlDataLayer\GK.Library.Data.SqlDataLayer.csproj">
       <Project>{daff6254-fe59-4f7f-a4c0-496856cc9807}</Project>
       <Name>GK.Library.Data.SqlDataLayer</Name>
@@ -181,25 +177,9 @@
       <Project>{091e15b6-8b10-4814-9eb3-d987bb27caed}</Project>
       <Name>GK.Library.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Library\GK.Library.Common\GK.Library.Common.csproj">
-      <Project>{4f2b6685-b3e2-4c16-a754-3994d9719f5d}</Project>
-      <Name>GK.Library.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Library\GK.Library.ConfigManager\GK.Library.ConfigManager.csproj">
-      <Project>{8e49d0d3-937c-4aad-83e1-4a2062cdeed2}</Project>
-      <Name>GK.Library.ConfigManager</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Library\GK.Library.Constants\GK.Library.Constants.csproj">
-      <Project>{efdfbf99-5350-4864-bdd2-5e215f1d098f}</Project>
-      <Name>GK.Library.Constants</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Library\GK.Library.Entities\GK.Library.Entities.csproj">
       <Project>{56d879b6-b233-4dc0-ad5a-924d406745db}</Project>
       <Name>GK.Library.Entities</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Library\GK.Library.Facade\GK.Library.Facade.csproj">
-      <Project>{35652810-0394-47b2-a8b1-b9112cc2c2d7}</Project>
-      <Name>GK.Library.Facade</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Library\GK.Library.Utility\GK.Library.Utility.csproj">
       <Project>{fedcb7f2-0afd-476f-8823-f78061d7e553}</Project>

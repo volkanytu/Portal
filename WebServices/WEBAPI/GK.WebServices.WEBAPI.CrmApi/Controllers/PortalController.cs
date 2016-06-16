@@ -1,5 +1,6 @@
 ﻿using GK.Library.Entities.CrmEntities;
 using GK.Library.Entities.CustomEntities;
+using GK.Library.Facade.Interfaces;
 using GK.WebServices.WEBAPI.CrmApi.MockData;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,12 @@ namespace GK.WebServices.WEBAPI.CrmApi.Controllers
     public class PortalController : ApiController, IBaseController<Portal>
     {
         private PortalMock _portalMock;
+        private IPortalFacade _portalFacade;
 
-        public PortalController()
+        public PortalController(IPortalFacade portalFacade)
         {
+            _portalFacade = portalFacade;
+
             _portalMock = new PortalMock();
         }
 
@@ -26,6 +30,8 @@ namespace GK.WebServices.WEBAPI.CrmApi.Controllers
 
         public Portal Get(int id)
         {
+            _portalFacade.Get(Guid.NewGuid());
+
             return _portalMock.GetPortal();
         }
 

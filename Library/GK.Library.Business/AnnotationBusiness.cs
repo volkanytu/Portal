@@ -10,14 +10,15 @@ using System.Threading.Tasks;
 
 namespace GK.Library.Business
 {
-    public class AnnotationBusiness : IAnnotationBusiness
+    public class AnnotationBusiness : BaseBusiness<Annotation>, IAnnotationBusiness
     {
-        private BaseDao<Annotation> _baseDao;
+        private IBaseDao<Annotation> _baseAnnotationDao;
         private IAnnotationDao _annotationDao;
 
-        public AnnotationBusiness(BaseDao<Annotation> baseDao, IAnnotationDao annotationDao)
+        public AnnotationBusiness(IBaseDao<Annotation> baseAnnotationDao, IAnnotationDao annotationDao)
+            : base(baseAnnotationDao)
         {
-            _baseDao = baseDao;
+            _baseAnnotationDao = baseAnnotationDao;
             _annotationDao = annotationDao;
         }
 
