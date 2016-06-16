@@ -187,7 +187,7 @@
                         <div class="survey">
                             <h4>Ürün Etiket Kodu Girişi</h4>
                             <div>
-                                <input type="text" placeholder="Kodu giriniz" ng-model="pointCode" id="txtCode" />
+                                <input type="text" placeholder="Kodu giriniz" ng-model="pointCode" id="txtCode" ng-keypress="UseCode($event)" />
                                 <a href="javascript:void(0);" class="btnCodeSend" ng-click="UseCode();"></a>
                             </div>
                             <br />
