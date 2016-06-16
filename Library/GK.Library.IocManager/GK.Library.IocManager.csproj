@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AC652341-1183-4452-89A7-019790177D37}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GK.Library.IocManager</RootNamespace>
+    <AssemblyName>GK.Library.IocManager</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\Assemblies\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Extras.DynamicProxy2">
+      <HintPath>..\Assemblies\Autofac.Extras.DynamicProxy2.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi">
+      <HintPath>..\Assemblies\Autofac.Integration.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\Assemblies\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Nest">
+      <HintPath>..\Assemblies\Nest.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IocContainerBuilder.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Data\GK.Library.Data.ElasticDataLayer\GK.Library.Data.ElasticDataLayer.csproj">
+      <Project>{57907362-034d-4568-afaf-e3921f3620e1}</Project>
+      <Name>GK.Library.Data.ElasticDataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\VNET.Library.Data.Interfaces\GK.Library.Data.Interfaces.csproj">
+      <Project>{86f2a605-41b6-4158-8c44-b49410ab4c70}</Project>
+      <Name>GK.Library.Data.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\VNET.Library.Data.SqlDataLayer\GK.Library.Data.SqlDataLayer.csproj">
+      <Project>{daff6254-fe59-4f7f-a4c0-496856cc9807}</Project>
+      <Name>GK.Library.Data.SqlDataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GK.Library.Business\GK.Library.Business.csproj">
+      <Project>{091e15b6-8b10-4814-9eb3-d987bb27caed}</Project>
+      <Name>GK.Library.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GK.Library.Common\GK.Library.Common.csproj">
+      <Project>{4f2b6685-b3e2-4c16-a754-3994d9719f5d}</Project>
+      <Name>GK.Library.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GK.Library.ConfigManager\GK.Library.ConfigManager.csproj">
+      <Project>{8e49d0d3-937c-4aad-83e1-4a2062cdeed2}</Project>
+      <Name>GK.Library.ConfigManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GK.Library.Constants\GK.Library.Constants.csproj">
+      <Project>{efdfbf99-5350-4864-bdd2-5e215f1d098f}</Project>
+      <Name>GK.Library.Constants</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GK.Library.Entities\GK.Library.Entities.csproj">
+      <Project>{56d879b6-b233-4dc0-ad5a-924d406745db}</Project>
+      <Name>GK.Library.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GK.Library.Facade\GK.Library.Facade.csproj">
+      <Project>{35652810-0394-47b2-a8b1-b9112cc2c2d7}</Project>
+      <Name>GK.Library.Facade</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GK.Library.Interceptor\GK.Library.Interceptor.csproj">
+      <Project>{71cfa1a6-4108-4e90-af28-732cc0675740}</Project>
+      <Name>GK.Library.Interceptor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GK.Library.LogManager\GK.Library.LogManager.csproj">
+      <Project>{4df8f114-f472-4b61-a6f8-295c5d949b0d}</Project>
+      <Name>GK.Library.LogManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GK.Library.Utility\GK.Library.Utility.csproj">
+      <Project>{fedcb7f2-0afd-476f-8823-f78061d7e553}</Project>
+      <Name>GK.Library.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
