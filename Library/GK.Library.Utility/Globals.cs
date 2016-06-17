@@ -103,16 +103,5 @@ namespace GK.Library.Utility
             get { return RegistryHelper.Get.Value("IsSendMailActive"); }
         }
 
-        public static string ElasticServerUrl
-        {
-            get { return RegistryHelper.Get.Value("ElasticServerUrl"); }
-        }
-
-        public static string ElasticLogIndexName
-        {
-            get { return RegistryHelper.Get.Value("ElasticLogIndexName"); }
-        }       
-        
-
     }
 }
