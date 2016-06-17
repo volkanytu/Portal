@@ -17,6 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assemblies", "Assemblies", 
 		Library\Assemblies\CsvParser.dll = Library\Assemblies\CsvParser.dll
 		Library\Assemblies\Elasticsearch.Net.dll = Library\Assemblies\Elasticsearch.Net.dll
 		Library\Assemblies\microsoft.crm.sdk.proxy.dll = Library\Assemblies\microsoft.crm.sdk.proxy.dll
+		Library\Assemblies\Microsoft.Xrm.Client.dll = Library\Assemblies\Microsoft.Xrm.Client.dll
 		Library\Assemblies\microsoft.xrm.sdk.dll = Library\Assemblies\microsoft.xrm.sdk.dll
 		Library\Assemblies\Nest.dll = Library\Assemblies\Nest.dll
 		Library\Assemblies\Newtonsoft.Json.dll = Library\Assemblies\Newtonsoft.Json.dll
