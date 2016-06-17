@@ -32,7 +32,7 @@ namespace GK.Library.Data.SqlDataLayer
             };
 
             //TODO: Get By Object Id Query
-            DataTable dt = _sqlAccess.GetDataTable("", parameters);
+            DataTable dt = _sqlAccess.GetDataTable(AnnotationQueries.GET_LIST_QUERY_BY_OBJECT_ID, parameters);
 
             return dt.ToList<Annotation>();
         }

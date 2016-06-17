@@ -16,8 +16,7 @@ namespace GK.Library.Constants.SqlQueries
                                                             ,DocumentBody
                                                             ,FileName
                                                             ,MimeType
-                                                            ,NoteText
-	                                                        ,{0} ", ENTITY_BASE_SELECT);
+                                                            ,NoteText ");
 
         public static string GET_QUERY = string.Format(@"SELECT
 	                                                           {0}
@@ -32,5 +31,12 @@ namespace GK.Library.Constants.SqlQueries
 	                                                            Annotation (NOLOCK)
                                                             WHERE
 	                                                            statecode=0", BASE_SELECT);
+
+        public static string GET_LIST_QUERY_BY_OBJECT_ID = string.Format(@"SELECT
+	                                                                           {0}
+                                                                            FROM
+	                                                                            Annotation (NOLOCK)
+                                                                            WHERE
+	                                                                            ObjectId=@objectId", BASE_SELECT);
     }
 }
