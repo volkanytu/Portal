@@ -1,4 +1,5 @@
-﻿using GK.Library.Entities.CrmEntities;
+﻿using GK.Library.ConfigManager.Interfaces;
+using GK.Library.Entities.CrmEntities;
 using GK.Library.Entities.CustomEntities;
 using GK.Library.Facade.Interfaces;
 using GK.WebServices.WEBAPI.CrmApi.MockData;
@@ -15,10 +16,12 @@ namespace GK.WebServices.WEBAPI.CrmApi.Controllers
     {
         private PortalMock _portalMock;
         private IPortalFacade _portalFacade;
+        private IConfigs _configs;
 
-        public PortalController(IPortalFacade portalFacade)
+        public PortalController(IPortalFacade portalFacade, IConfigs configs)
         {
             _portalFacade = portalFacade;
+            _configs = configs;
 
             _portalMock = new PortalMock();
         }
@@ -30,7 +33,7 @@ namespace GK.WebServices.WEBAPI.CrmApi.Controllers
 
         public Portal Get(Guid id)
         {
-            _portalFacade.Get(Guid.NewGuid());
+            _portalFacade.Get(id);
 
             return _portalMock.GetPortal();
         }

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using GK.Library.IocManager;
 using System.Web.Http;
 using System.Reflection;
+using GK.Library.ConfigManager.Interfaces;
 
 namespace GK.WebServices.WEBAPI.CrmApi
 {
@@ -16,6 +17,8 @@ namespace GK.WebServices.WEBAPI.CrmApi
         public static void BuildIocContainer()
         {
             var builder = new ContainerBuilder();
+
+            builder = IocContainerBuilder.GetIConfigs(builder);
 
             builder = IocContainerBuilder.GetCrmApiIocContainer(builder, APPLICATION_NAME);
 

@@ -1,5 +1,6 @@
 ﻿using GK.Library.Business;
 using GK.Library.Business.Interfaces;
+using GK.Library.ConfigManager.Interfaces;
 using GK.Library.Entities.CrmEntities;
 using GK.Library.Entities.CustomEntities;
 using GK.WebServices.WEBAPI.CrmApi.MockData;
@@ -18,16 +19,21 @@ namespace GK.WebServices.WEBAPI.CrmApi.Controllers
     {
         private EducationMock _educationMock;
         private IBaseBusiness<Portal> _basePortalBusiness;
+        private IConfigs _configs;
 
-        public EducationController(IBaseBusiness<Portal> basePortalBusiness)
+        public EducationController(IBaseBusiness<Portal> basePortalBusiness, IConfigs configs)
         {
             _basePortalBusiness = basePortalBusiness;
+            _configs = configs;
+
+            _educationMock = new EducationMock();
         }
 
         [HttpGet]
         public List<Education> Get()
         {
-            _basePortalBusiness.Get(1, 2);
+            var a = _configs.CRM_ADMIN_ID;
+            //_basePortalBusiness.Get(1, 2);
 
             Education test = (Education)RequestContext.RouteData.Values["Test"];
             return _educationMock.GetEducationList();

@@ -9,7 +9,7 @@ namespace GK.Library.ConfigManager
 {
     public abstract class ConfigManager
     {
-        private const int CACHE_INTERVAL = 10 * 1000;
+        private const int CACHE_INTERVAL = 30 * 1000;
         private System.Timers.Timer _timer;
 
         private ReaderWriterLockSlim cacheLock = new ReaderWriterLockSlim();

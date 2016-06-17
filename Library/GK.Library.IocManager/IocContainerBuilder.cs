@@ -22,14 +22,42 @@ using Autofac.Extras.DynamicProxy2;
 using GK.Library.Business.Interfaces;
 using GK.Library.Facade.Interfaces;
 using GK.Library.Facade;
+using GK.Library.ConfigManager.Interfaces;
+using GK.Library.ConfigManager;
 
 namespace GK.Library.IocManager
 {
     public class IocContainerBuilder
     {
+        private const string CONFIGDB_SQL_ACCESS = "CONFIGDB_SQL_ACCESS";
+        private const string CONFIGDB_SQL_ENTITY_ACCESS = "CONFIGDB_SQL_ENTITY_ACCESS";
         private const string SQL_ACCESS_CRM = "SQL_ACCESS_CRM";
         private const string ELASTIC_LOG = "ELASTIC_LOG";
         private const string SQL_LOG = "SQL_LOG";
+
+        public static ContainerBuilder GetIConfigs(ContainerBuilder builder)
+        {
+            builder.Register<ISqlAccess>(c => new SqlAccess("Data Source=84.51.31.56; Initial Catalog=DO_MSCRM; User Id=CrmSqlUser; Password=CrmSqlPass;Max Pool Size = 10000;Pooling = True"))
+                .Named<ISqlAccess>(CONFIGDB_SQL_ACCESS)
+                .InstancePerDependency();
+
+            builder.Register<ISqlEntityAccess>(c => new SqlEntityAccess(c.ResolveNamed<ISqlAccess>(CONFIGDB_SQL_ACCESS)))
+                .Named<ISqlEntityAccess>(CONFIGDB_SQL_ENTITY_ACCESS)
+               .InstancePerDependency();
+
+            builder.Register<IDBConfigDao>(c => new DBConfigDao(c.ResolveNamed<ISqlEntityAccess>(CONFIGDB_SQL_ENTITY_ACCESS))).InstancePerDependency();
+
+            builder.Register<IConfigManager>(c => new DBConfigManager(c.Resolve<IDBConfigDao>())).InstancePerDependency();
+
+            builder.Register<IConfigs>(c => new Configs(c.Resolve<IConfigManager>())).InstancePerDependency();
+
+            //ISqlAccess sqlAccess = new SqlAccess("Data Source=84.51.31.56; Initial Catalog=DO_MSCRM; User Id=CrmSqlUser; Password=CrmSqlPass;Max Pool Size = 10000;Pooling = True");
+            //ISqlEntityAccess sqlEntityAccess = new SqlEntityAccess(sqlAccess);
+            //IDBConfigDao configDao = new DBConfigDao(sqlEntityAccess);
+            //IConfigManager configManager = new DBConfigManager(configDao);
+            //IConfigs configs = new Configs(configManager);
+            return builder;
+        }
 
         public static ContainerBuilder GetInterceptorIocContainer(ContainerBuilder builder)
         {
@@ -43,9 +71,9 @@ namespace GK.Library.IocManager
         {
             #region | DB ACCESS && LOG |
 
-            builder.Register<ISqlAccess>(c => new SqlAccess(Globals.ConnectionString)).Named<ISqlAccess>(SQL_ACCESS_CRM)
+            builder.Register<ISqlAccess>(c => new SqlAccess(c.Resolve<IConfigs>().CRM_DB_CONNECTION_STRING)).Named<ISqlAccess>(SQL_ACCESS_CRM)
                 .InstancePerRequest();
-            builder.Register<IElasticAccess>(c => new ElasticAccess(Globals.ElasticServerUrl, Globals.ElasticLogIndexName))
+            builder.Register<IElasticAccess>(c => new ElasticAccess(c.Resolve<IConfigs>().ELASTIC_SERVER_URL, c.Resolve<IConfigs>().ELASTIC_CRM_INDEX))
                 .InstancePerRequest();
 
             builder.Register<ILogKeyClients>(c => new LogKeyClients())

@@ -10,10 +10,10 @@ namespace GK.Library.Constants.SqlQueries
         #region | GET_CONFIG_VARS |
 
         public const string GET_CONFIG_VARS = @"SELECT
-	                                                v.[Key]
-	                                                ,v.Value AS [Value]
+	                                                cnf.new_name AS [Key]
+	                                                ,cnf.new_value AS [Value]
                                                 FROM
-                                                t_Config AS v (NOLOCK)";
+                                                new_config AS cnf (NOLOCK)";
 
         #endregion
     }
