@@ -12,10 +12,10 @@ namespace GK.WebServices.WEBAPI.CrmApi.Controllers
     public interface IBaseController<TEntity>
     {
         List<TEntity> Get();
-        TEntity Get(int id);
+        TEntity Get(Guid id);
         Paged<TEntity> Get(int pageSize, int page);
         string Create(TEntity entity);
         bool Update(TEntity entity);
-        bool Delete(int id);
+        bool Delete(Guid id);
     }
 }

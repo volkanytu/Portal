@@ -24,7 +24,7 @@ namespace GK.WebServices.WEBAPI.CrmApi.Controllers
             throw new NotImplementedException();
         }
 
-        public User Get(int id)
+        public User Get(Guid id)
         {
             throw new NotImplementedException();
         }
@@ -44,7 +44,7 @@ namespace GK.WebServices.WEBAPI.CrmApi.Controllers
             throw new NotImplementedException();
         }
 
-        public bool Delete(int id)
+        public bool Delete(Guid id)
         {
             throw new NotImplementedException();
         }

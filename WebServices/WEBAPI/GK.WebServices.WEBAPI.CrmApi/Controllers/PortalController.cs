@@ -28,7 +28,7 @@ namespace GK.WebServices.WEBAPI.CrmApi.Controllers
             return _portalMock.GetPortalList();
         }
 
-        public Portal Get(int id)
+        public Portal Get(Guid id)
         {
             _portalFacade.Get(Guid.NewGuid());
 
@@ -50,7 +50,7 @@ namespace GK.WebServices.WEBAPI.CrmApi.Controllers
             throw new NotImplementedException();
         }
 
-        public bool Delete(int id)
+        public bool Delete(Guid id)
         {
             throw new NotImplementedException();
         }

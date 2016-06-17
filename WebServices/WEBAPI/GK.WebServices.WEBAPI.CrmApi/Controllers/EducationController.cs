@@ -46,7 +46,7 @@ namespace GK.WebServices.WEBAPI.CrmApi.Controllers
         }
 
         [HttpGet]
-        public Education Get(int id)
+        public Education Get(Guid id)
         {
             return _educationMock.GetEducationList().FirstOrDefault();
         }
@@ -64,7 +64,7 @@ namespace GK.WebServices.WEBAPI.CrmApi.Controllers
         }
 
         [HttpDelete]
-        public bool Delete(int id)
+        public bool Delete(Guid id)
         {
             return true;
         }
