@@ -20,8 +20,6 @@ using GK.Library.Interceptor;
 using Castle.DynamicProxy;
 using Autofac.Extras.DynamicProxy2;
 using GK.Library.Business.Interfaces;
-using GK.Library.Facade.Interfaces;
-using GK.Library.Facade;
 
 namespace GK.Library.IocManager
 {
@@ -101,17 +99,17 @@ namespace GK.Library.IocManager
             .EnableInterfaceInterceptors()
             .InterceptedBy(typeof(CustomExceptionInterceptor));
 
-            builder.Register<IBaseDao<Annotation>>(c => new AnnotationDao(c.Resolve<IMsCrmAccess>()
-              , c.ResolveNamed<ISqlAccess>(SQL_ACCESS_CRM)))
-            .InstancePerRequest()
-            .EnableInterfaceInterceptors()
-            .InterceptedBy(typeof(CustomExceptionInterceptor));
+            //builder.RegisterType<BaseDao<SessionData>>()
+            //    .EnableClassInterceptors()
+            //    .InterceptedBy(typeof(CustomExceptionInterceptor));
 
-            builder.Register<IAnnotationDao>(c => new AnnotationDao(c.Resolve<IMsCrmAccess>()
-              , c.ResolveNamed<ISqlAccess>(SQL_ACCESS_CRM)))
-            .InstancePerRequest()
-            .EnableInterfaceInterceptors()
-            .InterceptedBy(typeof(CustomExceptionInterceptor));
+            //builder.RegisterType<BaseDao<User>>()
+            //    .EnableClassInterceptors()
+            //    .InterceptedBy(typeof(CustomExceptionInterceptor));
+
+            //builder.RegisterType<BaseDao<Portal>>()
+            //    .EnableClassInterceptors()
+            //    .InterceptedBy(typeof(CustomExceptionInterceptor));
 
             #endregion
 
@@ -136,25 +134,10 @@ namespace GK.Library.IocManager
             .EnableInterfaceInterceptors()
             .InterceptedBy(typeof(CustomExceptionInterceptor));
 
-            builder.Register<IBaseBusiness<Annotation>>(c => new AnnotationBusiness(c.Resolve<IBaseDao<Annotation>>()
-                , c.Resolve<IAnnotationDao>()))
-            .InstancePerRequest()
-            .EnableInterfaceInterceptors()
-            .InterceptedBy(typeof(CustomExceptionInterceptor));
-
-            builder.Register<IAnnotationBusiness>(c => new AnnotationBusiness(c.Resolve<IBaseDao<Annotation>>()
-                , c.Resolve<IAnnotationDao>()))
-            .InstancePerRequest()
-            .EnableInterfaceInterceptors()
-            .InterceptedBy(typeof(CustomExceptionInterceptor));
             #endregion
 
             #region | FACADE LIBRARY |
-            builder.Register<IPortalFacade>(c => new PortalFacade(c.Resolve<IBaseBusiness<Portal>>()
-               , c.Resolve<IAnnotationBusiness>()))
-           .InstancePerRequest()
-           .EnableInterfaceInterceptors()
-           .InterceptedBy(typeof(CustomExceptionInterceptor));
+
             #endregion
 
 

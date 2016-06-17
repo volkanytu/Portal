@@ -107,10 +107,6 @@
       <Project>{daff6254-fe59-4f7f-a4c0-496856cc9807}</Project>
       <Name>GK.Library.Data.SqlDataLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GK.Library.Constants\GK.Library.Constants.csproj">
-      <Project>{efdfbf99-5350-4864-bdd2-5e215f1d098f}</Project>
-      <Name>GK.Library.Constants</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GK.Library.Entities\GK.Library.Entities.csproj">
       <Project>{56d879b6-b233-4dc0-ad5a-924d406745db}</Project>
       <Name>GK.Library.Entities</Name>
@@ -120,6 +116,7 @@
       <Name>GK.Library.Utility</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
