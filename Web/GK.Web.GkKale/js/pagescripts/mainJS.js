@@ -1538,42 +1538,44 @@ function mainController($scope) {
 
     $scope.codeMessage = null;
 
-    $scope.UseCode = function () {
-            var code = $scope.pointCode;
+    $scope.UseCode = function ($keyEvent) {
+        if ($keyEvent == null || $keyEvent.which == 13) {
+        var code = $scope.pointCode;
 
-            $scope.showCodeMessage = false;
-            $scope.codeMessage = null;
+        $scope.showCodeMessage = false;
+        $scope.codeMessage = null;
 
-            if (code != null && code != "" && code != undefined) {
+        if (code != null && code != "" && code != undefined) {
 
-                IndexHelper.UsePointCode(code, function (e) {
-                    $scope.$apply(function () {
-                        if (e.Success == true) {
+            IndexHelper.UsePointCode(code, function (e) {
+                $scope.$apply(function () {
+                    if (e.Success == true) {
 
-                            IndexHelper.ToastrShow("success", e.Result, "Başarılı");
+                        IndexHelper.ToastrShow("success", e.Result, "Başarılı");
 
 
-                            $scope.pointCode = null;
+                        $scope.pointCode = null;
 
-                            $scope.showCodeMessage = true;
-                            $scope.codeMessage = e.Result;
-                            //document.location.reload();
+                        $scope.showCodeMessage = true;
+                        $scope.codeMessage = e.Result;
+                        //document.location.reload();
 
-                        }
-                        else {
-                            $scope.showCodeMessage = true;
-                            $scope.codeMessage = e.Result;
+                    }
+                    else {
+                        $scope.showCodeMessage = true;
+                        $scope.codeMessage = e.Result;
 
-                            IndexHelper.ToastrShow("error", e.Result, "Hata");
-                        }
-                    });
+                        IndexHelper.ToastrShow("error", e.Result, "Hata");
+                    }
                 });
-            }
-            else {
-                $scope.showCodeMessage = true;
-                $scope.codeMessage = "Lütfen bir kod giriniz.";
-                IndexHelper.ToastrShow("warning", "Lütfen bir kod giriniz.", "Eksik Kod");
-            }
+            });
+        }
+        else {
+            $scope.showCodeMessage = true;
+            $scope.codeMessage = "Lütfen bir kod giriniz.";
+            IndexHelper.ToastrShow("warning", "Lütfen bir kod giriniz.", "Eksik Kod");
+        }
+        }
     };
 
     $scope.EditUser = function (userId) {
