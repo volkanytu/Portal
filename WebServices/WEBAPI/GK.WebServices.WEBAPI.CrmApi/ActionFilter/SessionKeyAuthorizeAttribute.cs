@@ -29,7 +29,9 @@ namespace GK.WebServices.WEBAPI.CrmApi.ActionFilter
         {
             if (actionContext.ControllerContext.Controller.GetType() == typeof(EducationController)
                 ||
-                actionContext.ControllerContext.Controller.GetType() == typeof(PortalController))
+                actionContext.ControllerContext.Controller.GetType() == typeof(PortalController)
+                ||
+                actionContext.ControllerContext.Controller.GetType() == typeof(UserController))
             {
                 actionContext.RequestContext.RouteData.Values.Add("test", new Education() { Name = "VOLKAN" });
                 return true;

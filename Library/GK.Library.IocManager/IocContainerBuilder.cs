@@ -98,7 +98,7 @@ namespace GK.Library.IocManager
             builder.Register<ILogManager>(c => new Logger(c.Resolve<ILogFactory>(), c.Resolve<ILogKeyClients>()))
                 .InstancePerRequest();
 
-            builder.Register<IMsCrmAccess>(c => new MsCrmAccess("", ""))
+            builder.Register<IMsCrmAccess>(c => new MsCrmAccess(c.Resolve<IConfigs>().CRM_SVC_CONNECTION_STRING, c.Resolve<IConfigs>().CRM_SVC_IS_CONNECTION_STRING))
                 .InstancePerRequest();
 
             #endregion
@@ -157,6 +157,11 @@ namespace GK.Library.IocManager
             .EnableInterfaceInterceptors()
             .InterceptedBy(typeof(CustomExceptionInterceptor));
 
+            builder.Register<IBaseBusiness<SessionData>>(c => new SessionBusiness(c.Resolve<IBaseDao<SessionData>>()))
+            .InstancePerRequest()
+            .EnableInterfaceInterceptors()
+            .InterceptedBy(typeof(CustomExceptionInterceptor));
+
             builder.Register<IUserBusiness>(c => new UserBusiness(c.Resolve<IBaseDao<User>>()
                 , c.Resolve<IBaseDao<SessionData>>()
                 , c.Resolve<IUserDao>()))
@@ -183,6 +188,12 @@ namespace GK.Library.IocManager
            .InstancePerRequest()
            .EnableInterfaceInterceptors()
            .InterceptedBy(typeof(CustomExceptionInterceptor));
+
+            builder.Register<IUserFacade>(c => new UserFacade(c.Resolve<IUserBusiness>(), c.Resolve<IBaseBusiness<SessionData>>()))
+            .InstancePerRequest()
+            .EnableInterfaceInterceptors()
+            .InterceptedBy(typeof(CustomExceptionInterceptor));
+
             #endregion
 
 

@@ -5,6 +5,6 @@ namespace GK.Library.Business.Interfaces
 {
     public interface IUserBusiness
     {
-        ResponseContainer<SessionData> LoginUser(User userData);
+        ResponseContainer<bool> CheckLogin(User userData);
     }
 }

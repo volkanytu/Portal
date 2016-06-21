@@ -91,6 +91,7 @@
     <Compile Include="QuestionHelper.cs" />
     <Compile Include="RoleBusiness.cs" />
     <Compile Include="ScoreHelper.cs" />
+    <Compile Include="SessionBusiness.cs" />
     <Compile Include="SMSHelper.cs" />
     <Compile Include="SurveyHelper.cs" />
     <Compile Include="UserBusiness.cs" />

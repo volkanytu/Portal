@@ -21,9 +21,9 @@ namespace GK.Library.Entities.CrmEntities
         [CrmFieldName("new_ipaddress")]
         public string IpAddress { get; set; }
 
-        [CrmFieldDataType(CrmDataType.STRING)]
+        [CrmFieldDataType(CrmDataType.BOOL)]
         [CrmFieldName("new_isauthenticated")]
-        public bool IsAuthenticated { get; set; }
+        public bool? IsAuthenticated { get; set; }
 
         [CrmFieldDataType(CrmDataType.DATETIME)]
         [CrmFieldName("new_expiredate")]

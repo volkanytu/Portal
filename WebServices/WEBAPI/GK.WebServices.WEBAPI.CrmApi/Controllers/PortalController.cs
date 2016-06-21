@@ -29,14 +29,11 @@ namespace GK.WebServices.WEBAPI.CrmApi.Controllers
         public List<Portal> Get()
         {
             throw new NotImplementedException();
-            //return _portalMock.GetPortalList();
         }
 
         public Portal Get(Guid id)
         {
             return _portalFacade.Get(id);
-
-            //return _portalMock.GetPortal();
         }
 
         public Paged<Portal> Get(int pageSize, int page)

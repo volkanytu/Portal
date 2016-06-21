@@ -137,6 +137,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GK.Library.ConfigManager", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GK.Library.Common", "Library\GK.Library.Common\GK.Library.Common.csproj", "{4F2B6685-B3E2-4C16-A754-3994D9719F5D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConsoleApp", "ConsoleApp", "{CF557BA2-66C5-4BF9-9ECC-1A04AD6F99C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GK.ConsoleApp.TestApp", "ConsoleApp\GK.ConsoleApp.TestApp\GK.ConsoleApp.TestApp.csproj", "{D2DD69A1-9114-462D-BEBF-AD461B578549}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -295,6 +299,10 @@ Global
 		{4F2B6685-B3E2-4C16-A754-3994D9719F5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F2B6685-B3E2-4C16-A754-3994D9719F5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F2B6685-B3E2-4C16-A754-3994D9719F5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2DD69A1-9114-462D-BEBF-AD461B578549}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2DD69A1-9114-462D-BEBF-AD461B578549}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2DD69A1-9114-462D-BEBF-AD461B578549}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2DD69A1-9114-462D-BEBF-AD461B578549}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -343,5 +351,6 @@ Global
 		{EFDFBF99-5350-4864-BDD2-5E215F1D098F} = {44EA99DB-87C0-462F-962C-0937465058A8}
 		{8E49D0D3-937C-4AAD-83E1-4A2062CDEED2} = {44EA99DB-87C0-462F-962C-0937465058A8}
 		{4F2B6685-B3E2-4C16-A754-3994D9719F5D} = {44EA99DB-87C0-462F-962C-0937465058A8}
+		{D2DD69A1-9114-462D-BEBF-AD461B578549} = {CF557BA2-66C5-4BF9-9ECC-1A04AD6F99C3}
 	EndGlobalSection
 EndGlobal

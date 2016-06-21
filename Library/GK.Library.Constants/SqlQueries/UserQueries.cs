@@ -12,8 +12,8 @@ namespace GK.Library.Constants.SqlQueries
 	                                                        ,new_name AS Name
                                                             ,new_imageurl AS ImageUrl
                                                             ,new_password AS Password
-                                                            ,new_contactid AS ContactId
-                                                            ,new_contactidName AS ContactIdName
+                                                            ,new_contactId AS ContactId
+                                                            ,new_contactIdName AS ContactIdName
                                                             ,'contact' AS ContactIdTypeName
 	                                                        ,{0} ", ENTITY_BASE_SELECT);
 

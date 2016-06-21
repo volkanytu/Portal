@@ -18,8 +18,6 @@ namespace GK.Library.Business
         private IBaseDao<SessionData> _baseSessionDao;
         private IUserDao _userDao;
 
-        private const int TIMEOUT_MIN = 20;
-
         public UserBusiness(IBaseDao<User> baseUserDao, IBaseDao<SessionData> baseSessionDao, IUserDao userDao)
             : base(baseUserDao)
         {
@@ -28,15 +26,14 @@ namespace GK.Library.Business
             _userDao = userDao;
         }
 
-        public ResponseContainer<SessionData> LoginUser(User userData)
+        public ResponseContainer<bool> CheckLogin(User userData)
         {
-            var result = new ResponseContainer<SessionData>();
+            var result = new ResponseContainer<bool>();
 
             var user = _userDao.GetByName(userData.Name);
             if (user != null && user.Password == userData.Password)
             {
-                var session = CreateSession(userData);
-                result.Data = session; ;
+                result.Data = true;
 
                 result.SetSuccess();
             }
@@ -46,21 +43,6 @@ namespace GK.Library.Business
             }
 
             return result;
-        }
-
-        private SessionData CreateSession(User userData)
-        {
-            SessionData session = new SessionData()
-            {
-                Name = Guid.NewGuid().ToString("N") + Guid.NewGuid().ToString("N"),
-                ExpireDate = DateTime.Now.AddMinutes(TIMEOUT_MIN),
-                IsAuthenticated = true,
-                UserId = userData.ToEntityReferenceWrapper()
-            };
-
-            _baseSessionDao.Insert(session);
-
-            return session;
         }
     }
 }

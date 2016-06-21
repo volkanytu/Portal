@@ -26,9 +26,7 @@ namespace GK.Library.Data.SqlDataLayer
 
         public IOrganizationService GetAdminService()
         {
-            cacheLock.EnterReadLock();
-
-            try
+            lock (servicelock)
             {
                 CrmConnection connection = CrmConnection.Parse(_adminConnectionString);
 
@@ -39,10 +37,6 @@ namespace GK.Library.Data.SqlDataLayer
                 OrganizationService service = new OrganizationService(connection);
 
                 return service;
-            }
-            finally
-            {
-                cacheLock.ExitReadLock();
             }
         }
 
@@ -70,9 +64,7 @@ namespace GK.Library.Data.SqlDataLayer
 
         public IOrganizationService GetBehalfOfUserService(Guid userId)
         {
-            cacheLock.EnterReadLock();
-
-            try
+            lock (servicelock)
             {
                 CrmConnection connection = CrmConnection.Parse(_adminConnectionString);
 
@@ -84,10 +76,6 @@ namespace GK.Library.Data.SqlDataLayer
                 OrganizationService service = new OrganizationService(connection);
 
                 return service;
-            }
-            finally
-            {
-                cacheLock.ExitReadLock();
             }
         }
     }

@@ -29,7 +29,7 @@ namespace GK.WebServices.WEBAPI.CrmApi.Controllers
             throw new NotImplementedException();
         }
 
-        public Library.Entities.CustomEntities.Paged<User> Get(int pageSize, int page)
+        public Paged<User> Get(int pageSize, int page)
         {
             throw new NotImplementedException();
         }
@@ -49,6 +49,7 @@ namespace GK.WebServices.WEBAPI.CrmApi.Controllers
             throw new NotImplementedException();
         }
 
+        [HttpPost]
         public ResponseContainer<SessionData> LoginUser(User userData)
         {
             return _userFacade.LoginUser(userData);
