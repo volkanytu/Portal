@@ -79,6 +79,7 @@
     <Compile Include="QuestionHelper.cs" />
     <Compile Include="ScoreHelper.cs" />
     <Compile Include="SMSHelper.cs" />
+    <Compile Include="SteelDoorHelper.cs" />
     <Compile Include="SurveyHelper.cs" />
     <Compile Include="ValidationHelper.cs" />
     <Compile Include="VideoHelper.cs" />

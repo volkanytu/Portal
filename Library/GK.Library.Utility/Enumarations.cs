@@ -29,6 +29,13 @@ namespace GK.Library.Utility
         Result_Negative = 100000004
     }
 
+    public enum SteelDoorStatus
+    {
+        Waiting = 1,
+        CrmConfirmed = 100000000,
+        Result_Negative = 100000001
+    }
+
     public enum GiftStatus
     {
         Requested = 1,
@@ -61,7 +68,8 @@ namespace GK.Library.Utility
         ForumSubject,
         PointCode,
         UsePoint,
-        KGSSales
+        KGSSales,
+        SteelDoor
     }
 
     public enum ScorePeriod

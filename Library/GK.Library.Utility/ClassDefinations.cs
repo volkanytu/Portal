@@ -1186,6 +1186,75 @@ namespace GK.Library.Utility
         public string CreatedOnString { get; set; }
     }
 
+
+    [CrmSchemaName("new_steeldoor")]
+    public class SteelDoor
+    {
+        [CrmFieldDataType(CrmDataType.UNIQUEIDENTIFIER)]
+        [CrmFieldName("new_steeldoorid")]
+        public Guid Id { get; set; }
+
+        [CrmFieldDataType(CrmDataType.STRING)]
+        [CrmFieldName("new_name")]
+        public string Name { get; set; }
+
+        [CrmFieldDataType(CrmDataType.STRING)]
+        [CrmFieldName("new_firstname")]
+        public string FirstName { get; set; }
+
+        [CrmFieldDataType(CrmDataType.STRING)]
+        [CrmFieldName("new_lastname")]
+        public string LastName { get; set; }
+
+        [CrmFieldDataType(CrmDataType.STRING)]
+        [CrmFieldName("new_phonenumber")]
+        public string PhoneNumber { get; set; }
+
+        [CrmFieldDataType(CrmDataType.STRING)]
+        [CrmFieldName("new_email")]
+        public string Email { get; set; }
+
+        [CrmFieldDataType(CrmDataType.ENTITYREFERENCE)]
+        [CrmFieldName("new_cityid")]
+        public EntityReferenceWrapper CityId { get; set; }
+
+        [CrmFieldDataType(CrmDataType.ENTITYREFERENCE)]
+        [CrmFieldName("new_townid")]
+        public EntityReferenceWrapper TownId { get; set; }
+
+        [CrmFieldDataType(CrmDataType.ENTITYREFERENCE)]
+        [CrmFieldName("new_userid")]
+        public EntityReferenceWrapper UserId { get; set; }
+
+        [CrmFieldDataType(CrmDataType.ENTITYREFERENCE)]
+        [CrmFieldName("new_portalid")]
+        public EntityReferenceWrapper PortalId { get; set; }
+
+        [CrmFieldDataType(CrmDataType.OPTIONSETVALUE)]
+        [CrmFieldName("statuscode")]
+        public OptionSetValueWrapper Status { get; set; }
+
+        [CrmFieldDataType(CrmDataType.DATETIME)]
+        public DateTime? CreatedOn
+        {
+            get
+            {
+                return _createDate;
+            }
+            set
+            {
+                _createDate = value;
+
+                if (value != null)
+                {
+                    CreatedOnString = ((DateTime)value).ToString("dd.MM.yyyy HH:mm");
+                }
+            }
+        }
+
+        public DateTime? _createDate { get; set; }
+        public string CreatedOnString { get; set; }
+    }
     public enum CrmDataType
     {
         UNIQUEIDENTIFIER,

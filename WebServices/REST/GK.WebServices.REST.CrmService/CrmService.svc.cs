@@ -4757,6 +4757,151 @@ namespace GK.WebServices.REST.CrmService
         }
         #endregion
 
+        #region | STEEL DOOR OPERATIONS |
+
+        public MsCrmResult SaveDiscoveryForm(string token, SteelDoor steelDoor)
+        {
+            MsCrmResult returnValue = new MsCrmResult();
+            LoginSession ls = new LoginSession();
+
+            try
+            {
+                if (!string.IsNullOrEmpty(token))
+                {
+                    #region | CHECK SESSION |
+                    MsCrmResultObject sessionResult = GetUserSession(token);
+
+                    if (!sessionResult.Success)
+                    {
+                        returnValue.Result = sessionResult.Result;
+                        return returnValue;
+                    }
+                    else
+                    {
+                        ls = (LoginSession)sessionResult.ReturnObject;
+                    }
+
+                    #endregion
+
+                    #region | VALIDATION |
+
+                    if (string.IsNullOrEmpty(steelDoor.FirstName))
+                    {
+                        returnValue.Result = "Ad alanı boş olamaz";
+                        return returnValue;
+                    }
+
+                    if (string.IsNullOrEmpty(steelDoor.LastName))
+                    {
+                        returnValue.Result = "Soyadı alanı boş olamaz";
+                        return returnValue;
+                    }
+
+                    if (string.IsNullOrEmpty(steelDoor.PhoneNumber))
+                    {
+                        returnValue.Result = "Telefon Numarası alanı boş olamaz";
+                        return returnValue;
+                    }
+
+                    if (string.IsNullOrEmpty(steelDoor.Email))
+                    {
+                        returnValue.Result = "Email alanı boş olamaz";
+                        return returnValue;
+                    }
+
+                    if (steelDoor.CityId == null || steelDoor.CityId.Id == Guid.Empty)
+                    {
+                        returnValue.Result = "İl alanı boş olamaz";
+                        return returnValue;
+                    }
+
+                    if (steelDoor.TownId == null || steelDoor.TownId.Id == Guid.Empty)
+                    {
+                        returnValue.Result = "İlçe alanı boş olamaz";
+                        return returnValue;
+                    }
+
+                    #endregion
+
+                    IOrganizationService service = MSCRM.GetOrgService(true);
+
+                    sda = new SqlDataAccess();
+                    sda.openConnection(Globals.ConnectionString);
+
+                    steelDoor.Name = steelDoor.UserId.Name + "|" + DateTime.Now.ToString("dd.MM.yyyy HH:mm");
+
+                    returnValue = SteelDoorHelper.Insert(steelDoor, service);
+
+                }
+                else
+                {
+                    returnValue.Success = false;
+                    returnValue.Result = "M003"; //"Eksik parametre!";
+                }
+            }
+            catch (Exception ex)
+            {
+                returnValue.Result = ex.Message;
+            }
+
+            return returnValue;
+        }
+
+        public MsCrmResultObj<List<SteelDoor>> GetUserSteelDoors(string token)
+        {
+            MsCrmResultObj<List<SteelDoor>> returnValue = new MsCrmResultObj<List<SteelDoor>>();
+            LoginSession ls = new LoginSession();
+
+            try
+            {
+                if (!string.IsNullOrEmpty(token))
+                {
+                    #region | CHECK SESSION |
+                    MsCrmResultObject sessionResult = GetUserSession(token);
+
+                    if (!sessionResult.Success)
+                    {
+                        returnValue.Result = sessionResult.Result;
+                        return returnValue;
+                    }
+                    else
+                    {
+                        ls = (LoginSession)sessionResult.ReturnObject;
+                    }
+
+                    #endregion
+
+                    IOrganizationService service = MSCRM.GetOrgService(true);
+
+                    sda = new SqlDataAccess();
+                    sda.openConnection(Globals.ConnectionString);
+
+
+                    returnValue = SteelDoorHelper.GetUserSteelDoors(ls.PortalUserId, sda);
+
+                }
+                else
+                {
+                    returnValue.Success = false;
+                    returnValue.Result = "M003"; //"Eksik parametre!";
+                }
+            }
+            catch (Exception ex)
+            {
+                returnValue.Result = ex.Message;
+            }
+            finally
+            {
+                if (sda != null)
+                {
+                    sda.closeConnection();
+                }
+            }
+
+            return returnValue;
+        }
+        #endregion
+
         #region | ASSEMBLY REQUESTS |
 
         public MsCrmResultObj<List<AssemblyRequestInfo>> GetRequests(string token, string userId)

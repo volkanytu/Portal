@@ -466,5 +466,15 @@ namespace GK.WebServices.REST.CrmService
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json
             , UriTemplate = "/RegisterUser")]
         MsCrmResult RegisterUser(Contact contact);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json
+            , UriTemplate = "/SaveDiscoveryForm")]
+        MsCrmResult SaveDiscoveryForm(string token, SteelDoor steelDoor);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json
+            , UriTemplate = "/GetUserSteelDoors")]
+        MsCrmResultObj<List<SteelDoor>> GetUserSteelDoors(string token);
     }
 }

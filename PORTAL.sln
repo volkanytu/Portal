@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{44EA99DB-87C0-462F-962C-0937465058A8}"
 EndProject
@@ -94,6 +94,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GK.ServiceLibrary.GiftServiceLayer", "ServiceLibrary\GK.ServiceLibrary.GiftServiceLayer\GK.ServiceLibrary.GiftServiceLayer.csproj", "{D138D161-132B-4E06-B59F-48B643DD837D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GK.WebServices.REST.KaleGift", "WebServices\REST\GK.WebServices.REST.KaleGift\GK.WebServices.REST.KaleGift.csproj", "{F2BBDBD1-8E99-493A-8279-C25F81E23B52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GK.Plugins.SteelDoor", "Plugins\GK.Plugins.SteelDoor\GK.Plugins.SteelDoor.csproj", "{80EB55C1-9A80-4721-9721-21A131874D87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -201,6 +203,10 @@ Global
 		{F2BBDBD1-8E99-493A-8279-C25F81E23B52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2BBDBD1-8E99-493A-8279-C25F81E23B52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2BBDBD1-8E99-493A-8279-C25F81E23B52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80EB55C1-9A80-4721-9721-21A131874D87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80EB55C1-9A80-4721-9721-21A131874D87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80EB55C1-9A80-4721-9721-21A131874D87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80EB55C1-9A80-4721-9721-21A131874D87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -234,5 +240,6 @@ Global
 		{CA86FF65-2D94-47CC-83FD-DC5B05B38EC5} = {F986117E-9B76-4EC2-9A1B-B5F16BCCF1BA}
 		{D138D161-132B-4E06-B59F-48B643DD837D} = {50750900-3505-43FC-9737-5EFA4613189B}
 		{F2BBDBD1-8E99-493A-8279-C25F81E23B52} = {6800C4D2-6296-42EF-A408-DE2FCC93A932}
+		{80EB55C1-9A80-4721-9721-21A131874D87} = {96D4954E-E3F4-4459-8281-0C3FE099868E}
 	EndGlobalSection
 EndGlobal
