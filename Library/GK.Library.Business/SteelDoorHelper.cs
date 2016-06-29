@@ -94,8 +94,8 @@ namespace GK.Library.Business
             MsCrmResultObj<List<SteelDoor>> returnValue = new MsCrmResultObj<List<SteelDoor>>();
             #region | SQL QUERY |
 
-            string sqlQuery = @"SELECT
-	                                    pc.new_steeldoorid AS Id
+            string sqlQuery = @"SELECT DISTINCT
+	                                    pc.new_steeldoorId AS Id
 	                                    ,pc.new_name AS Name
 	                                    ,pc.new_firstname AS FirstName
 	                                    ,pc.new_lastname AS LastName
@@ -114,11 +114,24 @@ namespace GK.Library.Business
 	                                    ,pc.new_portalidName AS PortalIdName
 	                                    ,'new_portal' AS PortalIdTypeName
 	                                    ,pc.statuscode AS Status
+	                                    ,sm.Value AS StatusValue
 	                                    ,pc.CreatedOn AS CreatedOn
                                     FROM
                                     new_steeldoor AS pc (NOLOCK)
+JOIN
+    Entity AS e (NOLOCK)
+        ON
+        e.Name='new_steeldoor'
+JOIN
+    StringMap AS sm (NOLOCK)
+        ON
+        sm.ObjectTypeCode=e.ObjectTypeCode
+        AND
+        sm.AttributeName='statuscode'
+        AND
+        sm.AttributeValue=pc.statuscode
                                     WHERE
-                                    pc.new_userid={0}";
+                                    pc.new_userid='{0}'";
 
             #endregion
 

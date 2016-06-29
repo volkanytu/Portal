@@ -1,4 +1,4 @@
-* { -moz-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box; font-family:arial; font-size:14px; color:#292d31; font-weight:400; font-style:normal; text-align:left; 
+﻿* { -moz-box-sizing:border-box; -webkit-box-sizing:border-box; box-sizing:border-box; font-family:arial; font-size:14px; color:#292d31; font-weight:400; font-style:normal; text-align:left; 
 line-height:1; margin:0; padding:0; border:none; outline:none; vertical-align: baseline; text-decoration:none; list-style:none; }
 ::selection {background: #7b8184;}
 ::-moz-selection {background: #7b8184;}
@@ -313,13 +313,16 @@ a.btnAlternate{background:#4682f0;}
 
 /*Iframe Content*/
 .mainContent{padding:20px 0; background:#fff;}
+.mainContent #graffitiList{background:#efefef;}
 .iframeContent{background: #fff; margin:0 220px 0 0;}
 .bnrContent{width:220px; float:right;}
 .writeComnt textarea{width:100%; background:#eff2f3; -webkit-border-radius:5px; -moz-border-radius:5px; border-radius:5px; padding:10px; height:70px; font-family:'open_sanssemibold'; color:#7d8086; font-size:13px; resize:none;}
 .shareBtns{padding-top:5px; padding-bottom:15px;}
 .grid-row{padding:0 20px;}
+.grid-row.share{margin-bottom:30px; border-bottom:1px solid #d7dbdc;}
+.grid-row.share .contentBtns{border-bottom:none;}
 
-.contentBtns {text-align:right; padding:25px 0; border-bottom:1px solid #eff2f3;}
+.contentBtns {text-align:right;padding:25px 0;border-bottom:1px solid #eff2f3;}
 .contentBtns a.btnShare{display:inline-block; background:#9ca1ad; width:100px; padding:10px;}
 
 /*******************************Iframe Contents***********************************/
@@ -350,7 +353,9 @@ a.btnAlternate{background:#4682f0;}
 .row-inline { border-top:1px solid #eff2f3; padding:12px 0 25px 0; max-width:540px;}
 .row .avtr{float:left; width:60px;}
 .row .info{ margin-left:75px; padding-top:13px;}
-.row-inline p, .row-comment p{font-family:'open_sanssemibold'; font-size:13px; color:#7d8086;}
+.get-comment .row-inline .user-comnt p{font-family:'open_sanssemibold'; font-size:13px; color:#7d8086;}
+.get-comment .row-inline .user-comment p {font-family:'open_sansbold'; font-size:14px; color:#000;}
+
 .row .user-comnt{ clear:both; padding-top:20px;}
 
 /*Slider*/
@@ -868,7 +873,7 @@ body.mobiMenuReady .vMbMenu.vail, body.loginMenuReady .vLgMenu.vail{display:bloc
 .bodyHolder.loginPage .right, .bodyHolder.loginPage .left:after{display:none;}
 
 /*Mobile Holder Layout Fixed*/
-.grid-row, .title-content, .detail-title, .content-bnr, .info-fields{padding:0 15px;}
+.grid-row, .title-content, .detail-title, .content-bnr, .info-fields{padding:0 15px;background: #fff;}
 .title-other, .nav {margin:0 15px;}
 .video-list ul li .inline{margin:0 5px 30px 5px;}
 .content-desc, .friendsPage .title-bottom{ padding-left:15px; padding-right:15px;}

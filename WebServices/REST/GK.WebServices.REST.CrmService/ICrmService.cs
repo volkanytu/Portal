@@ -469,8 +469,8 @@ namespace GK.WebServices.REST.CrmService
 
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json
-            , UriTemplate = "/SaveDiscoveryForm")]
-        MsCrmResult SaveDiscoveryForm(string token, SteelDoor steelDoor);
+            , UriTemplate = "/SaveSteelDoorForm")]
+        MsCrmResult SaveSteelDoorForm(string token, SteelDoor steelDoor);
 
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json
