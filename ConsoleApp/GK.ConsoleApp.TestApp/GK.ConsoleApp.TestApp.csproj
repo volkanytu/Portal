@@ -100,6 +100,14 @@
       <Project>{ac652341-1183-4452-89a7-019790177d37}</Project>
       <Name>GK.Library.IocManager</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Library\GK.Library.LogManager\GK.Library.LogManager.csproj">
+      <Project>{4df8f114-f472-4b61-a6f8-295c5d949b0d}</Project>
+      <Name>GK.Library.LogManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Library\GK.Library.Utility\GK.Library.Utility.csproj">
+      <Project>{fedcb7f2-0afd-476f-8823-f78061d7e553}</Project>
+      <Name>GK.Library.Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

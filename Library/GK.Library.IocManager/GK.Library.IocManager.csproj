@@ -82,6 +82,10 @@
       <Project>{8e49d0d3-937c-4aad-83e1-4a2062cdeed2}</Project>
       <Name>GK.Library.ConfigManager</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GK.Library.Constants\GK.Library.Constants.csproj">
+      <Project>{efdfbf99-5350-4864-bdd2-5e215f1d098f}</Project>
+      <Name>GK.Library.Constants</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GK.Library.Entities\GK.Library.Entities.csproj">
       <Project>{56d879b6-b233-4dc0-ad5a-924d406745db}</Project>
       <Name>GK.Library.Entities</Name>
