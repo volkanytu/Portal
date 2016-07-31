@@ -476,5 +476,10 @@ namespace GK.WebServices.REST.CrmService
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json
             , UriTemplate = "/GetUserSteelDoors")]
         MsCrmResultObj<List<SteelDoor>> GetUserSteelDoors(string token);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json
+            , UriTemplate = "/DeleteGraffiti")]
+        MsCrmResult DeleteGraffiti(string token, string graffitiId);
     }
 }

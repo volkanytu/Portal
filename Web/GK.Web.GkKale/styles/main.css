@@ -582,6 +582,8 @@ position:relative; top:2px;}
 .writeComnt .row-prf-img .prf-info{margin-left:145px; position:relative;}
 .writeComnt .row-prf-img .prf-img i.fotoUpdate{background: url(../images/camera-photo.png) no-repeat; display: inline-block; width: 32px; height: 32px; cursor: pointer; margin-top:15px; position:absolute; bottom:10px !important; right:10px !important; z-index:1;}
 .writeComnt .row-prf-img .prf-img i.fotoRemove{background: url(../images/trash.png) no-repeat; display: inline-block; width: 32px; height: 32px; cursor: pointer; margin-top:15px; position:absolute; bottom:10px !important; right:50px !important; z-index:1;}
+.writeComnt .row-prf-img .prf-img i.fotoRight{background: url(../images/rotateright.png) no-repeat; display: inline-block; width: 32px; height: 32px; cursor: pointer; margin-top:15px; position:absolute; bottom:10px !important; right:90px !important; z-index:1;}
+.writeComnt .row-prf-img .prf-img i.fotoLeft{background: url(../images/rotateleft.png) no-repeat; display: inline-block; width: 32px; height: 32px; cursor: pointer; margin-top:15px; position:absolute; bottom:10px !important; right:130px !important; z-index:1;}
 /*Volkan*/
 
 .profileDetailPage .icon3.iconPrf{background:url(../images/iconProfil.png) center center #9ca1ad no-repeat;}

@@ -17,6 +17,9 @@
     <script src="js/jquery/purl.js"></script>
     <script src="js/pagescripts/GlobalVariables.js?ver=300820152239"></script>
     <script src="js/pagescripts/languageMessagesJS.js?ver=300820152239"></script>
+    <script src="js/resize/binaryajax.js"></script>
+    <script src="js/resize/canvasResize.js"></script>
+    <script src="js/resize/exif.js"></script>
     <script src="js/pagescripts/graffitiJS.js?ver=300820152239"></script>
     <script src="js/customPlugin.js"></script>
 
@@ -79,6 +82,14 @@
                                     <div class="update-btn">
                                         <a href="javascript:void(0);" ng-click="RemoveImage();"><i class="fotoRemove"></i></a>
                                     </div>
+
+                                    <div class="update-btn">
+                                        <a href="javascript:void(0);" ng-click="RotateRight();"><i class="fotoRight"></i></a>
+                                    </div>
+
+                                    <div class="update-btn">
+                                        <a href="javascript:void(0);" ng-click="RotateLeft();"><i class="fotoLeft"></i></a>
+                                    </div>
                                 </div>
                                 <div class="prf-info">
 
@@ -91,7 +102,7 @@
                 </div>
 
                 <div class="contentBtns">
-                    <a href="javascript:void(0);" class="btnDefault btnShare" id="btnShare" ng-click="CreateGraffiti()"><span>PAYLAŞ</span></a>
+                    <a href="javascript:void(0);" class="btnDefault btnShare" id="btnShare" ng-show="showShare" ng-click="CreateGraffiti()"><span>PAYLAŞ</span></a>
                 </div>
             </div>
             <!--Content Share-->

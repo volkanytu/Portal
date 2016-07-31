@@ -75,6 +75,9 @@
     <Content Include="images\ntf.png" />
     <Content Include="images\ntfBellIcon.png" />
     <Content Include="images\ntfPopupArow.png" />
+    <Content Include="images\right.png" />
+    <Content Include="images\rotateleft.png" />
+    <Content Include="images\rotateright.png" />
     <Content Include="isEmriGoruntule.html" />
     <Content Include="isEmirleri.html" />
     <Content Include="hediyeler.html" />
@@ -113,6 +116,9 @@
     <Content Include="js\ChatServer.js" />
     <Content Include="js\pagescripts\registerJS.js" />
     <Content Include="js\pagescripts\steeldoorformJS.js" />
+    <Content Include="js\resize\binaryajax.js" />
+    <Content Include="js\resize\canvasResize.js" />
+    <Content Include="js\resize\exif.js" />
     <Content Include="js\underscore-min.js" />
     <Content Include="nps.html" />
     <Content Include="mesajlar.html" />

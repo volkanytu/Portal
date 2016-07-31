@@ -1129,6 +1129,52 @@ namespace GK.WebServices.REST.CrmService
             return returnValue;
         }
 
+        public MsCrmResult DeleteGraffiti(string token, string graffitiId)
+        {
+            MsCrmResult returnValue = new MsCrmResult();
+            LoginSession ls = new LoginSession();
+
+            try
+            {
+                if (!string.IsNullOrEmpty(token) || !string.IsNullOrEmpty(graffitiId))
+                {
+                    #region | CHECK SESSION |
+                    MsCrmResultObject sessionResult = GetUserSession(token);
+
+                    if (!sessionResult.Success)
+                    {
+                        returnValue.Result = sessionResult.Result;
+                        return returnValue;
+                    }
+                    else
+                    {
+                        ls = (LoginSession)sessionResult.ReturnObject;
+                    }
+
+                    #endregion
+
+                    IOrganizationService service = MSCRM.GetOrgService(true);
+
+                    service.Delete("new_graffiti", new Guid(graffitiId));
+
+                    returnValue.Success = true;
+                    returnValue.Result = "Duvar yazısı silindi";
+                }
+                else
+                {
+                    returnValue.Success = false;
+                    returnValue.Result = "M003"; //"Eksik parametre!-SaveGraffiti";
+                }
+            }
+            catch (Exception ex)
+            {
+                returnValue.Success = false;
+                returnValue.Result = ex.Message + "-SaveGraffiti";
+            }
+            return returnValue;
+        }
+
+
         #endregion
 
         #region | EDUCATION OPERATIONS |

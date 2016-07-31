@@ -261,6 +261,49 @@ var GraffitiHelper = {
             }
         });
     },
+    "DeleteGraffiti": function (graffitiId, callBackFunction) {
+
+        var jData = {};
+        jData.token = GraffitiHelper.Token;
+
+        jData.graffitiId = graffitiId;
+
+        var jSonData = JSON.stringify(jData);
+
+        //debugger;
+        $.ajax({
+            url: CustomServiceUrl + "CrmService.svc/DeleteGraffiti",
+            async: false,
+            dataType: "json",
+            contentType: "application/json;",
+            type: "POST",
+            data: jSonData,
+            beforeSend: function () {
+            },
+            complete: function () {
+            },
+            success: function (data) {
+                //debugger;
+                if (data != null) {
+                    if (data.Success == true) {
+
+                        callBackFunction(data);
+
+                        return;
+                    }
+                }
+                else {
+                    parent.IndexHelper.ShowNotify(ReturnMessage(IndexHelper.LanguageCode, "M002") + "<br />DeleteGraffiti", "error");
+                    return false;
+                }
+            },
+            error: function (a, b, c) {
+                debugger;
+                parent.IndexHelper.ShowNotify(c + "<br />DeleteGraffiti", "error");
+                return false;
+            }
+        });
+    },
     "ReadImage": function (input, callBackFunction) {
 
         if (input.files && input.files[0]) {
@@ -273,17 +316,59 @@ var GraffitiHelper = {
 
             reader.onload = function (e) {
 
-                callBackFunction(e);
+                //callBackFunction(e);
+
+                canvasResize(file, {
+                    width: 500,
+                    height: 0,
+                    crop: false,
+                    quality: 100,
+                    rotate: GraffitiHelper.ImageAngel,
+                    orientation: 5,
+                    callback: function (data, width, height) {
+                        //$("#imageThumb").attr('src', data);
+
+                        var blob = dataURLToBlob(data);
+
+                        callBackFunction(data);
+
+                        var fileSize = parseInt(blob.size / 1024);
+
+                        //if (fileSize > 100) {
+                        //    UploadHelper.ShowNotify("UYARI", "Dosya boyutu 100 KB'ı aşmıştır.", "orange", "white");
+
+                        //    return;
+                        //}
+
+                        var resizedFile = {};
+
+                        resizedFile.blob = blob;
+                        resizedFile.fileName = file.name;
+
+                        GraffitiHelper.ImageFile = resizedFile;
+
+                        //UploadHelper.ResizedFile = resizedFile;
+
+                        //showPicture(blob.name, data, width, height);
+
+                        //$("#lblFileSize").html(fileSize + " KB");
+
+                        //var formData = new FormData();
+                        //formData.append('file', blob, file.name);
+
+                        //PostFile(formData);
+                    }
+                });
 
                 var fileSize = parseInt(file.size / 1024);
                 var fileName = file.name;
 
-                var imageFile = {};
+                //var imageFile = {};
 
-                imageFile.blob = file;
-                imageFile.fileName = file.name;
+                //imageFile.blob = file;
+                //imageFile.fileName = file.name;
 
-                GraffitiHelper.ImageFile = imageFile;
+                //GraffitiHelper.ImageFile = imageFile;
             }
         }
 
@@ -336,7 +421,8 @@ var GraffitiHelper = {
     "GraffitiCount": 0,
     "IncreaseCount": 5,
     "CommentIncreaseCount": 2,
-    "Token": ""
+    "Token": "",
+    "ImageAngel": 0
 };
 
 function graffitiController($scope) {
@@ -360,15 +446,18 @@ function graffitiController($scope) {
     $scope.showCommentSend = true;
     $scope.sendCommentAreaClass = "selected";
     $scope.sendImgAreaClass = "";
-
+    $scope.showShare = true;
     $scope.GraffitiImageUrl = attachmentUrl + "no_image_available.png";
 
     $("#fileUpload").change(function () {
 
+        GraffitiHelper.ImageAngel = 0;
+
         GraffitiHelper.ReadImage(this, function (e) {
 
             $scope.$apply(function () {
-                $scope.GraffitiImageUrl = e.target.result;
+                //$scope.GraffitiImageUrl = e.target.result;
+                $scope.GraffitiImageUrl = e;
             });
         });
     });
@@ -378,6 +467,10 @@ function graffitiController($scope) {
     };
 
     $scope.RemoveImage = function () {
+
+        var input = $("#fileUpload");
+
+        input.replaceWith(input.val('').clone(true));
 
         GraffitiHelper.ImageFile = null;
 
@@ -515,7 +608,9 @@ function graffitiController($scope) {
         var hasImage = false;
         var graffitiText = $scope.txtGraffiti;
 
-        if (GraffitiHelper.ImageFile != null) {
+        //if (GraffitiHelper.ImageFile != null) {
+        var input = document.getElementById("fileUpload");
+        if (input.files && input.files[0]) {
             hasImage = true;
         }
 
@@ -525,10 +620,14 @@ function graffitiController($scope) {
             return;
         }
 
+        $scope.showShare = false;
+
         GraffitiHelper.CreateGraffiti($scope.txtGraffiti, hasImage, function (e) {
 
             $scope.$apply(function () {
                 if (e.Success == true) {
+
+                    var createdId = e.CrmId;
 
                     if (hasImage == true) {
                         var formData = new FormData();
@@ -538,22 +637,38 @@ function graffitiController($scope) {
 
                             if (data.Success == true) {
 
+                                $scope.RemoveImage();
+                                $scope.showShare = true;
                                 document.location.reload();
+
                             }
                             else {
                                 parent.IndexHelper.ShowNotify(data.Result, "error");
+
+                                GraffitiHelper.DeleteGraffiti(createdId, function (e) {
+
+                                });
+
+                                $scope.showShare = true;
+
+                                return;
                             }
                         });
                     }
                     else {
+                        $scope.RemoveImage();
+                        $scope.showShare = true;
                         document.location.reload();
                     }
 
+                    $scope.RemoveImage();
+                    $scope.showShare = true;
                     parent.IndexHelper.ShowNotify(ReturnMessage(IndexHelper.LanguageCode, "M015"), "success");
 
                 }
                 else {
                     parent.IndexHelper.ShowNotify(ReturnMessage(IndexHelper.LanguageCode, e.Result), "error");
+                    $scope.showShare = true;
                 }
             });
 
@@ -596,4 +711,65 @@ function graffitiController($scope) {
             }
         });
     };
+
+    $scope.RotateRight = function () {
+
+        var fileElement = document.getElementById("fileUpload");
+
+        if (GraffitiHelper.ImageAngel > 359) {
+            GraffitiHelper.ImageAngel = 90;
+        }
+        else {
+            GraffitiHelper.ImageAngel += 90;
+        }
+
+        GraffitiHelper.ReadImage(fileElement, function (e) {
+
+            $scope.$apply(function () {
+                $scope.GraffitiImageUrl = e;
+            });
+        });
+    }
+
+    $scope.RotateLeft = function () {
+
+        var fileElement = document.getElementById("fileUpload");
+
+        GraffitiHelper.ImageAngel += 270;
+        var modValue = GraffitiHelper.ImageAngel % 360;
+
+        GraffitiHelper.ImageAngel = Math.abs(modValue);
+
+        GraffitiHelper.ReadImage(fileElement, function (e) {
+
+            $scope.$apply(function () {
+                $scope.GraffitiImageUrl = e;
+            });
+        });
+    }
+}
+
+function dataURLToBlob(dataURL) {
+    var BASE64_MARKER = ';base64,';
+    if (dataURL.indexOf(BASE64_MARKER) == -1) {
+        var parts = dataURL.split(',');
+        var contentType = parts[0].split(':')[1];
+        var raw = parts[1];
+
+        return new Blob([raw], { type: contentType });
+    }
+    else {
+        var parts = dataURL.split(BASE64_MARKER);
+        var contentType = parts[0].split(':')[1];
+        var raw = window.atob(parts[1]);
+        var rawLength = raw.length;
+
+        var uInt8Array = new Uint8Array(rawLength);
+
+        for (var i = 0; i < rawLength; ++i) {
+            uInt8Array[i] = raw.charCodeAt(i);
+        }
+
+        return new Blob([uInt8Array], { type: contentType });
+    }
 }
