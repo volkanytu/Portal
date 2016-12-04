@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
+using GK.Library.Utility;
 
 namespace GK.Library.Utility
 {
@@ -910,6 +911,23 @@ namespace GK.Library.Utility
         [DataMember]
         [CrmFieldDataType(CrmDataType.STRING)]
         public string AddressDetail { get; set; }
+
+        [DataMember]
+        [CrmFieldDataType(CrmDataType.STRING)]
+        public string EmailAddress { get; set; }
+
+        [DataMember]
+        [CrmFieldDataType(CrmDataType.STRING)]
+        public string ClearPassword { get; set; }
+
+        //[DataMember]
+        //public string Password
+        //{
+        //    get
+        //    {
+        //        return Encryption.SHA1Hash(this.Password);
+        //    }
+        //}
 
     }
 
