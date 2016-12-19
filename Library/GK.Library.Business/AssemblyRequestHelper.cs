@@ -345,7 +345,7 @@ namespace GK.Library.Business
                                     WHERE
 	                                    c.EmailAddress1='{0}'
                                         AND
-                                        u.new_password={1}";
+                                        u.new_password='{1}'";
 
                 #endregion
 
