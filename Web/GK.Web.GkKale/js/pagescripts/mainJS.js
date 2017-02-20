@@ -1365,6 +1365,46 @@ var IndexHelper = {
             return;
         });
     },
+    "GetUnReadMessages": function (token, callBackFunction) {
+
+        //debugger;
+        var jData = {};
+        jData.token = token;
+
+        var jSonData = JSON.stringify(jData);
+
+        //debugger;
+        $.ajax({
+            url: CustomServiceUrl + "CrmService.svc/GetUnReadMessages",
+            async: true,
+            dataType: "json",
+            contentType: "application/json;",
+            type: "POST",
+            data: jSonData,
+            beforeSend: function () {
+            },
+            complete: function () {
+            },
+            success: function (data) {
+                //debugger;
+                if (data != null) {
+
+                    callBackFunction(data);
+
+                    return;
+                }
+                else {
+                    IndexHelper.ToastrShow("error", ReturnMessage(IndexHelper.LanguageCode, "M002") + "<br />GetUnReadMessages", "Hata");
+                    return false;
+                }
+            },
+            error: function (a, b, c) {
+                debugger;
+                IndexHelper.ToastrShow("error", c + "<br />GetUnReadMessages", "Hata");
+                return false;
+            }
+        });
+    },
     "DocumentBaseUrl": "",
     "ProfileImagePath": "",
     "UserName": "",
@@ -1400,6 +1440,8 @@ function mainController($scope) {
     $scope.showMain = false;
     $scope.errorText = "";
     $scope.showMessageNotification = false;
+    $scope.notificationCount = 0;
+
 
     IndexHelper.CheckSession(false, $scope.token, function (e) {
         $scope.$apply(function () {
@@ -1493,46 +1535,46 @@ function mainController($scope) {
     };
 
     $scope.showCodeMessage = false;
+
     $scope.codeMessage = null;
 
     $scope.UseCode = function ($keyEvent) {
-
         if ($keyEvent == null || $keyEvent.which == 13) {
-            var code = $scope.pointCode;
+        var code = $scope.pointCode;
 
-            $scope.showCodeMessage = false;
-            $scope.codeMessage = null;
+        $scope.showCodeMessage = false;
+        $scope.codeMessage = null;
 
-            if (code != null && code != "" && code != undefined) {
+        if (code != null && code != "" && code != undefined) {
 
-                IndexHelper.UsePointCode(code, function (e) {
-                    $scope.$apply(function () {
-                        if (e.Success == true) {
+            IndexHelper.UsePointCode(code, function (e) {
+                $scope.$apply(function () {
+                    if (e.Success == true) {
 
-                            IndexHelper.ToastrShow("success", e.Result, "Başarılı");
+                        IndexHelper.ToastrShow("success", e.Result, "Başarılı");
 
 
-                            $scope.pointCode = null;
+                        $scope.pointCode = null;
 
-                            $scope.showCodeMessage = true;
-                            $scope.codeMessage = e.Result;
-                            //document.location.reload();
+                        $scope.showCodeMessage = true;
+                        $scope.codeMessage = e.Result;
+                        //document.location.reload();
 
-                        }
-                        else {
-                            $scope.showCodeMessage = true;
-                            $scope.codeMessage = e.Result;
+                    }
+                    else {
+                        $scope.showCodeMessage = true;
+                        $scope.codeMessage = e.Result;
 
-                            IndexHelper.ToastrShow("error", e.Result, "Hata");
-                        }
-                    });
+                        IndexHelper.ToastrShow("error", e.Result, "Hata");
+                    }
                 });
-            }
-            else {
-                $scope.showCodeMessage = true;
-                $scope.codeMessage = "Lütfen bir kod giriniz.";
-                IndexHelper.ToastrShow("warning", "Lütfen bir kod giriniz.", "Eksik Kod");
-            }
+            });
+        }
+        else {
+            $scope.showCodeMessage = true;
+            $scope.codeMessage = "Lütfen bir kod giriniz.";
+            IndexHelper.ToastrShow("warning", "Lütfen bir kod giriniz.", "Eksik Kod");
+        }
         }
     };
 
@@ -1541,6 +1583,30 @@ function mainController($scope) {
         if (userId.toLowerCase() != IndexHelper.UserId.toLowerCase()) {
             IndexHelper.ShowDialog("<iframe src='popupArkadaslarim.html?userid=" + userId + "' style='width:100%;height:570px;' />", null, null, true);
         }
+    };
+
+    IndexHelper.GetUnReadMessages($scope.token, function (e) {
+        $scope.$apply(function () {
+            if (e.Success == true) {
+
+                $scope.Unreads = e.ReturnObject;
+
+                $scope.notificationCount = e.ReturnObject.length;
+            }
+        });
+    });
+
+    $scope.OpenUserChatPage = function (toId, toName) {
+
+        var userId = IndexHelper.UserId;
+        var userIdName = IndexHelper.userIdName;
+
+        $("#ifrmContent").attr("src", "http://kaleanahtarcilarkulubu.com.tr:5555/chat?targetuserid=" + toId + "&targetuseridname=" + toName + "&userid=" + userId + "&useridname=" + userIdName);
+        //$("#ifrmContent").attr("src", "http://localhost:3000/chat?targetuserid=" + toId + "&targetuseridname=" + toName + "&userid=" + userId + "&useridname=" + userIdName);
+
+        $("li[fromid='" + toId + "']").remove();
+
+        $scope.notificationCount = $(".ntfHolder ul li").length;
     };
 
     $scope.Like = function (entityId, entityName, callBack) {

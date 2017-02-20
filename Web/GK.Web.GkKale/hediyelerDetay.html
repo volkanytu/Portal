@@ -35,9 +35,10 @@
                 <div class="bnr">
                     <img src="{{attachmentUrl+gift.ImageUrl}}" /><div class="cPopup"><div><span class="scr">{{gift.Point}}</span><span class="txt">Puan</span></div></div>
                     <div class="content-share">
-                        <a href="#" class="like" id="btnUp"><i></i><span>0</span></a>
-                        <a href="#" class="comment"><i></i><span id="lblCommentCount">0</span></a>
-                        <a href="javascript:void(0);" class="btnDefault btnScore" ng-click="CreateGiftRequest();"><span>PUAN KULLAN</span></a><div class="fixer"></div>
+                        <a href="#" class="like" id="btnUp" ng-show="false"><i></i><span>0</span></a>
+                        <a href="#" class="comment" ng-show="false"><i></i><span id="lblCommentCount">0</span></a>
+                        <a href="javascript:void(0);" class="btnDefault btnScore" ng-click="UsePoint();"><span>PUAN KULLAN</span></a><div class="fixer"></div>
+                        <button class="btnDefault btnScore" style="display:none;" id="btnUse" ng-click="CreateGiftRequest();"><span>PUAN TEST</span></button>
                     </div>
                 </div>
                 <p class="item-title">Detaylı Bilgi</p>

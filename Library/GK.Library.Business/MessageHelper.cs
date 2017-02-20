@@ -218,5 +218,35 @@ namespace GK.Library.Business
 
             return returnValue;
         }
+
+        public static List<Message> GetUnReadMessages(Guid portalUserId, SqlDataAccess sda)
+        {
+
+            #region | SQL QUERY |
+
+            string sqlQuery = @"SELECT
+                                A.*
+                                ,'new_user' AS FromIdTypeName
+                                ,'new_user' AS ToIdTypeName
+                                FROM
+                                (
+	                                SELECT
+	                                m.*
+	                                    ,DENSE_RANK() OVER 
+		                                (PARTITION BY m.FromId ORDER BY m.CreatedOn DESC) AS [Rank]
+	                                FROM
+	                                v_Messages AS m (NOLOCK)
+	                                WHERE
+	                                m.ToId='{0}' AND m.HasSeen=0		
+                                ) AS A ORDER BY A.CreatedOn DESC
+                                --WHERE
+                                --A.Rank=1";
+            #endregion
+
+            DataTable dt = sda.getDataTable(string.Format(sqlQuery, portalUserId));
+
+            return dt.ToList<Message>();
+        }
+
     }
 }

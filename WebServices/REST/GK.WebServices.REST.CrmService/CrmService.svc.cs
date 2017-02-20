@@ -836,6 +836,135 @@ namespace GK.WebServices.REST.CrmService
             return returnValue;
         }
 
+        public MsCrmResult RegisterUser(Contact contact)
+        {
+            MsCrmResult returnValue = new MsCrmResult();
+
+            #region | VALIDATION |
+
+            if (string.IsNullOrWhiteSpace(contact.FirstName))
+            {
+                returnValue.Result = "Ad alanı boş olamaz";
+                return returnValue;
+            }
+
+            if (string.IsNullOrWhiteSpace(contact.LastName))
+            {
+                returnValue.Result = "Soyadı alanı boş olamaz";
+                return returnValue;
+            }
+
+            if (string.IsNullOrWhiteSpace(contact.MobilePhone))
+            {
+                returnValue.Result = "Telefon Numarası alanı boş olamaz";
+                return returnValue;
+            }
+            else
+            {
+                TelephoneNumber telNo = ValidationHelper.CheckTelephoneNumber(contact.MobilePhone);
+
+                if (!telNo.isFormatOK)
+                {
+                    returnValue.Success = false;
+                    returnValue.Result = "Cep telefonu formatı hatalıdır.";
+
+                    return returnValue;
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(contact.EmailAddress))
+            {
+                returnValue.Result = "Email alanı boş olamaz";
+                return returnValue;
+            }
+
+            if (contact.CityId == null || contact.CityId.Id == Guid.Empty)
+            {
+                returnValue.Result = "İl alanı boş olamaz";
+                return returnValue;
+            }
+
+            if (contact.TownId == null || contact.TownId.Id == Guid.Empty)
+            {
+                returnValue.Result = "İlçe alanı boş olamaz";
+                return returnValue;
+            }
+
+            if (string.IsNullOrWhiteSpace(contact.AddressDetail))
+            {
+                returnValue.Result = "Adres detayı alanı boş olamaz.";
+                return returnValue;
+            }
+
+            #endregion
+
+
+            try
+            {
+                IOrganizationService service = MSCRM.GetOrgService(true);
+
+                List<Entity> toPartyList = new List<Entity>();
+                List<Entity> fromPartyList = new List<Entity>();
+
+                EntityReference erKamil = new EntityReference("contact", new Guid("D30F27E1-AC2F-E511-80C4-000D3A216510"));
+                EntityReference erTest = new EntityReference("contact", new Guid("5B65085C-662E-E511-80C4-000D3A216510"));
+
+                string subject = "Yeni Üyelik Başvurusu";
+
+                StringBuilder sb = new StringBuilder();
+
+                sb.AppendLine("Merhabalar,</br>");
+                sb.AppendLine("Yeni üyelik başvurusu bilgileri aşağıdaki gibidir: </br></br>");
+
+                sb.AppendLine("<strong><u>Kişisel Bilgiler</u></strong></br>");
+                sb.AppendLine("<strong>Ad:</strong>" + contact.FirstName + "</br>");
+                sb.AppendLine("<strong>Soyad:</strong>" + contact.LastName + "</br>");
+                sb.AppendLine("<strong>Firma Adı:</strong>" + contact.Title + "</br>");
+                sb.AppendLine("<strong>Cinsiyet:</strong>" + (contact.Gender != null ? (contact.Gender == 1 ? "Bay" : "Bayan") : "---") + "</br>");
+                sb.AppendLine("<strong>Cep Telefonu:</strong>" + contact.MobilePhone + "</br>");
+                sb.AppendLine("<strong>Email:</strong>" + contact.EmailAddress + "</br></br>");
+
+                sb.AppendLine("<strong><u>Adres Bilgileri</u></strong></br>");
+                sb.AppendLine("<strong>İl:</strong>" + contact.CityId.Name + "</br>");
+                sb.AppendLine("<strong>İlçe:</strong>" + contact.TownId.Name + "</br>");
+                sb.AppendLine("<strong>Adres Detayı:</strong>" + contact.AddressDetail + "</br>");
+
+                sb.AppendLine("</br></br></br>");
+                sb.AppendLine("İyi çalışmalar...");
+
+
+                Entity fromParty = new Entity("activityparty");
+                fromParty["partyid"] = new EntityReference("systemuser", new Guid(Globals.AdminId));
+
+                fromPartyList.Add(fromParty);
+
+                Entity toParty1 = new Entity("activityparty");
+                toParty1["partyid"] = erKamil;
+
+                Entity toParty2 = new Entity("activityparty");
+                toParty2["partyid"] = erTest;
+
+                Entity toParty3 = new Entity("activityparty");
+                toParty3["addressused"] = "uye@kaleanahtarcilarkulubu.com.tr";
+
+                toPartyList.Add(toParty1);
+                toPartyList.Add(toParty2);
+                toPartyList.Add(toParty3);
+
+                GeneralHelper.SendMail(Guid.Empty, string.Empty, fromPartyList.ToArray(), toPartyList.ToArray(), subject, sb.ToString(), service);
+
+                returnValue.Success = true;
+
+            }
+            catch (Exception ex)
+            {
+
+                returnValue.Result = ex.Message;
+            }
+
+            return returnValue;
+        }
+
         #endregion
 
         #region | GRAFFITI OPERATIONS |
@@ -999,6 +1128,52 @@ namespace GK.WebServices.REST.CrmService
             }
             return returnValue;
         }
+
+        public MsCrmResult DeleteGraffiti(string token, string graffitiId)
+        {
+            MsCrmResult returnValue = new MsCrmResult();
+            LoginSession ls = new LoginSession();
+
+            try
+            {
+                if (!string.IsNullOrEmpty(token) || !string.IsNullOrEmpty(graffitiId))
+                {
+                    #region | CHECK SESSION |
+                    MsCrmResultObject sessionResult = GetUserSession(token);
+
+                    if (!sessionResult.Success)
+                    {
+                        returnValue.Result = sessionResult.Result;
+                        return returnValue;
+                    }
+                    else
+                    {
+                        ls = (LoginSession)sessionResult.ReturnObject;
+                    }
+
+                    #endregion
+
+                    IOrganizationService service = MSCRM.GetOrgService(true);
+
+                    service.Delete("new_graffiti", new Guid(graffitiId));
+
+                    returnValue.Success = true;
+                    returnValue.Result = "Duvar yazısı silindi";
+                }
+                else
+                {
+                    returnValue.Success = false;
+                    returnValue.Result = "M003"; //"Eksik parametre!-SaveGraffiti";
+                }
+            }
+            catch (Exception ex)
+            {
+                returnValue.Success = false;
+                returnValue.Result = ex.Message + "-SaveGraffiti";
+            }
+            return returnValue;
+        }
+
 
         #endregion
 
@@ -3924,7 +4099,7 @@ namespace GK.WebServices.REST.CrmService
             return json;
         }
 
-        public string GetGiftList(string token, string categoryId, string sortyType)
+        public string GetGiftList(string token, string categoryId, string sortType)
         {
             MsCrmResultObject returnValue = new MsCrmResultObject();
 
@@ -3954,7 +4129,7 @@ namespace GK.WebServices.REST.CrmService
                     sda = new SqlDataAccess();
                     sda.openConnection(Globals.ConnectionString);
 
-                    returnValue = GiftHelper.GetGiftList(ls.PortalId, ls.PortalUserId, new Guid(categoryId), sortyType, sda);
+                    returnValue = GiftHelper.GetGiftList(ls.PortalId, ls.PortalUserId, new Guid(categoryId), sortType, sda);
                 }
                 else
                 {
@@ -4324,6 +4499,62 @@ namespace GK.WebServices.REST.CrmService
             return messageInfo;
         }
 
+        public MsCrmResultObj<List<Message>> GetUnReadMessages(string token, string requestId)
+        {
+            MsCrmResultObj<List<Message>> returnValue = new MsCrmResultObj<List<Message>>();
+            LoginSession ls = new LoginSession();
+
+            try
+            {
+                if (!string.IsNullOrEmpty(token) || !string.IsNullOrEmpty(requestId))
+                {
+                    #region | CHECK SESSION |
+                    MsCrmResultObject sessionResult = GetUserSession(token);
+
+                    if (!sessionResult.Success)
+                    {
+                        returnValue.Result = sessionResult.Result;
+                        return returnValue;
+                    }
+                    else
+                    {
+                        ls = (LoginSession)sessionResult.ReturnObject;
+                    }
+
+                    #endregion
+
+                    sda = new SqlDataAccess();
+                    sda.openConnection(Globals.ConnectionString);
+
+
+                    List<Message> lstMessages = MessageHelper.GetUnReadMessages(ls.PortalUserId, sda);
+
+                    returnValue.ReturnObject = lstMessages;
+
+                    returnValue.Success = true;
+
+                }
+                else
+                {
+                    returnValue.Success = false;
+                    returnValue.Result = "M003"; //"Eksik parametre!";
+                }
+            }
+            catch (Exception ex)
+            {
+                returnValue.Result = ex.Message;
+            }
+            finally
+            {
+                if (sda != null)
+                {
+                    sda.closeConnection();
+                }
+            }
+
+            return returnValue;
+        }
+
 
         #endregion
 
@@ -4512,6 +4743,205 @@ namespace GK.WebServices.REST.CrmService
             catch (Exception ex)
             {
                 returnValue.Result = ex.Message;
+            }
+
+            return returnValue;
+        }
+
+        public MsCrmResultObj<List<DiscoveryForm>> GetUserDiscoveryFormList(string token)
+        {
+            MsCrmResultObj<List<DiscoveryForm>> returnValue = new MsCrmResultObj<List<DiscoveryForm>>();
+            LoginSession ls = new LoginSession();
+
+            try
+            {
+                if (!string.IsNullOrEmpty(token))
+                {
+                    #region | CHECK SESSION |
+                    MsCrmResultObject sessionResult = GetUserSession(token);
+
+                    if (!sessionResult.Success)
+                    {
+                        returnValue.Result = sessionResult.Result;
+                        return returnValue;
+                    }
+                    else
+                    {
+                        ls = (LoginSession)sessionResult.ReturnObject;
+                    }
+
+                    #endregion
+
+                    IOrganizationService service = MSCRM.GetOrgService(true);
+
+                    sda = new SqlDataAccess();
+                    sda.openConnection(Globals.ConnectionString);
+
+
+                    returnValue = DiscoveryFormHelper.GetUserDiscoveryFormList(ls.PortalUserId, sda);
+
+                }
+                else
+                {
+                    returnValue.Success = false;
+                    returnValue.Result = "M003"; //"Eksik parametre!";
+                }
+            }
+            catch (Exception ex)
+            {
+                returnValue.Result = ex.Message;
+            }
+            finally
+            {
+                if (sda != null)
+                {
+                    sda.closeConnection();
+                }
+            }
+
+            return returnValue;
+        }
+        #endregion
+
+        #region | STEEL DOOR OPERATIONS |
+
+        public MsCrmResult SaveSteelDoorForm(string token, SteelDoor steelDoor)
+        {
+            MsCrmResult returnValue = new MsCrmResult();
+            LoginSession ls = new LoginSession();
+
+            try
+            {
+                if (!string.IsNullOrEmpty(token))
+                {
+                    #region | CHECK SESSION |
+                    MsCrmResultObject sessionResult = GetUserSession(token);
+
+                    if (!sessionResult.Success)
+                    {
+                        returnValue.Result = sessionResult.Result;
+                        return returnValue;
+                    }
+                    else
+                    {
+                        ls = (LoginSession)sessionResult.ReturnObject;
+                    }
+
+                    #endregion
+
+                    #region | VALIDATION |
+
+                    if (string.IsNullOrEmpty(steelDoor.FirstName))
+                    {
+                        returnValue.Result = "Ad alanı boş olamaz";
+                        return returnValue;
+                    }
+
+                    if (string.IsNullOrEmpty(steelDoor.LastName))
+                    {
+                        returnValue.Result = "Soyadı alanı boş olamaz";
+                        return returnValue;
+                    }
+
+                    if (string.IsNullOrEmpty(steelDoor.PhoneNumber))
+                    {
+                        returnValue.Result = "Telefon Numarası alanı boş olamaz";
+                        return returnValue;
+                    }
+
+                    if (string.IsNullOrEmpty(steelDoor.Email))
+                    {
+                        returnValue.Result = "Email alanı boş olamaz";
+                        return returnValue;
+                    }
+
+                    if (steelDoor.CityId == null || steelDoor.CityId.Id == Guid.Empty)
+                    {
+                        returnValue.Result = "İl alanı boş olamaz";
+                        return returnValue;
+                    }
+
+                    if (steelDoor.TownId == null || steelDoor.TownId.Id == Guid.Empty)
+                    {
+                        returnValue.Result = "İlçe alanı boş olamaz";
+                        return returnValue;
+                    }
+
+                    #endregion
+
+                    IOrganizationService service = MSCRM.GetOrgService(true);
+
+                    sda = new SqlDataAccess();
+                    sda.openConnection(Globals.ConnectionString);
+
+                    steelDoor.Name = steelDoor.UserId.Name + "|" + DateTime.Now.ToString("dd.MM.yyyy HH:mm");
+
+                    returnValue = SteelDoorHelper.Insert(steelDoor, service);
+
+                }
+                else
+                {
+                    returnValue.Success = false;
+                    returnValue.Result = "M003"; //"Eksik parametre!";
+                }
+            }
+            catch (Exception ex)
+            {
+                returnValue.Result = ex.Message;
+            }
+
+            return returnValue;
+        }
+
+        public MsCrmResultObj<List<SteelDoor>> GetUserSteelDoors(string token)
+        {
+            MsCrmResultObj<List<SteelDoor>> returnValue = new MsCrmResultObj<List<SteelDoor>>();
+            LoginSession ls = new LoginSession();
+
+            try
+            {
+                if (!string.IsNullOrEmpty(token))
+                {
+                    #region | CHECK SESSION |
+                    MsCrmResultObject sessionResult = GetUserSession(token);
+
+                    if (!sessionResult.Success)
+                    {
+                        returnValue.Result = sessionResult.Result;
+                        return returnValue;
+                    }
+                    else
+                    {
+                        ls = (LoginSession)sessionResult.ReturnObject;
+                    }
+
+                    #endregion
+
+                    IOrganizationService service = MSCRM.GetOrgService(true);
+
+                    sda = new SqlDataAccess();
+                    sda.openConnection(Globals.ConnectionString);
+
+
+                    returnValue = SteelDoorHelper.GetUserSteelDoors(ls.PortalUserId, sda);
+
+                }
+                else
+                {
+                    returnValue.Success = false;
+                    returnValue.Result = "M003"; //"Eksik parametre!";
+                }
+            }
+            catch (Exception ex)
+            {
+                returnValue.Result = ex.Message;
+            }
+            finally
+            {
+                if (sda != null)
+                {
+                    sda.closeConnection();
+                }
             }
 
             return returnValue;

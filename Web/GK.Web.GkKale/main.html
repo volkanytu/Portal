@@ -48,6 +48,7 @@
     <script src="js/jquery/jquery.simplemodal.js"></script>
     <script src="js/jquery/osx.js"></script>
     <script src="js/socket.io.js"></script>
+    <script src="js/underscore-min.js"></script>
 
     <script type="text/javascript">
 
@@ -91,7 +92,10 @@
             <div class="headerHolder">
                 <div class="col col1">
                     <div class="mbMenu hidden"><a href="javascript:void(0);" class="mbMbtn"></a></div>
-                    <div class="grid grid1"><a href="#" ng-click="openPage($event,'duvarYazisi.html')" class="logo"><img src="./images/logo.png" border="0" title="Kale Kilit" /></a></div>
+                    <div class="grid grid1">
+                        <a href="#" ng-click="openPage($event,'duvarYazisi.html')" class="logo">
+                        <img src="./images/logo.png" border="0" title="Kale Kilit" /></a>
+                    </div>
                     <div class="grid grid2">
                         <div class="headerMenu">
                             <ul>
@@ -112,11 +116,37 @@
 
                 <!--Mobile Logout-->
                 <div class="mLogout">
-                    <div class="mLogoutHldr">
-                        <div class="prf"><a href="javascript:void(0);" class="prfbtn"><span>{{contact.FirstName+" "+contact.LastName}}</span><i class="icon1 iconMember"></i></a></div>
-                        <div class="mLogoutSub">
-                            <a href="javascript:void(0);" id="btnMyProfile" ng-click="openPage($event,'profilDetay.html')"><i class="icon4 iconPrf"></i>Profilim</a>
-                            <a href="javascript:void(0);" id="btnLogOut" ng-click="CloseSession()"><i class="icon4 iconLogout"></i>Çıkış</a>
+                    <div class="logoutWrp">
+                        <div class="ntfPp">
+                            <span>{{notificationCount}}</span><i></i>
+                            <!--Notification-->
+                            <div class="ntfPopup">
+                                <h2>Bildirimler</h2>
+                                <div class="ntfHolder">
+                                    <ul>
+                                        <li ng-repeat="mess in Unreads" fromid="{{mess.FromId.Id}}">
+                                            <a href="javascript:void(0);" ng-click="OpenUserChatPage(mess.FromId.Id,mess.FromId.Name);">
+                                                <div class="ntfUserImg">
+                                                    <img src="images/ntf.png" />
+                                                </div>
+                                                <div class="ntfComment">
+                                                    <p><b>{{mess.FromId.Name}}</b>{{mess.Content}}</p>
+                                                    <p class="pull-right" style="font-size:xx-small;">{{mess.CreatedOnString}}</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <!--<div class="showAll"><a href="javascript:void(0);">Tümünü Göster</a></div>-->
+                                </div>
+                            </div>
+                            <!--Notification-->
+                        </div>
+                        <div class="mLogoutHldr">
+                            <div class="prf"><a href="javascript:void(0);" class="prfbtn"><span>{{contact.FirstName+" "+contact.LastName}}</span><i class="icon1 iconMember"></i></a></div>
+                            <div class="mLogoutSub">
+                                <a href="javascript:void(0);" id="btnMyProfile" ng-click="openPage($event,'profilDetay.html')"><i class="icon4 iconPrf"></i>Profilim</a>
+                                <a href="javascript:void(0);" id="btnLogOut" ng-click="CloseSession()"><i class="icon4 iconLogout"></i>Çıkış</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -132,7 +162,9 @@
                             <!--Profile Img-->
                             <!--Profile Info-->
                             <div class="prfInf">
-                                <h1>{{contact.FirstName+" "+contact.LastName}}</h1>
+                                <h1>
+                                    {{contact.FirstName+" "+contact.LastName}}
+                                </h1>
                                 <span>{{contact.Title}}</span>
                             </div>
                             <!--Profile Info-->
@@ -179,6 +211,7 @@
                                 <li><a href="javascript:void(0);" type="menu" id="btnForum" ng-click="openPage($event,'forum.html')"><i class="icon2 iconFr"></i>Forum</a></li>
                                 <!--<li><a href="javascript:void(0);" type="menu" id="btnSurvey" ng-click="openPage($event,'yapimAsamasinda.html')"><i class="icon2 iconAnk"></i>Anket</a></li>-->
                                 <li><a href="javascript:void(0);" type="menu" id="btnSurvey" ng-click="openPage($event,'ucretsizKesifFormu.html')"><i class="icon2 iconAnk"></i>Ücretsiz Keşif Formu</a></li>
+                                <li><a href="javascript:void(0);" type="menu" id="btnSteel" ng-click="openPage($event,'celikKapiFormu.html')"><i class="icon2 iconAnk"></i>Kale Çelik Kapı</a></li>
                                 <li><a href="javascript:void(0);" type="menu" id="btnRequests" ng-click="openPage($event,'isEmirleri.html')"><i class="icon2 iconAnk"></i>İş Emirleri</a></li>
                                 <li><a href="javascript:void(0);" type="menu" id="btnPoints" ng-click="openPage($event,'puanlarim.html')"><i class="icon2 iconP"></i>Puanlarım</a></li>
                             </ul>

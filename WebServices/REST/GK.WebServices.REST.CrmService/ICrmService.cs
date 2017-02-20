@@ -381,7 +381,7 @@ namespace GK.WebServices.REST.CrmService
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json
             , UriTemplate = "/GetGiftList")]
-        string GetGiftList(string token, string categoryId, string sortyType);
+        string GetGiftList(string token, string categoryId, string sortType);
 
         [OperationContract]
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json
@@ -451,5 +451,35 @@ namespace GK.WebServices.REST.CrmService
         [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json
             , UriTemplate = "/AnswerNpsSurvey")]
         MsCrmResult AnswerNpsSurvey(string npsSurveyId, int suggest, int suggestPoint);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json
+            , UriTemplate = "/GetUserDiscoveryFormList")]
+        MsCrmResultObj<List<DiscoveryForm>> GetUserDiscoveryFormList(string token);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json
+            , UriTemplate = "/GetUnReadMessages")]
+        MsCrmResultObj<List<Message>> GetUnReadMessages(string token, string requestId);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json
+            , UriTemplate = "/RegisterUser")]
+        MsCrmResult RegisterUser(Contact contact);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json
+            , UriTemplate = "/SaveSteelDoorForm")]
+        MsCrmResult SaveSteelDoorForm(string token, SteelDoor steelDoor);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json
+            , UriTemplate = "/GetUserSteelDoors")]
+        MsCrmResultObj<List<SteelDoor>> GetUserSteelDoors(string token);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json
+            , UriTemplate = "/DeleteGraffiti")]
+        MsCrmResult DeleteGraffiti(string token, string graffitiId);
     }
 }

@@ -20,6 +20,8 @@
     <script src="js/pagescripts/GlobalVariables.js"></script>
     <script src="js/jquery/jquery.session.js"></script>
     <script src="js/pagescripts/languageMessagesJS.js"></script>
+    <script src="js/jquery/notify.js"></script>
+    <script src="js/customPlugin.js"></script>
 
     <script type="text/javascript">
 
@@ -104,7 +106,7 @@
                             </div>
                             <div class="error" ng-show="showError"><span class="errorText">{{errorText}}</span></div>
                             <div class="loginInfo">
-                                <span class="infoText">Üyelik için <a href="mailto:uye@kaleanahtarcilarkulubu.com.tr" style="font-weight:bold;">uye@kaleanahtarcilarkulubu.com.tr</a> ile iletişime geçebilirsiniz.</span>
+                                <span class="infoText">Üyelik için <a href="#" ng-click="OpenRegisterPage();" style="font-weight:bold;">Tıklayınız!</a></span>
                             </div>
 
                         </div>

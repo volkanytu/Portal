@@ -105,11 +105,13 @@ namespace GK.Library.Business
                                         u.new_userId AS Id
                                         ,u.new_name AS IdName
                                         ,'new_user' AS IdTypeName
+                                        ,u.new_password AS ClearPassword
                                         ,c.FirstName
                                         ,c.LastName
                                         ,c.JobTitle AS CompanyName
                                         ,c.MobilePhone AS MobilePhoneNumber
                                         ,c.Telephone1 AS WorkPhoneNumber
+                                        ,c.EmailAddress1 AS EmailAddress
                                         ,c.new_cityId AS CityId
                                         ,c.new_cityIdName AS CityIdName
                                         ,'new_city' AS CityIdTypeName
@@ -147,6 +149,83 @@ namespace GK.Library.Business
 	                                    c.new_cityId IS NOT NULL
                                     AND
 	                                    c.new_townId IS NOT NULL";
+
+                #endregion
+
+                DataTable dt = sda.getDataTable(string.Format(sqlQuery, portalId));
+
+                if (dt.Rows.Count > 0)
+                {
+                    List<AssemblerInfo> assemblerList = dt.ToList<AssemblerInfo>();
+
+                    returnValue.Success = true;
+                    returnValue.ReturnObject = assemblerList;
+                }
+                else
+                {
+                    returnValue.Result = "Kayıt bulunamadı.";
+                }
+            }
+            catch (Exception ex)
+            {
+                returnValue.HasException = true;
+                returnValue.Result = ex.Message;
+            }
+
+            return returnValue;
+        }
+
+        public static MsCrmResultObj<List<AssemblerInfo>> GetAllMemberList(Guid portalId, SqlDataAccess sda)
+        {
+            MsCrmResultObj<List<AssemblerInfo>> returnValue = new MsCrmResultObj<List<AssemblerInfo>>();
+
+            try
+            {
+                #region | SQL QUERY |
+
+                string sqlQuery = @"SELECT 
+	                                    DISTINCT
+                                        u.new_userId AS Id
+                                        ,u.new_name AS IdName
+                                        ,'new_user' AS IdTypeName
+                                        ,u.new_password AS ClearPassword
+                                        ,c.FirstName
+                                        ,c.LastName
+                                        ,c.JobTitle AS CompanyName
+                                        ,c.MobilePhone AS MobilePhoneNumber
+                                        ,c.Telephone1 AS WorkPhoneNumber
+                                        ,c.EmailAddress1 AS EmailAddress
+                                        ,c.new_cityId AS CityId
+                                        ,c.new_cityIdName AS CityIdName
+                                        ,'new_city' AS CityIdTypeName
+                                        ,c.new_townId AS TownId
+                                        ,c.new_townIdName AS TownIdName
+                                        ,'new_town' AS TownIdTypeName
+                                        ,c.new_addressdetail AS AddressDetail
+                                    FROM
+                                    new_user AS u (NOLOCK)
+                                        JOIN
+                                            new_new_user_new_role AS ur (NOLOCK)
+                                                ON
+                                                ur.new_userid=u.new_userId
+                                        JOIN
+                                            new_role AS r (NOLOCK)
+                                                ON
+                                                ur.new_roleid=r.new_roleId
+                                                AND
+                                                r.statecode=0
+                                                AND
+                                                r.statuscode=1 --Active
+                                                AND
+                                                r.new_portalId='{0}'
+                                        JOIN
+                                            Contact AS c (NOLOCK)
+                                                ON
+                                                u.new_contactId=c.ContactId
+                                    WHERE
+                                        u.statecode=0
+                                    AND
+                                        u.statuscode=1 --Active";
 
                 #endregion
 
@@ -216,7 +295,7 @@ namespace GK.Library.Business
                     List<AssemblerInfo> assemblerList = dt.ToList<AssemblerInfo>();
 
                     returnValue.Success = true;
-                    returnValue.ReturnObject = assemblerList[0];
+                    returnValue.ReturnObject = assemblerList.FirstOrDefault();
                 }
                 else
                 {
@@ -232,6 +311,66 @@ namespace GK.Library.Business
             return returnValue;
         }
 
+        public static MsCrmResultObj<AssemblerInfo> GetAssemblerInfo(string emailAddress, string password, SqlDataAccess sda)
+        {
+            MsCrmResultObj<AssemblerInfo> returnValue = new MsCrmResultObj<AssemblerInfo>();
+
+            try
+            {
+                #region | SQL QUERY |
+
+                string sqlQuery = @"SELECT 
+	                                    DISTINCT
+                                        u.new_userId AS Id
+                                        ,u.new_name AS IdName
+                                        ,'new_user' AS IdTypeName
+                                        ,c.FirstName
+                                        ,c.LastName
+                                        ,c.JobTitle AS CompanyName
+                                        ,c.MobilePhone AS MobilePhoneNumber
+                                        ,c.Telephone1 AS WorkPhoneNumber
+                                        ,c.new_cityId AS CityId
+                                        ,c.new_cityIdName AS CityIdName
+                                        ,'new_city' AS CityIdTypeName
+                                        ,c.new_townId AS TownId
+                                        ,c.new_townIdName AS TownIdName
+                                        ,'new_town' AS TownIdTypeName
+                                        ,c.new_addressdetail AS AddressDetail
+                                    FROM
+                                    new_user AS u (NOLOCK)
+                                        JOIN
+                                            Contact AS c (NOLOCK)
+                                                ON
+                                                u.new_contactId=c.ContactId
+                                    WHERE
+	                                    c.EmailAddress1='{0}'
+                                        AND
+                                        u.new_password='{1}'";
+
+                #endregion
+
+                DataTable dt = sda.getDataTable(string.Format(sqlQuery, emailAddress, password));
+
+                if (dt.Rows.Count > 0)
+                {
+                    List<AssemblerInfo> assemblerList = dt.ToList<AssemblerInfo>();
+
+                    returnValue.Success = true;
+                    returnValue.ReturnObject = assemblerList.FirstOrDefault();
+                }
+                else
+                {
+                    returnValue.Result = "Kayıt bulunamadı.";
+                }
+            }
+            catch (Exception ex)
+            {
+                returnValue.HasException = true;
+                returnValue.Result = ex.Message;
+            }
+
+            return returnValue;
+        }
 
         public static MsCrmResultObj<List<AssemblyRequestInfo>> GetAssemblyRequestList(Guid userId, SqlDataAccess sda)
         {
@@ -333,7 +472,7 @@ namespace GK.Library.Business
                     List<AssemblyRequestInfo> assemblyRequestList = dt.ToList<AssemblyRequestInfo>();
 
                     returnValue.Success = true;
-                    returnValue.ReturnObject = assemblyRequestList[0];
+                    returnValue.ReturnObject = assemblyRequestList.FirstOrDefault();
                 }
                 else
                 {

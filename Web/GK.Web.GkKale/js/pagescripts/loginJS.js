@@ -154,12 +154,23 @@ var LoginHelper = {
             }
         });
     },
-    "ShowDialog": function ShowDialog(html, title, className) {
+    "ShowDialog": function ShowDialog(html, title, className, showCloseButton, closeCallBackFunction) {
         bootbox.dialog({
             message: html,
             title: title,
-            className: className
+            className: className,
+            closeButton: showCloseButton == null ? true : showCloseButton,
+            onEscape: closeCallBackFunction
         });
+    },
+    "CloseDialog": function () {
+
+        bootbox.hideAll();
+    },
+    "ShowNotify": function (message, type) {
+        //Types:success,info,warn,error
+
+        $.notify(message, type);
     },
     "PortalInfo": {},
     "LanguageCode": "tr"
@@ -237,6 +248,11 @@ function loginController($scope) {
 
     $scope.ForgotPassword = function () {
         document.location.href = "passwordForgot.html?portalid=" + $scope.portal.Id;
+    };
+
+    $scope.OpenRegisterPage = function () {
+
+        LoginHelper.ShowDialog("<iframe src='popupRegister.html' style='width:100%;height:570px;' />", null, null, true);
     };
 }
 

@@ -91,6 +91,7 @@ namespace GK.WindowsServices.SendNpsSurvey
                 string fullName = requestInfo.FirstName + " " + requestInfo.LastName;
                 string mailBody = string.Format(Constants.SURVEY_MAILD_BODY, fullName, npsSurveyId.ToString());
 
+                FileLogHelper.LogFunction(this.GetType().Name, "SendNpsSurvey_ServiceProcess_SendSurveydMail_INFO:" + requestInfo.EmailAddress, ERROR_LOG_PATH);
                 MsCrmResult resultSendMail = SendMail(requestInfo.EmailAddress, "Kale Anahtar Değerlendirme Anketi", mailBody);
 
                 if (resultSendMail.Success)
@@ -136,6 +137,7 @@ namespace GK.WindowsServices.SendNpsSurvey
 
                 mail.Subject = subject;
                 mail.Body = mailBody;
+                mail.IsBodyHtml = true;
 
                 SmtpClient smtp = new SmtpClient();
                 smtp.Host = MAIL_HOST;

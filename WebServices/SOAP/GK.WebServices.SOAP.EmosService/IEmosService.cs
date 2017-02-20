@@ -32,5 +32,11 @@ namespace GK.WebServices.SOAP.EmosService
 
         [OperationContract]
         MsCrmResultObj<List<AssemblerInfo>> GetAllAssemblerList(string token);
+
+        [OperationContract]
+        MsCrmResultObj<List<AssemblerInfo>> GetAllMemberList(string token);
+
+        [OperationContract]
+        MsCrmResultObj<AssemblerInfo> GetUser(string token, string emailaddress, string password);
     }
 }

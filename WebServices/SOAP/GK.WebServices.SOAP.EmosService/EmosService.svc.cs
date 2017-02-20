@@ -458,5 +458,92 @@ namespace GK.WebServices.SOAP.EmosService
             return returnValue;
         }
 
+        public MsCrmResultObj<List<AssemblerInfo>> GetAllMemberList(string token)
+        {
+            MsCrmResultObj<List<AssemblerInfo>> returnValue = new MsCrmResultObj<List<AssemblerInfo>>();
+
+            LoginSession ls = new LoginSession();
+
+            try
+            {
+                #region | CHECK SESSION |
+                MsCrmResultObj<LoginSession> sessionResult = GetUserSession(token);
+
+                if (!sessionResult.Success)
+                {
+                    returnValue.Result = sessionResult.Result;
+                    return returnValue;
+                }
+                else
+                {
+                    ls = sessionResult.ReturnObject;
+                }
+
+                #endregion
+
+                _sda = new SqlDataAccess();
+                _sda.openConnection(Globals.ConnectionString);
+
+                returnValue = AssemblyRequestHelper.GetAllMemberList(new Guid(Globals.DefaultPortalId), _sda);
+            }
+            catch (Exception ex)
+            {
+                returnValue.HasException = true;
+                returnValue.Result = ex.Message;
+            }
+            finally
+            {
+                if (_sda != null)
+                {
+                    _sda.closeConnection();
+                }
+            }
+
+            return returnValue;
+        }
+
+        public MsCrmResultObj<AssemblerInfo> GetUser(string token, string emailaddress, string password)
+        {
+            MsCrmResultObj<AssemblerInfo> returnValue = new MsCrmResultObj<AssemblerInfo>();
+
+            LoginSession ls = new LoginSession();
+
+            try
+            {
+                #region | CHECK SESSION |
+                MsCrmResultObj<LoginSession> sessionResult = GetUserSession(token);
+
+                if (!sessionResult.Success)
+                {
+                    returnValue.Result = sessionResult.Result;
+                    return returnValue;
+                }
+                else
+                {
+                    ls = sessionResult.ReturnObject;
+                }
+
+                #endregion
+
+                _sda = new SqlDataAccess();
+                _sda.openConnection(Globals.ConnectionString);
+
+                returnValue = AssemblyRequestHelper.GetAssemblerInfo(emailaddress, password, _sda);
+            }
+            catch (Exception ex)
+            {
+                returnValue.HasException = true;
+                returnValue.Result = ex.Message;
+            }
+            finally
+            {
+                if (_sda != null)
+                {
+                    _sda.closeConnection();
+                }
+            }
+
+            return returnValue;
+        }
     }
 }

@@ -1,0 +1,162 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html ng-app="" ng-controller="steelDoorController">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kale Kilit Platformu</title>
+
+    <!--<link href="styles/bootstrap.min.css" rel="stylesheet" />-->
+    <link href="styles/bootsdatetime.css" rel="stylesheet" />
+    <link href="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
+    <link href="./styles/main.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular-route.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="http://eternicode.github.io/bootstrap-datepicker/bootstrap-datepicker/js/locales/bootstrap-datepicker.tr.js"></script>
+
+    <script src="js/jquery/jquery.widget.min.js"></script>
+    <script src="js/jquery/jquery.session.js"></script>
+    <script src="js/jquery/purl.js"></script>
+    <script src="js/jquery/jquery.maskedinput.js"></script>
+    <script src="js/pagescripts/GlobalVariables.js"></script>
+    <script src="js/pagescripts/languageMessagesJS.js"></script>
+    <script src="js/pagescripts/steeldoorformJS.js"></script>
+    <script src="js/customPlugin.js"></script>
+</head>
+<body style="background:#fff;">
+    <!--Main Content-->
+    <div class="mainContent scorePage profileDetailPage clearfix">
+
+        <div id="divMain">
+
+            <!--Grid-->
+            <div class="grid-row grid-data">
+
+                <!--Title-->
+                <div class="title-content title-survey">
+                    <h1><i class="icon3 iconSurvey"></i><span>Kale Çelik Kapı Formu<i></i></span></h1>
+                </div>
+                <!--Title-->
+                <!--Data Enter-->
+                <div class="row row-data-enter">
+
+                    <div class="data-holder left">
+                        <div class="ng-control"><label class="ng-binding">Ad</label></div>
+                        <div class="input-control">
+                            <input type="text" placeholder="" ng-model="steelDoorForm.FirstName" />
+                        </div>
+                    </div>
+
+                    <div class="data-holder right">
+                        <div class="ng-control"><label class="ng-binding">Soyad</label></div>
+                        <div class="input-control">
+                            <input type="text" placeholder="" ng-model="steelDoorForm.LastName" />
+                        </div>
+                    </div>
+                    <div class="fixer"></div>
+                </div>
+
+                <div class="row row-data-enter">
+
+                    <div class="data-holder left">
+                        <div class="ng-control"><label class="ng-binding">Telefon</label></div>
+                        <div class="input-control">
+                            <input type="text" id="txtPhoneNumber" placeholder="" ng-model="steelDoorForm.PhoneNumber" />
+                        </div>
+                    </div>
+
+                    <div class="data-holder right">
+                        <div class="ng-control"><label class="ng-binding">Email</label></div>
+                        <div class="input-control">
+                            <input type="text" placeholder="" ng-model="steelDoorForm.Email" />
+                        </div>
+                    </div>
+                    <div class="fixer"></div>
+                </div>
+
+                <div class="row row-data-enter">
+
+                    <div class="data-holder left">
+                        <div class="ng-control"><label class="ng-binding">İl</label></div>
+                        <div class="input-control select">
+                            <select ng-model="steelDoorForm.CityId" id="cityId"
+                                    ng-options="city as city.Name for city in cities"
+                                    ng-change="CityChange();"></select>
+                        </div>
+                        <div class="fixer"></div>
+                    </div>
+
+                    <div class="data-holder right">
+                        <div class="ng-control"><label class="ng-binding">İlçe</label></div>
+                        <div class="input-control select">
+                            <select ng-model="steelDoorForm.TownId"
+                                    ng-options="town as town.Name for town in towns"></select>
+                        </div>
+                        <div class="fixer"></div>
+                    </div>
+
+                    <!--Data Enter-->
+                </div>
+                <!--Grid-->
+                <!--Grid-->
+                <div class="grid-row grid-data-btn">
+                    <div class="row row-data-btn">
+                        <button class="btnPrfUpdate" ng-click="Send();">
+                            <span>GÖNDER</span>
+                        </button>
+                    </div>
+                </div>
+                <!--Grid-->
+                <!--Grid-->
+                <div class="grid-row grid-data-wrng">
+                    <div class="row row-data-wrng">
+                        <p>** çalışma saatlerimiz 07:30 ile 17:30 arasıdır. 17:30 sonrasında gelen talepler ile bir sonraki resmi iş günü irtibata geçilecektir.</p>
+                    </div>
+                </div>
+                <!--Grid-->
+            </div>
+            <!--Grid-->
+            <div class="grid-row grid-data-wrng" ng-show="showOldForms">
+                <div class="detail-title"><span>Eski Kale Çelik Kapı Formları</span></div>
+                <div class="row row-system-list">
+                    <div class="table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ad</th>
+                                    <th>Soyad</th>
+                                    <th>İl</th>
+                                    <th>İlçe</th>
+                                    <th>Durum</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="row in oldForms | orderBy:'-CreatedOn'">
+                                    <td style="padding-left:0px;">{{row.FirstName}}</td>
+                                    <td>{{row.LastName}}</td>
+                                    <td>{{row.CityId.Name}}</td>
+                                    <td>{{row.TownId.Name}}</td>
+                                    <td>{{row.Status.Value}}</td>
+                                    <td style="padding:10px;">
+                                        <button class="btnPrfUpdate" style="padding:5px; margin:0px;" ng-click="Edit(row.Id);">
+                                            <span>>></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!--Grid-->
+        </div>
+    </div>
+    <!--Main Content-->
+</body>
+</html>

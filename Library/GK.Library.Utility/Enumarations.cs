@@ -25,7 +25,15 @@ namespace GK.Library.Utility
         ServiceSent = 100000000,
         ServiceError = 100000001,
         LotusConfirmed = 100000002,
-        CrmConfirmed = 100000003
+        CrmConfirmed = 100000003,
+        Result_Negative = 100000004
+    }
+
+    public enum SteelDoorStatus
+    {
+        Waiting = 1,
+        CrmConfirmed = 100000000,
+        Result_Negative = 100000001
     }
 
     public enum GiftStatus
@@ -52,15 +60,16 @@ namespace GK.Library.Utility
         EditArticle,
         EditVideo,
         Login,
-        UpdateProfile,
+        UpdateProfile=100000005,
         Survey,
         PostComment,
         GraffitiText,
         GraffitiMedia,
-        ForumSubject,
+        ForumSubject=100000010,
         PointCode,
         UsePoint,
-        KGSSales
+        KGSSales,
+        SteelDoor
     }
 
     public enum ScorePeriod

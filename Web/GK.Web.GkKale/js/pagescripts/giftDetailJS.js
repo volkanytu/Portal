@@ -92,11 +92,16 @@ var GiftDetailtHelper = {
             }
         });
     },
+    "UseGift": function () {
+
+        alert("asdadas");
+    },
     "UserId": "",
     "PortalId": "",
     "GiftId": "",
     "Token": "",
 };
+
 
 function giftDetailController($scope, $sce) {
 
@@ -168,7 +173,9 @@ function giftDetailController($scope, $sce) {
         });
     });
 
-    $scope.CreateGiftRequest = function () {
+    $scope.CreateGiftRequest = function () {        
+
+        parent.IndexHelper.CloseDialog();
 
         GiftDetailtHelper.CreateGiftRequest(GiftDetailtHelper.GiftId, function (e) {
 
@@ -178,6 +185,20 @@ function giftDetailController($scope, $sce) {
             else {
                 parent.IndexHelper.ToastrShow("error", ReturnMessage(parent.IndexHelper.LanguageCode, e.Result), "Hata");
             }
+
+        });
+    };
+
+    $scope.UsePoint = function () {
+
+        var html = "";
+        
+        html += "<p>İlgili hediye kaydı için talep oluşturmak istediğinizden emin misiniz?</p>";
+        html += "<div class='btn'><a href='#' onclick=\"$('#ifrmContent')[0].contentWindow.btnUse.click();\" class='btnDefault btnReq'><span>EVET</span></a></div>";
+        html += "<div class='btn'><a href='#' onclick='parent.IndexHelper.CloseDialog();' class='btnDefault btnAllFriend'><span>HAYIR</span></a></div>";
+
+        parent.IndexHelper.ShowDialog(html, "Onay", null, true, function () {
+
 
         });
     };
