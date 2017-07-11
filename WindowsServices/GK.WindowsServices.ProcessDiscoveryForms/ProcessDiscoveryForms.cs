@@ -151,7 +151,7 @@ namespace GK.WindowsServices.ProcessDiscoveryForms
 
                 lotusService.RESPONSE result = lotus.CREATERECORD("A3108", Convert.ToDouble(discoveryForm.FormCode), discoveryForm.FirstName, discoveryForm.LastName, discoveryForm.Email, discoveryForm.PhoneNumber
                              , string.Empty, discoveryForm.CityId.Name, discoveryForm.TownId.Name, string.Empty
-                             , "", string.Empty, string.Empty, userName);
+                             , "", string.Empty, string.Empty, userName, "true");
 
 
                 if (result.ERRORCODE == 0)

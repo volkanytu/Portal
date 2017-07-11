@@ -23,7 +23,7 @@ namespace GK.WindowsServices.ProcessDiscoveryForms.lotusService {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="DominoSoapBinding", Namespace="urn:DefaultNamespace")]
@@ -75,7 +75,7 @@ namespace GK.WindowsServices.ProcessDiscoveryForms.lotusService {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("CREATERECORD", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
         [return: System.Xml.Serialization.XmlElementAttribute("CREATERECORDReturn", Namespace="urn:DefaultNamespace")]
-        public RESPONSE CREATERECORD([System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string PASSWORD, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] double ID, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string AD, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string SOYAD, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string EMAIL, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string TEL, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string SAAT, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string IL, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string ILCE, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string KONUTTIPI, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string OKUNDU, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string BASVURUTARIH, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string NEREDEGORDUNUZ, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string ANAHTARCI) {
+        public RESPONSE CREATERECORD([System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string PASSWORD, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] double ID, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string AD, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string SOYAD, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string EMAIL, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string TEL, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string SAAT, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string IL, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string ILCE, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string KONUTTIPI, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string OKUNDU, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string BASVURUTARIH, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string NEREDEGORDUNUZ, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string ANAHTARCI, [System.Xml.Serialization.XmlElementAttribute(Namespace="urn:DefaultNamespace")] string KVKONAY) {
             object[] results = this.Invoke("CREATERECORD", new object[] {
                         PASSWORD,
                         ID,
@@ -90,17 +90,34 @@ namespace GK.WindowsServices.ProcessDiscoveryForms.lotusService {
                         OKUNDU,
                         BASVURUTARIH,
                         NEREDEGORDUNUZ,
-                        ANAHTARCI});
+                        ANAHTARCI,
+                        KVKONAY});
             return ((RESPONSE)(results[0]));
         }
         
         /// <remarks/>
-        public void CREATERECORDAsync(string PASSWORD, double ID, string AD, string SOYAD, string EMAIL, string TEL, string SAAT, string IL, string ILCE, string KONUTTIPI, string OKUNDU, string BASVURUTARIH, string NEREDEGORDUNUZ, string ANAHTARCI) {
-            this.CREATERECORDAsync(PASSWORD, ID, AD, SOYAD, EMAIL, TEL, SAAT, IL, ILCE, KONUTTIPI, OKUNDU, BASVURUTARIH, NEREDEGORDUNUZ, ANAHTARCI, null);
+        public void CREATERECORDAsync(string PASSWORD, double ID, string AD, string SOYAD, string EMAIL, string TEL, string SAAT, string IL, string ILCE, string KONUTTIPI, string OKUNDU, string BASVURUTARIH, string NEREDEGORDUNUZ, string ANAHTARCI, string KVKONAY) {
+            this.CREATERECORDAsync(PASSWORD, ID, AD, SOYAD, EMAIL, TEL, SAAT, IL, ILCE, KONUTTIPI, OKUNDU, BASVURUTARIH, NEREDEGORDUNUZ, ANAHTARCI, KVKONAY, null);
         }
         
         /// <remarks/>
-        public void CREATERECORDAsync(string PASSWORD, double ID, string AD, string SOYAD, string EMAIL, string TEL, string SAAT, string IL, string ILCE, string KONUTTIPI, string OKUNDU, string BASVURUTARIH, string NEREDEGORDUNUZ, string ANAHTARCI, object userState) {
+        public void CREATERECORDAsync(
+                    string PASSWORD, 
+                    double ID, 
+                    string AD, 
+                    string SOYAD, 
+                    string EMAIL, 
+                    string TEL, 
+                    string SAAT, 
+                    string IL, 
+                    string ILCE, 
+                    string KONUTTIPI, 
+                    string OKUNDU, 
+                    string BASVURUTARIH, 
+                    string NEREDEGORDUNUZ, 
+                    string ANAHTARCI, 
+                    string KVKONAY, 
+                    object userState) {
             if ((this.CREATERECORDOperationCompleted == null)) {
                 this.CREATERECORDOperationCompleted = new System.Threading.SendOrPostCallback(this.OnCREATERECORDOperationCompleted);
             }
@@ -118,7 +135,8 @@ namespace GK.WindowsServices.ProcessDiscoveryForms.lotusService {
                         OKUNDU,
                         BASVURUTARIH,
                         NEREDEGORDUNUZ,
-                        ANAHTARCI}, this.CREATERECORDOperationCompleted, userState);
+                        ANAHTARCI,
+                        KVKONAY}, this.CREATERECORDOperationCompleted, userState);
         }
         
         private void OnCREATERECORDOperationCompleted(object arg) {
@@ -148,7 +166,7 @@ namespace GK.WindowsServices.ProcessDiscoveryForms.lotusService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1067.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1087.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -183,11 +201,11 @@ namespace GK.WindowsServices.ProcessDiscoveryForms.lotusService {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
     public delegate void CREATERECORDCompletedEventHandler(object sender, CREATERECORDCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1055.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class CREATERECORDCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {

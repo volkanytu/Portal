@@ -16,6 +16,7 @@
       <xsd:element name="BASVURUTARIH" type="xsd:string" />
       <xsd:element name="NEREDEGORDUNUZ" type="xsd:string" />
       <xsd:element name="ANAHTARCI" type="xsd:string" />
+      <xsd:element name="KVKONAY" type="xsd:string" />
       <xsd:complexType name="RESPONSE">
         <xsd:sequence>
           <xsd:element name="ERRORCODE" type="xsd:short" />
@@ -25,6 +26,9 @@
       <xsd:element name="CREATERECORDReturn" type="impl:RESPONSE" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="CREATERECORDResponse">
+    <wsdl:part name="CREATERECORDReturn" element="impl:CREATERECORDReturn" />
+  </wsdl:message>
   <wsdl:message name="CREATERECORDRequest">
     <wsdl:part name="PASSWORD" element="impl:PASSWORD" />
     <wsdl:part name="ID" element="impl:ID" />
@@ -40,9 +44,7 @@
     <wsdl:part name="BASVURUTARIH" element="impl:BASVURUTARIH" />
     <wsdl:part name="NEREDEGORDUNUZ" element="impl:NEREDEGORDUNUZ" />
     <wsdl:part name="ANAHTARCI" element="impl:ANAHTARCI" />
-  </wsdl:message>
-  <wsdl:message name="CREATERECORDResponse">
-    <wsdl:part name="CREATERECORDReturn" element="impl:CREATERECORDReturn" />
+    <wsdl:part name="KVKONAY" element="impl:KVKONAY" />
   </wsdl:message>
   <wsdl:portType name="UcretsizKesif">
     <wsdl:operation name="CREATERECORD">
